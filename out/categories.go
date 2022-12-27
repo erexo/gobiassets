@@ -90,13 +90,13 @@ var Items = map[ItemCategory][]uint16{
 	ItemCategoryContainers: {
 		1990,  // Present
 		6104,  // Jewel Case
-		7587,  // Bag
+		1987,  // Bag
 		1991,  // Konoha Bag
 		1992,  // Suna Bag
 		1995,  // Kumo Bag
 		3939,  // Forest Bag
 		5927,  // Pirate Bag
-		7739,  // Golden Bag
+		1997,  // Golden Bag
 		12861, // Sand Jug
 		1998,  // Konoha Backpack
 		1999,  // Suna Backpack
@@ -433,25 +433,304 @@ var Items = map[ItemCategory][]uint16{
 		12817, // Destruction
 	},
 	ItemCategoryGloves: {
-		2387, // Bandages
-
+		2387,  // Bandages
+		2394,  // Leather Gloves
+		2402,  // Metal Gloves
+		2443,  // Black Gloves
+		2412,  // Ninja Gloves
+		2172,  // Assassin Gloves
+		2390,  // Cyborg Gloves
+		2421,  // Hyouton Gloves
+		2400,  // Gummy Gloves
+		12314, // Shinobi Gloves
+		2425,  // Red Gloves
+		2391,  // Vampire Gloves
+		2121,  // Kyokushin Gloves
+		2442,  // Bloody Gloves
+		2407,  // Sound Glove
+		2411,  // Samurai Gloves
+		12858, // Enforcer Glove
+		2444,  // Legendary Gloves
+		2534,  // Knuckle Duster
+		2422,  // Golden Gloves
+		11945, // Bandit King Glove
+		2439,  // Raiton Gloves
+		2497,  // Reinforced Glove
+		2494,  // Cursed Glove
+		8923,  // Fur Claws
+		2440,  // Chakra Spikes
+		2499,  // Black Glove
+		11949, // Undead Glove
+		11391, // Hakai Glove
+		2120,  // Razor Claws
+		2505,  // Raiton Master Gloves
+		7379,  // Katon Glove
+		7385,  // Kagero Glove
+		11392, // Doton Hakai Glove
+		2509,  // Heaven Glove
+		11958, // Demonic Glove
+		11393, // Fuuton Hakai Glove
+		2633,  // Sealed Basher
+		12246, // Ninshu Glove
+		2492,  // Heavy Spiked Glove
+		12786, // Inner Gloves
+		12834, // Ravage Glove
+		11394, // Suiton Hakai Glove
+		2423,  // Shiver Gloves
+		11416, // Uprising Gloves
+		12078, // Shallow Glove
+		12257, // Akuma Glove
+		11418, // Shadow Gloves
+		12297, // Oinin Gloves
+		2629,  // Kokinjo Gloves
+		11395, // Raiton Hakai Glove
+		12796, // Code Kama
+		11883, // Emperor Staff
+		11957, // Prism Glove
+		2658,  // Sealed Golden Glove
+		11396, // Katon Hakai Glove
+		12086, // Vital Knuckle Dusters
 	},
 	ItemCategorySwords: {
-		2428, // Short Sword
+		2428,  // Short Sword
+		2419,  // Bandit Sword
+		7591,  // Jagged Sword
+		11477, // Katana
+		2386,  // Machete
+		2384,  // Katanas
+		2438,  // Assassin Katanas
+		2434,  // Cyborg Katana
+		2431,  // Heavy Big Sword
+		12313, // Shinobi Katana
+		2383,  // Skeleton Sword
+		7386,  // Vampire Sword
+		2435,  // Kyokushin Sword
+		7419,  // Bloody Cleaver
+		2417,  // Mystic Katana
+		2388,  // Madman Katana
+		2406,  // Serpent Sword
+		2451,  // Samurai Katana
+		12859, // Enforcer Katana
+		7391,  // Legendary Sword
+		2379,  // Kusanagi
+		7420,  // Mystic Sword
+		11943, // Bandit King Dirk
+		2432,  // Triple-Blade Scythe
+		2430,  // Shiny Sword
+		2488,  // Cursed Katana
+		8924,  // White Katana
+		2433,  // Raiton Swords
+		11947, // Undead Sword
+		2489,  // Crystal Katana
+		11909, // Magma Sword
+		2188,  // Tweak Katana
+		6540,  // Raiton Katana
+		2627,  // Katon Sword
+		2630,  // Kagero Sword
+		2181,  // Doton Tweak Katana
+		2461,  // Heaven Sword
+		7438,  // Samehada
+		2185,  // Fuuton Tweak Katana
+		2632,  // Sealed Hatchet
+		12245, // Ninshu Katana
+		12785, // Inner Katana
+		12835, // Ravage Sword
+		2182,  // Suiton Tweak Katana
+		2382,  // Raiga Katana
+		12255, // Akuma Katana
+		7434,  // Royal Katana
+		11885, // Blossom Katana
+		12073, // Lightning Chakra Sword
+		12296, // Oinin Katana
+		8927,  // Ruby Sword
+		11913, // Emperor Sword
+		2183,  // Raiton Tweak Katana
+		2385,  // Unreal Sword
+		2190,  // Hiramekarei
+		12801, // Boro Dagger
+		11956, // Chakred Sword
+		11910, // Shadow Dagger
+		6528,  // Searing Katana
+		2187,  // Katon Tweak Katana
+		12087, // Vital Katana
+
 	},
 	ItemCategoryDistances: {
 		11417, // Training Chain
+		2399,  // Shuriken
+		7366,  // Sand Shuriken
+		2410,  // Kunai
+		2546,  // Burst Senbon
+		7368,  // Kunai with Note
+		11963, // Sealed Raiton Scroll
+		2389,  // Demonwing Shuriken
+		12792, // Inner Senbon
+		2543,  // Senbons
+		7367,  // Clone Kunais
+		2545,  // Poison Senbon
+		11469, // Elite Chain
+		8614,  // Silver Senbon
+		11397, // Twisted Kunai
+		2157,  // Reinforced Kunai
+		11962, // Sealed Suiton Scroll
+		11398, // Doton Twisted Kunai
+		11964, // Sealed Doton Scroll
+		11399, // Fuuton Twisted Kunai
+		7460,  // Yondaime Kunai
+		11894, // Outcast Blade
+		2143,  // Explosive Throwing Ball
+		12249, // Ninshu Senbon
+		11400, // Suiton Twisted Kunai
+		2144,  // Raiton Shuriken
+		12295, // Oinin Shuriken
+		1294,  // Heavy Throwing Ball
+		2501,  // Bashosen
+		11401, // Raiton Twisted Kunai
+		11961, // Sealed Katon Scroll
+		11936, // Unreal Blade
+		12800, // Delta Blaster
+		11402, // Katon Twisted Kunai
+		2455,  // Senbon Shooter
+		2456,  // Shooting Umbrella
+		12077, // Aoi Umbrella
+		12256, // Akuma Curse
+		11960, // Shinobi Gauntlet
 	},
 	ItemCategoryBands: {
-		2553, // Brown Band
+		2553,  // Brown Band
+		2551,  // Red Band
+		2550,  // Blue Band
+		2548,  // Yellow Band
+		2580,  // Green Band
+		2533,  // Gray Band
+		11414, // Black Band
+		12088, // Vital Halberd
 	},
 	ItemCategoryEdibles: {
 		2159, // Chakra Pill
+		2673, // Medic Pill
+		7850, // Blue Shard
+		8309, // Red Shard
+		2111, // Soldier Pill
+		8931, // Katon Soldier Pill
+		8944, // Suiton Soldier Pill
+		8936, // Raiton Soldier Pill
+		8940, // Fuuton Soldier Pill
+		8932, // Doton Soldier Pill
+		5900, // Raiton Gem
+		6569, // Candy
+		6541, // Coloured Egg
+		6542, // Coloured Egg
+		2674, // Cookies
+		2695, // Egg
+		7372, // Ice Cream
+		6278, // Cake
+		2667, // Fish
+		2684, // Chips
+		6394, // Cream Cake
+		2666, // Meat
+		2793, // Mushroom
+		2671, // Ham
+		2696, // Ramen
 	},
 	ItemCategoryValuables: {
-		2148, // Yen
+		2148,  // Yen
+		2152,  // Green Yen Note
+		2160,  // Red Yen Note
+		2685,  // Crystal Yen Note
+		5890,  // Adrenaline
+		8306,  // Small Piece of Chakra
+		8302,  // Piece of Chakra
+		8300,  // Perfect Piece of Chakra
+		7768,  // Mystery Chakra
+		6535,  // Chakred Scroll
+		11525, // Frozen Gem
+		12140, // Unstable Device
+		2500,  // Spring Box
+		2445,  // Summer Box
+		3970,  // Autumn Box
+		2427,  // Winter Box
+		2090,  // +20% experience box
+		2142,  // +20% Experience Box [Event]
+		1964,  // green hokage sign
+		1963,  // blue hokage sign
+		1965,  // prism hokage sign
+		12134, // disenchanting device
+		1982,  // Authority Tome
+		1983,  // Blessed Tome
+		1985,  // Tome of Destruction
+		1986,  // Tome of Sins
+		7620,  // Kami Skull
+		2149,  // Gold Bar
+		5670,  // Voodoo Skull
+		6533,  // Ceremonial Book
+		6534,  // Imperor's Trident
+		2745,  // Blue Rose
 	},
 	ItemCategoryCollectables: {
 		12104, // Teddy Bear
+		12099, // Deadly Poison
+		11896, // Glass Tube
+		12016, // Medic Bandages
+		12103, // Kyokushin Costume
+		12105, // Sun Medal
+		12106, // Chimes of Terror
+		12100, // Legendary Icon
+		12862, // Golden Dust
+		11527, // Green Leaf
+		11533, // Shadow Leaf
+		11532, // Imperial Leaf
+		11505, // Toxic Venom
+		11520, // Ancient Stone
+		11881, // Thorn Leaf
+		11897, // Shadow Fabric
+		12267, // Hell Bells
+		12268, // Prism Glasses
+		12266, // Undead Coin
+		12270, // Cursed Scale
+		12272, // Fiery Brooch
+		12273, // Supply Package
+		12277, // Crystal Gem
+		12219, // Broken Light Emblem
+		12220, // Light Emblem
+		11511, // Fertile Soil
+		11506, // Muddy Hay
+		8930,  // Anti-bug powder
+		11503, // Bamboo Stick
+		1959,  // Darui Report
+		11519, // Armor Piece
+		11523, // Raiton Heart
+		11524, // Katon Heart
+		11522, // Aegis of Light
+		11509, // Muddy Twig
+		11512, // Frost Giant Fur
+		11518, // Giant Snake Skull
+		11539, // Empty Antidote
+		8925,  // Full Antidote
+		12065, // Samurai Jewel
+		12017, // Confidential Scrolls
+		11935, // Power Shard
+		11528, // Prism Book
+		8017,  // Delphic Device
+		11521, // Sentinel Gooey
+		11895, // Golden Coin
+		11916, // Otsutsuki Soul
+		8266,  // Otsutsuki Parchment
+		12279, // Golden Sand
+		12281, // Crimson Blossom
+		12282, // Cursed Claw
+		12283, // Vile Root
+		12252, // Declaration
+		12243, // Kageboshi Soul
+		11517, // Katon Feather
+		11515, // Suiton Feather
+		11514, // Raiton Feather
+		11513, // Fuuton Feather
+		11516, // Doton Feather
+		8003,  // Katon Chakra
+		8002,  // Suiton Chakra
+		8006,  // Raiton Chakra
+		8004,  // Fuuton Chakra
+		8005,  // Doton Chakra
 	},
 }
