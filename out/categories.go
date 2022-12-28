@@ -14,9 +14,13 @@ const (
 	ItemCategoryScrolls
 	ItemCategoryGloves
 	ItemCategorySwords
-	ItemCategoryDistances
+	ItemCategoryDistance
+	ItemCategoryShooters
+	ItemCategoryAmmunition
 	ItemCategoryBands
-	ItemCategoryEdibles
+	ItemCategoryPills
+	ItemCategoryFood
+	ItemCategoryCurrency
 	ItemCategoryValuables
 	ItemCategoryCollectables
 
@@ -66,9 +70,13 @@ const (
 	ItemCategoryScrolls
 	ItemCategoryGloves
 	ItemCategorySwords
-	ItemCategoryDistances
+	ItemCategoryDistance
+	ItemCategoryShooters
+	ItemCategoryAmmunition
 	ItemCategoryBands
-	ItemCategoryEdibles
+	ItemCategoryPills
+	ItemCategoryFood
+	ItemCategoryCurrency
 	ItemCategoryValuables
 	ItemCategoryCollectables
 
@@ -555,46 +563,50 @@ var Items = map[ItemCategory][]uint16{
 		12087, // Vital Katana
 
 	},
-	ItemCategoryDistances: {
+	ItemCategoryDistance: {
 		11417, // Training Chain
 		2399,  // Shuriken
 		7366,  // Sand Shuriken
 		2410,  // Kunai
-		2546,  // Burst Senbon
 		7368,  // Kunai with Note
-		11963, // Sealed Raiton Scroll
 		2389,  // Demonwing Shuriken
-		12792, // Inner Senbon
-		2543,  // Senbons
 		7367,  // Clone Kunais
-		2545,  // Poison Senbon
 		11469, // Elite Chain
-		8614,  // Silver Senbon
 		11397, // Twisted Kunai
 		2157,  // Reinforced Kunai
-		11962, // Sealed Suiton Scroll
 		11398, // Doton Twisted Kunai
-		11964, // Sealed Doton Scroll
 		11399, // Fuuton Twisted Kunai
 		7460,  // Yondaime Kunai
 		11894, // Outcast Blade
 		2143,  // Explosive Throwing Ball
-		12249, // Ninshu Senbon
 		11400, // Suiton Twisted Kunai
 		2144,  // Raiton Shuriken
 		12295, // Oinin Shuriken
 		1294,  // Heavy Throwing Ball
 		2501,  // Bashosen
 		11401, // Raiton Twisted Kunai
-		11961, // Sealed Katon Scroll
 		11936, // Unreal Blade
 		12800, // Delta Blaster
 		11402, // Katon Twisted Kunai
+	},
+	ItemCategoryShooters: {
 		2455,  // Senbon Shooter
 		2456,  // Shooting Umbrella
 		12077, // Aoi Umbrella
 		12256, // Akuma Curse
 		11960, // Shinobi Gauntlet
+	},
+	ItemCategoryAmmunition: {
+		2546,  // Burst Senbon
+		11963, // Sealed Raiton Scroll
+		12792, // Inner Senbon
+		2543,  // Senbons
+		2545,  // Poison Senbon
+		8614,  // Silver Senbon
+		11962, // Sealed Suiton Scroll
+		11964, // Sealed Doton Scroll
+		12249, // Ninshu Senbon
+		11961, // Sealed Katon Scroll
 	},
 	ItemCategoryBands: {
 		2553,  // Brown Band
@@ -606,11 +618,9 @@ var Items = map[ItemCategory][]uint16{
 		11414, // Black Band
 		12088, // Vital Halberd
 	},
-	ItemCategoryEdibles: {
-		2159, // Chakra Pill
+	ItemCategoryPills: {
 		2673, // Medic Pill
-		7850, // Blue Shard
-		8309, // Red Shard
+		2159, // Chakra Pill
 		2111, // Soldier Pill
 		8931, // Katon Soldier Pill
 		8944, // Suiton Soldier Pill
@@ -618,9 +628,11 @@ var Items = map[ItemCategory][]uint16{
 		8940, // Fuuton Soldier Pill
 		8932, // Doton Soldier Pill
 		5900, // Raiton Gem
+		7850, // Blue Shard
+		8309, // Red Shard
 		6569, // Candy
-		6541, // Coloured Egg
-		6542, // Coloured Egg
+	},
+	ItemCategoryFood: {
 		2674, // Cookies
 		2695, // Egg
 		7372, // Ice Cream
@@ -633,11 +645,14 @@ var Items = map[ItemCategory][]uint16{
 		2671, // Ham
 		2696, // Ramen
 	},
+	ItemCategoryCurrency: {
+		2148, // Yen
+		2152, // Green Yen Note
+		2160, // Red Yen Note
+		2685, // Crystal Yen Note
+		1691, // Premium Ticket
+	},
 	ItemCategoryValuables: {
-		2148,  // Yen
-		2152,  // Green Yen Note
-		2160,  // Red Yen Note
-		2685,  // Crystal Yen Note
 		5890,  // Adrenaline
 		8306,  // Small Piece of Chakra
 		8302,  // Piece of Chakra
