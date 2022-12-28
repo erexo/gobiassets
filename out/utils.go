@@ -9,7 +9,7 @@ func Title(s string) string {
 	prev := ' '
 	return strings.Map(
 		func(r rune) rune {
-			if !unicode.IsLetter(prev) {
+			if !unicode.IsLetter(prev) && prev != '\'' {
 				prev = r
 				return unicode.ToTitle(r)
 			}

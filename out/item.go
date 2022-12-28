@@ -2,39 +2,270 @@ package out
 
 import (
 	"fmt"
+	"log"
+	"math"
+	"strconv"
+	"strings"
 
 	"github.com/erexo/gobiaitem/in"
 )
 
 type Item struct {
-	ServerId uint16
-	ClientId uint16
-	Name     string
-	Role     ItemRole
+	ServerId    uint16
+	ClientId    uint16
+	Name        string
+	Role        ItemRole
+	Description string
+	Weight      float32
+	Worth       int64
+	Attributes  Attributes
+}
+
+type ItemAttribute uint8
+
+const (
+	ItemAttributeArmor ItemAttribute = iota
+	ItemAttributeDefense
+	ItemAttributeAttack
+	ItemAttributeContainerSize
+	ItemAttributeReduceDeath
+	ItemAttributeRange
+	ItemAttributeDuration
+	ItemAttributeLevel
+	ItemAttributeBreakChance
+	ItemAttributePreventDrop
+	ItemAttributeSpeed
+	ItemAttributeHealthTicks
+	ItemAttributeHealthGain
+	ItemAttributeManaTicks
+	ItemAttributeManaGain
+	ItemAttributeManaShield
+	ItemAttributeSkillAll
+	ItemAttributeSkillMagic
+	ItemAttributeSkillWeapons
+	ItemAttributeSkillSword
+	ItemAttributeSkillAxe
+	ItemAttributeSkillClub
+	ItemAttributeSkillDist
+	ItemAttributeSkillFish
+	ItemAttributeSkillShield
+	ItemAttributeSkillFist
+	ItemAttributeMaxHealth
+	ItemAttributeMaxHealthPercent
+	ItemAttributeMaxMana
+	ItemAttributeMaxManaPercent
+	ItemAttributeSoul
+	ItemAttributeMagicPercent
+	ItemAttributeMagicPvePercent
+	ItemAttributeMeleePercent
+	ItemAttributeHealingPercent
+	ItemAttributeProtection
+)
+
+type Attributes []byte
+
+type AttributeValue struct {
+	Attribute ItemAttribute
+	Value     int32
+}
+
+func (w Attributes) ReadAttributes() []AttributeValue {
+	const attSize = 5
+	ret := []AttributeValue{}
+	for i := 0; i+attSize <= len(w); i += attSize {
+		ret = append(ret, AttributeValue{
+			Attribute: ItemAttribute(w[i]),
+			Value: int32(w[i+1]) |
+				int32(w[i+2])<<8 |
+				int32(w[i+3])<<16 |
+				int32(w[i+4])<<24,
+		})
+	}
+	return ret
+}
+
+func (w *Attributes) writeAttr(attr ItemAttribute, value int64) {
+	if value == 0 {
+		return
+	}
+	if value > math.MaxInt32 {
+		panic("attribute bigger than int32")
+	}
+
+	*w = append(*w, uint8(attr),
+		uint8(value),
+		uint8(value>>8),
+		uint8(value>>16),
+		uint8(value>>24))
 }
 
 func NewItem(client uint16, item *in.Item) *Item {
-	role := ItemRoleAll
-	if r, ok := item.Attributes["role"]; ok {
-		role = Role(r)
-	}
+	attr := Attributes{}
+	attr.writeAttr(ItemAttributeArmor, readAttribute(item.Attributes, "armor"))
+	attr.writeAttr(ItemAttributeDefense, readAttribute(item.Attributes, "defense")+readAttribute(item.Attributes, "extradef"))
+	attr.writeAttr(ItemAttributeAttack, readAttribute(item.Attributes, "attack")+readAttribute(item.Attributes, "extraatk"))
+	attr.writeAttr(ItemAttributeContainerSize, readAttribute(item.Attributes, "containersize"))
+	attr.writeAttr(ItemAttributeReduceDeath, readAttribute(item.Attributes, "reducedeathpercent"))
+	attr.writeAttr(ItemAttributeRange, readAttribute(item.Attributes, "range"))
+	attr.writeAttr(ItemAttributeDuration, readAttribute(item.Attributes, "duration"))
+	attr.writeAttr(ItemAttributeLevel, readAttribute(item.Attributes, "level"))
+	attr.writeAttr(ItemAttributeBreakChance, readAttribute(item.Attributes, "breakchance"))
+	attr.writeAttr(ItemAttributePreventDrop, readAttribute(item.Attributes, "preventdrop"))
+	attr.writeAttr(ItemAttributeSpeed, readAttribute(item.Attributes, "speed"))
+	attr.writeAttr(ItemAttributeHealthTicks, readAttribute(item.Attributes, "healthticks"))
+	attr.writeAttr(ItemAttributeHealthGain, readAttribute(item.Attributes, "healthgain"))
+	attr.writeAttr(ItemAttributeManaTicks, readAttribute(item.Attributes, "manaticks"))
+	attr.writeAttr(ItemAttributeManaGain, readAttribute(item.Attributes, "managain"))
+	attr.writeAttr(ItemAttributeManaShield, readAttribute(item.Attributes, "manashield"))
+	attr.writeAttr(ItemAttributeSkillAll, readAttribute(item.Attributes, "allskills"))
+	attr.writeAttr(ItemAttributeSkillMagic, readAttribute(item.Attributes, "magiclevelpoints"))
+	attr.writeAttr(ItemAttributeSkillWeapons, readAttribute(item.Attributes, "skillweapons"))
+	attr.writeAttr(ItemAttributeSkillSword, readAttribute(item.Attributes, "skillsword"))
+	attr.writeAttr(ItemAttributeSkillAxe, readAttribute(item.Attributes, "skillaxe"))
+	attr.writeAttr(ItemAttributeSkillClub, readAttribute(item.Attributes, "skillclub"))
+	attr.writeAttr(ItemAttributeSkillDist, readAttribute(item.Attributes, "skilldist"))
+	attr.writeAttr(ItemAttributeSkillFish, readAttribute(item.Attributes, "skillfish"))
+	attr.writeAttr(ItemAttributeSkillShield, readAttribute(item.Attributes, "skillshield"))
+	attr.writeAttr(ItemAttributeSkillFist, readAttribute(item.Attributes, "skillfist"))
+	attr.writeAttr(ItemAttributeMaxHealth, readAttribute(item.Attributes, "maxhealthpoints"))
+	attr.writeAttr(ItemAttributeMaxHealthPercent, readAttributePercent(item.Attributes, "maxhealthpercent"))
+	attr.writeAttr(ItemAttributeMaxMana, readAttribute(item.Attributes, "maxmanapoints"))
+	attr.writeAttr(ItemAttributeMaxManaPercent, readAttributePercent(item.Attributes, "maxmanapercent"))
+	attr.writeAttr(ItemAttributeSoul, readAttribute(item.Attributes, "soulpoints"))
+	attr.writeAttr(ItemAttributeMagicPercent, readAttributePercent(item.Attributes, "increasemagicpercent"))
+	attr.writeAttr(ItemAttributeMagicPvePercent, readAttributePercent(item.Attributes, "increasemagicpvepercent"))
+	attr.writeAttr(ItemAttributeMeleePercent, readAttributePercent(item.Attributes, "increasemeleepercent"))
+	attr.writeAttr(ItemAttributeHealingPercent, readAttributePercent(item.Attributes, "increasehealingpercent"))
+	attr.writeAttr(ItemAttributeProtection, readAttribute(item.Attributes, "absorbpercentall"))
+
 	return &Item{
-		ServerId: uint16(item.Id),
-		ClientId: client,
-		Name:     Title(item.Name),
-		Role:     role,
+		ServerId:    uint16(item.Id),
+		ClientId:    client,
+		Name:        Title(item.Name),
+		Role:        Role(readAttributeString(item.Attributes, "role")),
+		Description: readAttributeString(item.Attributes, "description"),
+		Weight:      float32(readAttribute(item.Attributes, "weight")) / 100,
+		Worth:       readAttribute(item.Attributes, "worth"),
+		Attributes:  attr,
 	}
+}
+
+func readAttribute(attr in.Attributes, name string) int64 {
+	if v, ok := attr[strings.ToLower(name)]; ok {
+		ret, err := strconv.ParseInt(v, 10, 64)
+		if err != nil {
+			log.Println(err)
+		}
+		return ret
+	}
+	return 0
+}
+
+func readAttributeString(attr in.Attributes, name string) string {
+	if v, ok := attr[strings.ToLower(name)]; ok {
+		return v
+	}
+	return ""
+}
+
+func readAttributePercent(attr in.Attributes, name string) int64 {
+	v := readAttribute(attr, name)
+	if v == 0 {
+		return 0
+	}
+	return v - 100
 }
 
 func Type() string {
 	return `type Item struct {
-	ServerId uint16
-	ClientId uint16
-	Name     string
-	Role     ItemRole
+	ServerId    uint16
+	ClientId    uint16
+	Name        string
+	Role        ItemRole
+	Description string
+	Weight      float32
+	Worth       int64
+	Attributes  Attributes
+}
+
+type ItemAttribute uint8
+
+const (
+	ItemAttributeArmor ItemAttribute = iota
+	ItemAttributeDefense
+	ItemAttributeAttack
+	ItemAttributeContainerSize
+	ItemAttributeReduceDeath
+	ItemAttributeRange
+	ItemAttributeDuration
+	ItemAttributeLevel
+	ItemAttributeBreakChance
+	ItemAttributePreventDrop
+	ItemAttributeSpeed
+	ItemAttributeHealthTicks
+	ItemAttributeHealthGain
+	ItemAttributeManaTicks
+	ItemAttributeManaGain
+	ItemAttributeManaShield
+	ItemAttributeSkillAll
+	ItemAttributeSkillMagic
+	ItemAttributeSkillWeapons
+	ItemAttributeSkillSword
+	ItemAttributeSkillAxe
+	ItemAttributeSkillClub
+	ItemAttributeSkillDist
+	ItemAttributeSkillFish
+	ItemAttributeSkillShield
+	ItemAttributeSkillFist
+	ItemAttributeMaxHealth
+	ItemAttributeMaxHealthPercent
+	ItemAttributeMaxMana
+	ItemAttributeMaxManaPercent
+	ItemAttributeSoul
+	ItemAttributeMagicPercent
+	ItemAttributeMagicPvePercent
+	ItemAttributeMeleePercent
+	ItemAttributeHealingPercent
+	ItemAttributeProtection
+)
+
+type Attributes []byte
+
+type AttributeValue struct {
+	Attribute ItemAttribute
+	Value     int32
+}
+
+func (w Attributes) ReadAttributes() []AttributeValue {
+	const attSize = 5
+	ret := []AttributeValue{}
+	for i := 0; i+attSize <= len(w); i += attSize {
+		ret = append(ret, AttributeValue{
+			Attribute: ItemAttribute(w[i]),
+			Value: int32(w[i+1]) |
+				int32(w[i+2])<<8 |
+				int32(w[i+3])<<16 |
+				int32(w[i+4])<<24,
+		})
+	}
+	return ret
 }`
 }
 
 func (i *Item) String() string {
-	return fmt.Sprintf(`Item{%d, %d, "%s", %d}`, i.ServerId, i.ClientId, i.Name, i.Role)
+	var attrsStr strings.Builder
+	if len(i.Attributes) == 0 {
+		attrsStr.WriteString("nil")
+	} else {
+		attrsStr.WriteString("[]byte{")
+		for j, v := range i.Attributes {
+			attrsStr.WriteString(strconv.Itoa(int(v)))
+			if j < len(i.Attributes)-1 {
+				attrsStr.WriteString(", ")
+			}
+		}
+		attrsStr.WriteByte('}')
+	}
+	return fmt.Sprintf(`Item{%d, %d, "%s", %d, "%s", %.2f, %d, %s}`,
+		i.ServerId, i.ClientId, i.Name, i.Role, i.Description, i.Weight, i.Worth, attrsStr.String())
 }

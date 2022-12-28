@@ -2,6 +2,7 @@ package in
 
 import (
 	"encoding/xml"
+	"strings"
 )
 
 type Items struct {
@@ -24,7 +25,7 @@ func (a *Attributes) UnmarshalXML(dec *xml.Decoder, start xml.StartElement) erro
 	for _, attr := range start.Attr {
 		switch attr.Name.Local {
 		case "key":
-			key = attr.Value
+			key = strings.ToLower(attr.Value)
 		case "value":
 			value = attr.Value
 		}
