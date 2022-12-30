@@ -334,7 +334,7 @@ var Items = map[ItemCategory][]uint16{
 		11975, // Black Samurai Boots
 		2531,  // Fuguki Boots
 		11891, // Outcast Shoes
-		5901,  // Raiton Boots
+		5907,  // Raiton Boots
 		7383,  // Katon Shoes
 		11481, // Raikage Boots
 		11594, // Reinforced Boots

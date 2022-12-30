@@ -24,37 +24,38 @@ type Item struct {
 type ItemAttribute uint8
 
 const (
-	ItemAttributeArmor ItemAttribute = iota
+	ItemAttributeAttack ItemAttribute = iota
 	ItemAttributeDefense
-	ItemAttributeAttack
-	ItemAttributeContainerSize
-	ItemAttributeReduceDeath
 	ItemAttributeRange
+	ItemAttributeBreakChance
+	ItemAttributeArmor
+	ItemAttributeContainerSize
 	ItemAttributeDuration
 	ItemAttributeLevel
-	ItemAttributeBreakChance
-	ItemAttributePreventDrop
+
 	ItemAttributeSpeed
-	ItemAttributeHealthTicks
-	ItemAttributeHealthGain
-	ItemAttributeManaTicks
-	ItemAttributeManaGain
+	ItemAttributePreventDrop
+	ItemAttributeReduceDeath
 	ItemAttributeManaShield
-	ItemAttributeSkillAll
-	ItemAttributeSkillMagic
-	ItemAttributeSkillWeapons
-	ItemAttributeSkillSword
-	ItemAttributeSkillAxe
-	ItemAttributeSkillClub
-	ItemAttributeSkillDist
-	ItemAttributeSkillFish
-	ItemAttributeSkillShield
-	ItemAttributeSkillFist
 	ItemAttributeMaxHealth
 	ItemAttributeMaxHealthPercent
 	ItemAttributeMaxMana
 	ItemAttributeMaxManaPercent
+	ItemAttributeHealthTicks
+	ItemAttributeHealthGain
+	ItemAttributeManaTicks
+	ItemAttributeManaGain
 	ItemAttributeSoul
+	ItemAttributeSkillAll
+	ItemAttributeSkillWeapons
+	ItemAttributeSkillMagic
+	ItemAttributeSkillFist
+	ItemAttributeSkillClub
+	ItemAttributeSkillSword
+	ItemAttributeSkillDist
+	ItemAttributeSkillShield
+	ItemAttributeSkillAxe
+	ItemAttributeSkillFish
 	ItemAttributeMagicPercent
 	ItemAttributeMagicPvePercent
 	ItemAttributeMeleePercent
@@ -101,37 +102,37 @@ func (w *Attributes) writeAttr(attr ItemAttribute, value int64) {
 
 func NewItem(client uint16, item *in.Item) *Item {
 	attr := Attributes{}
-	attr.writeAttr(ItemAttributeArmor, readAttribute(item.Attributes, "armor"))
-	attr.writeAttr(ItemAttributeDefense, readAttribute(item.Attributes, "defense")+readAttribute(item.Attributes, "extradef"))
-	attr.writeAttr(ItemAttributeAttack, readAttribute(item.Attributes, "attack")+readAttribute(item.Attributes, "extraatk"))
-	attr.writeAttr(ItemAttributeContainerSize, readAttribute(item.Attributes, "containersize"))
-	attr.writeAttr(ItemAttributeReduceDeath, readAttribute(item.Attributes, "reducedeathpercent"))
+	attr.writeAttr(ItemAttributeAttack, readAttribute(item.Attributes, "attack", "extraatk", "elementphysical", "elementfire", "elementenergy", "elementearth", "elementice", "elementholy", "elementdeath"))
+	attr.writeAttr(ItemAttributeDefense, readAttribute(item.Attributes, "defense", "extradef"))
 	attr.writeAttr(ItemAttributeRange, readAttribute(item.Attributes, "range"))
+	attr.writeAttr(ItemAttributeBreakChance, readAttribute(item.Attributes, "breakchance"))
+	attr.writeAttr(ItemAttributeArmor, readAttribute(item.Attributes, "armor"))
+	attr.writeAttr(ItemAttributeContainerSize, readAttribute(item.Attributes, "containersize"))
 	attr.writeAttr(ItemAttributeDuration, readAttribute(item.Attributes, "duration"))
 	attr.writeAttr(ItemAttributeLevel, readAttribute(item.Attributes, "level"))
-	attr.writeAttr(ItemAttributeBreakChance, readAttribute(item.Attributes, "breakchance"))
-	attr.writeAttr(ItemAttributePreventDrop, readAttribute(item.Attributes, "preventdrop"))
 	attr.writeAttr(ItemAttributeSpeed, readAttribute(item.Attributes, "speed"))
-	attr.writeAttr(ItemAttributeHealthTicks, readAttribute(item.Attributes, "healthticks"))
-	attr.writeAttr(ItemAttributeHealthGain, readAttribute(item.Attributes, "healthgain"))
-	attr.writeAttr(ItemAttributeManaTicks, readAttribute(item.Attributes, "manaticks"))
-	attr.writeAttr(ItemAttributeManaGain, readAttribute(item.Attributes, "managain"))
+	attr.writeAttr(ItemAttributePreventDrop, readAttribute(item.Attributes, "preventdrop"))
+	attr.writeAttr(ItemAttributeReduceDeath, readAttribute(item.Attributes, "reducedeathpercent"))
 	attr.writeAttr(ItemAttributeManaShield, readAttribute(item.Attributes, "manashield"))
-	attr.writeAttr(ItemAttributeSkillAll, readAttribute(item.Attributes, "allskills"))
-	attr.writeAttr(ItemAttributeSkillMagic, readAttribute(item.Attributes, "magiclevelpoints"))
-	attr.writeAttr(ItemAttributeSkillWeapons, readAttribute(item.Attributes, "skillweapons"))
-	attr.writeAttr(ItemAttributeSkillSword, readAttribute(item.Attributes, "skillsword"))
-	attr.writeAttr(ItemAttributeSkillAxe, readAttribute(item.Attributes, "skillaxe"))
-	attr.writeAttr(ItemAttributeSkillClub, readAttribute(item.Attributes, "skillclub"))
-	attr.writeAttr(ItemAttributeSkillDist, readAttribute(item.Attributes, "skilldist"))
-	attr.writeAttr(ItemAttributeSkillFish, readAttribute(item.Attributes, "skillfish"))
-	attr.writeAttr(ItemAttributeSkillShield, readAttribute(item.Attributes, "skillshield"))
-	attr.writeAttr(ItemAttributeSkillFist, readAttribute(item.Attributes, "skillfist"))
 	attr.writeAttr(ItemAttributeMaxHealth, readAttribute(item.Attributes, "maxhealthpoints"))
 	attr.writeAttr(ItemAttributeMaxHealthPercent, readAttributePercent(item.Attributes, "maxhealthpercent"))
 	attr.writeAttr(ItemAttributeMaxMana, readAttribute(item.Attributes, "maxmanapoints"))
 	attr.writeAttr(ItemAttributeMaxManaPercent, readAttributePercent(item.Attributes, "maxmanapercent"))
+	attr.writeAttr(ItemAttributeHealthTicks, readAttribute(item.Attributes, "healthticks"))
+	attr.writeAttr(ItemAttributeHealthGain, readAttribute(item.Attributes, "healthgain"))
+	attr.writeAttr(ItemAttributeManaTicks, readAttribute(item.Attributes, "manaticks"))
+	attr.writeAttr(ItemAttributeManaGain, readAttribute(item.Attributes, "managain"))
 	attr.writeAttr(ItemAttributeSoul, readAttribute(item.Attributes, "soulpoints"))
+	attr.writeAttr(ItemAttributeSkillAll, readAttribute(item.Attributes, "allskills"))
+	attr.writeAttr(ItemAttributeSkillWeapons, readAttribute(item.Attributes, "skillweapons"))
+	attr.writeAttr(ItemAttributeSkillMagic, readAttribute(item.Attributes, "magiclevelpoints"))
+	attr.writeAttr(ItemAttributeSkillFist, readAttribute(item.Attributes, "skillfist"))
+	attr.writeAttr(ItemAttributeSkillClub, readAttribute(item.Attributes, "skillclub"))
+	attr.writeAttr(ItemAttributeSkillSword, readAttribute(item.Attributes, "skillsword"))
+	attr.writeAttr(ItemAttributeSkillDist, readAttribute(item.Attributes, "skilldist"))
+	attr.writeAttr(ItemAttributeSkillShield, readAttribute(item.Attributes, "skillshield"))
+	attr.writeAttr(ItemAttributeSkillAxe, readAttribute(item.Attributes, "skillaxe"))
+	attr.writeAttr(ItemAttributeSkillFish, readAttribute(item.Attributes, "skillfish"))
 	attr.writeAttr(ItemAttributeMagicPercent, readAttributePercent(item.Attributes, "increasemagicpercent"))
 	attr.writeAttr(ItemAttributeMagicPvePercent, readAttributePercent(item.Attributes, "increasemagicpvepercent"))
 	attr.writeAttr(ItemAttributeMeleePercent, readAttributePercent(item.Attributes, "increasemeleepercent"))
@@ -150,15 +151,18 @@ func NewItem(client uint16, item *in.Item) *Item {
 	}
 }
 
-func readAttribute(attr in.Attributes, name string) int64 {
-	if v, ok := attr[strings.ToLower(name)]; ok {
-		ret, err := strconv.ParseInt(v, 10, 64)
-		if err != nil {
-			log.Println(err)
+func readAttribute(attr in.Attributes, names ...string) int64 {
+	var ret int64
+	for _, name := range names {
+		if v, ok := attr[strings.ToLower(name)]; ok {
+			value, err := strconv.ParseInt(v, 10, 64)
+			if err != nil {
+				log.Println(err)
+			}
+			ret += value
 		}
-		return ret
 	}
-	return 0
+	return ret
 }
 
 func readAttributeString(attr in.Attributes, name string) string {
@@ -191,37 +195,38 @@ func Type() string {
 type ItemAttribute uint8
 
 const (
-	ItemAttributeArmor ItemAttribute = iota
+	ItemAttributeAttack ItemAttribute = iota
 	ItemAttributeDefense
-	ItemAttributeAttack
-	ItemAttributeContainerSize
-	ItemAttributeReduceDeath
 	ItemAttributeRange
+	ItemAttributeBreakChance
+	ItemAttributeArmor
+	ItemAttributeContainerSize
 	ItemAttributeDuration
 	ItemAttributeLevel
-	ItemAttributeBreakChance
-	ItemAttributePreventDrop
+
 	ItemAttributeSpeed
-	ItemAttributeHealthTicks
-	ItemAttributeHealthGain
-	ItemAttributeManaTicks
-	ItemAttributeManaGain
+	ItemAttributePreventDrop
+	ItemAttributeReduceDeath
 	ItemAttributeManaShield
-	ItemAttributeSkillAll
-	ItemAttributeSkillMagic
-	ItemAttributeSkillWeapons
-	ItemAttributeSkillSword
-	ItemAttributeSkillAxe
-	ItemAttributeSkillClub
-	ItemAttributeSkillDist
-	ItemAttributeSkillFish
-	ItemAttributeSkillShield
-	ItemAttributeSkillFist
 	ItemAttributeMaxHealth
 	ItemAttributeMaxHealthPercent
 	ItemAttributeMaxMana
 	ItemAttributeMaxManaPercent
+	ItemAttributeHealthTicks
+	ItemAttributeHealthGain
+	ItemAttributeManaTicks
+	ItemAttributeManaGain
 	ItemAttributeSoul
+	ItemAttributeSkillAll
+	ItemAttributeSkillWeapons
+	ItemAttributeSkillMagic
+	ItemAttributeSkillFist
+	ItemAttributeSkillClub
+	ItemAttributeSkillSword
+	ItemAttributeSkillDist
+	ItemAttributeSkillShield
+	ItemAttributeSkillAxe
+	ItemAttributeSkillFish
 	ItemAttributeMagicPercent
 	ItemAttributeMagicPvePercent
 	ItemAttributeMeleePercent
