@@ -32,37 +32,17 @@ const (
 func main() {
 	fmt.Println("HI")
 
-	items := saveItems()
+	prices := readPrices()
+	items := saveItems(prices)
 	monsters := saveMonsters()
 
 	verifyLoot(items, monsters)
+	verifyPrices(items, prices)
 
 	fmt.Println("BYE")
 }
 
-func verifyLoot(items []*out.Item, monsters []*out.Monster) {
-	lootItems := make(map[uint16]struct{})
-	for _, monster := range monsters {
-		for _, loot := range monster.Loot {
-			lootItems[loot.Id] = struct{}{}
-		}
-	}
-	for _, item := range items {
-		delete(lootItems, item.ServerId)
-	}
-	if len(lootItems) == 0 {
-		return
-	}
-
-	var sb strings.Builder
-	sb.WriteString("Omitted Loot item ids:\n")
-	for id := range lootItems {
-		fmt.Fprintf(&sb, "%d, ", id)
-	}
-	log.Println(sb.String())
-}
-
-func saveItems() []*out.Item {
+func saveItems(prices prices) []*out.Item {
 	defer logTime("Items")()
 
 	data, err := ioutil.ReadFile(filepath.Join(dataPath, otbFile))
@@ -71,16 +51,7 @@ func saveItems() []*out.Item {
 	}
 	serverClient := ReadOtb(data)
 
-	input, err := readxml()
-	if err != nil {
-		panic(err)
-	}
-
-	prices, err := readPrices()
-	if err != nil {
-		panic(err)
-	}
-
+	input := readItems()
 	itemsToInclude := make(map[uint16]struct{})
 
 	// categories
@@ -180,10 +151,7 @@ func GetItem(clientId uint16) *Item {
 func saveMonsters() []*out.Monster {
 	defer logTime("Monsters")()
 
-	inmonsters, err := readMonsters()
-	if err != nil {
-		panic(err)
-	}
+	input := readMonsters()
 
 	f, err := os.OpenFile(monstersFileName, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0755)
 	if err != nil {
@@ -191,11 +159,11 @@ func saveMonsters() []*out.Monster {
 	}
 	defer f.Close()
 
-	monsters := make([]*out.Monster, len(inmonsters))
+	monsters := make([]*out.Monster, len(input))
 	variables := make(map[string]string)
 	var nameChars int
 	var variableChars int
-	for i, monster := range inmonsters {
+	for i, monster := range input {
 		m := out.GetMonster(monster)
 		monsters[i] = m
 		if len(m.Name) > nameChars {
@@ -255,24 +223,68 @@ func GetMonster(name string) *Monster {
 	return monsters
 }
 
-func readxml() ([]*in.Item, error) {
+func verifyLoot(items []*out.Item, monsters []*out.Monster) {
+	desired := make(map[uint16]struct{})
+	for _, monster := range monsters {
+		for _, loot := range monster.Loot {
+			desired[loot.Id] = struct{}{}
+		}
+	}
+	for _, item := range items {
+		delete(desired, item.ServerId)
+	}
+	if len(desired) == 0 {
+		return
+	}
+
+	var sb strings.Builder
+	sb.WriteString("Omitted Loot item ids:\n")
+	for id := range desired {
+		fmt.Fprintf(&sb, "%d, ", id)
+	}
+	log.Println(sb.String())
+}
+
+func verifyPrices(items []*out.Item, prices prices) {
+	desired := make(map[uint16]struct{})
+	for id := range prices {
+		desired[uint16(id)] = struct{}{}
+	}
+	for _, item := range items {
+		delete(desired, item.ServerId)
+	}
+	if len(desired) == 0 {
+		return
+	}
+
+	var sb strings.Builder
+	sb.WriteString("Omitted Price item ids:\n")
+	for id := range desired {
+		fmt.Fprintf(&sb, "%d, ", id)
+	}
+	log.Println(sb.String())
+}
+
+func readItems() []*in.Item {
 	f, err := os.Open(filepath.Join(dataPath, xmlFile))
 	if err != nil {
-		return nil, err
+		panic(err)
 	}
 	defer f.Close()
 
 	items := &in.Items{}
 	if err := xml.NewDecoder(f).Decode(items); err != nil {
-		return nil, err
+		panic(err)
 	}
 
-	return items.Items, nil
+	return items.Items
 }
 
-func readPrices() (map[int]int, error) {
-	ret := make(map[int]int)
-	err := filepath.WalkDir(filepath.Join(dataPath, npcDir), func(path string, e fs.DirEntry, err error) error {
+type prices map[int]int
+
+func readPrices() prices {
+	ret := make(prices)
+	if err := filepath.WalkDir(filepath.Join(dataPath, npcDir), func(path string, e fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
@@ -322,19 +334,21 @@ func readPrices() (map[int]int, error) {
 			}
 		}
 		return nil
-	})
-	return ret, err
+	}); err != nil {
+		panic(err)
+	}
+	return ret
 }
 
-func readMonsters() ([]*in.Monster, error) {
+func readMonsters() []*in.Monster {
 	var monsters []*in.Monster
-	err := filepath.WalkDir(filepath.Join(dataPath, monsterDir), func(path string, d fs.DirEntry, err error) error {
+	if err := filepath.WalkDir(filepath.Join(dataPath, monsterDir), func(path string, d fs.DirEntry, err error) error {
 		if d.IsDir() || filepath.Ext(path) != ".xml" {
 			return nil
 		}
 		f, err := os.Open(path)
 		if err != nil {
-			return err
+			panic(err)
 		}
 		defer f.Close()
 		m := in.NewMonster()
@@ -343,8 +357,10 @@ func readMonsters() ([]*in.Monster, error) {
 		}
 		monsters = append(monsters, m)
 		return nil
-	})
-	return monsters, err
+	}); err != nil {
+		panic(err)
+	}
+	return monsters
 }
 
 type monsterByLevel []*out.Monster
