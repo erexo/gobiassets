@@ -180,7 +180,7 @@ func readAttributePercent(attr in.Attributes, name string) int64 {
 	return v - 100
 }
 
-func Type() string {
+func ItemType() string {
 	return `type Item struct {
 	ServerId    uint16
 	ClientId    uint16

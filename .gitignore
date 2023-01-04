@@ -33,3 +33,4 @@ __debug_bin
 *.work*
 
 _items.go
+_monsters.go

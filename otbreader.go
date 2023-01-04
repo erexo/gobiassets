@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func ReadOtb(data []byte) map[uint16]uint16 {
 	tree := NewBinaryTreeReader(data)
 	node := tree.GetNode()
@@ -14,10 +12,9 @@ func ReadOtb(data []byte) map[uint16]uint16 {
 		if node.ReadU16() != 140 { // datalen
 			panic("datalen")
 		}
-		major := node.ReadU32()
-		minor := node.ReadU32()
-		build := node.ReadU32()
-		fmt.Println(major, minor, build)
+		node.ReadU32() // ver
+		node.ReadU32()
+		node.ReadU32()
 	}
 
 	node = tree.GetNode()
