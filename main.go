@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/fs"
 	"io/ioutil"
+	"log"
 	"os"
 	"path/filepath"
 	"sort"
@@ -31,13 +32,37 @@ const (
 func main() {
 	fmt.Println("HI")
 
-	saveItems()
-	saveMonsters()
+	items := saveItems()
+	monsters := saveMonsters()
+
+	verifyLoot(items, monsters)
 
 	fmt.Println("BYE")
 }
 
-func saveItems() {
+func verifyLoot(items []*out.Item, monsters []*out.Monster) {
+	lootItems := make(map[uint16]struct{})
+	for _, monster := range monsters {
+		for _, loot := range monster.Loot {
+			lootItems[loot.Id] = struct{}{}
+		}
+	}
+	for _, item := range items {
+		delete(lootItems, item.ServerId)
+	}
+	if len(lootItems) == 0 {
+		return
+	}
+
+	var sb strings.Builder
+	sb.WriteString("Omitted Loot item ids:\n")
+	for id := range lootItems {
+		fmt.Fprintf(&sb, "%d, ", id)
+	}
+	log.Println(sb.String())
+}
+
+func saveItems() []*out.Item {
 	defer logTime("Items")()
 
 	data, err := ioutil.ReadFile(filepath.Join(dataPath, otbFile))
@@ -46,7 +71,7 @@ func saveItems() {
 	}
 	serverClient := ReadOtb(data)
 
-	items, err := readxml()
+	input, err := readxml()
 	if err != nil {
 		panic(err)
 	}
@@ -54,30 +79,6 @@ func saveItems() {
 	prices, err := readPrices()
 	if err != nil {
 		panic(err)
-	}
-
-	ret := make([]*out.Item, 0, len(items))
-	for _, item := range items {
-		if client, ok := serverClient[uint16(item.Id)]; ok {
-			it := out.NewItem(client, item)
-			if it.Worth == 0 {
-				if price, ok := prices[item.Id]; ok {
-					it.Worth = int64(price)
-				}
-			}
-			ret = append(ret, it)
-		}
-	}
-
-	f, err := os.OpenFile(itemsFileName, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0755)
-	if err != nil {
-		panic(err)
-	}
-	defer f.Close()
-
-	idChars := 1
-	if len(ret) > 0 {
-		idChars += len(strconv.Itoa(int(ret[len(ret)-1].ServerId)))
 	}
 
 	itemsToInclude := make(map[uint16]struct{})
@@ -104,13 +105,36 @@ func saveItems() {
 		categoriesStr.WriteString("},\n")
 	}
 
-	var varStr strings.Builder
-	var switchStr strings.Builder
-	for _, item := range ret {
-		if _, ok := itemsToInclude[item.ServerId]; !ok {
+	items := make([]*out.Item, 0, len(input))
+	for _, item := range input {
+		if _, ok := itemsToInclude[uint16(item.Id)]; !ok {
 			continue
 		}
+		if client, ok := serverClient[uint16(item.Id)]; ok {
+			it := out.NewItem(client, item)
+			if it.Worth == 0 {
+				if price, ok := prices[item.Id]; ok {
+					it.Worth = int64(price)
+				}
+			}
+			items = append(items, it)
+		}
+	}
 
+	f, err := os.OpenFile(itemsFileName, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0755)
+	if err != nil {
+		panic(err)
+	}
+	defer f.Close()
+
+	idChars := 1
+	if len(items) > 0 {
+		idChars += len(strconv.Itoa(int(items[len(items)-1].ServerId)))
+	}
+
+	var varStr strings.Builder
+	var switchStr strings.Builder
+	for _, item := range items {
 		// var
 		varName := fmt.Sprintf("item%d", item.ServerId)
 		varStr.WriteByte('\t')
@@ -150,9 +174,10 @@ func GetItem(clientId uint16) *Item {
 `, packageName, out.Category(), out.ItemType(), varStr.String(), categoriesStr.String(), switchStr.String()); err != nil {
 		panic(err)
 	}
+	return items
 }
 
-func saveMonsters() {
+func saveMonsters() []*out.Monster {
 	defer logTime("Monsters")()
 
 	inmonsters, err := readMonsters()
@@ -227,6 +252,7 @@ func GetMonster(name string) *Monster {
 `, packageName, out.MonsterType(), varStr.String(), byLevelStr.String(), switchStr.String()); err != nil {
 		panic(err)
 	}
+	return monsters
 }
 
 func readxml() ([]*in.Item, error) {
