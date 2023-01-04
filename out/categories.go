@@ -23,10 +23,10 @@ const (
 	ItemCategoryCurrency
 	ItemCategoryValuables
 	ItemCategoryDolls
-	ItemCategoryCollectables
+	ItemCategoryMissions
 
 	ItemCategoryFirst = ItemCategoryContainers
-	ItemCategoryLast  = ItemCategoryCollectables
+	ItemCategoryLast  = ItemCategoryMissions
 )
 
 type ItemRole uint8
@@ -80,10 +80,10 @@ const (
 	ItemCategoryCurrency
 	ItemCategoryValuables
 	ItemCategoryDolls
-	ItemCategoryCollectables
+	ItemCategoryMissions
 
 	ItemCategoryFirst = ItemCategoryContainers
-	ItemCategoryLast  = ItemCategoryCollectables
+	ItemCategoryLast  = ItemCategoryMissions
 )
 
 type ItemRole uint8
@@ -673,6 +673,7 @@ var Items = map[ItemCategory][]uint16{
 		1963,  // blue hokage sign
 		1965,  // prism hokage sign
 		12134, // disenchanting device
+		12299, // Toad Statue
 		1982,  // Authority Tome
 		1983,  // Blessed Tome
 		1985,  // Tome of Destruction
@@ -683,6 +684,11 @@ var Items = map[ItemCategory][]uint16{
 		6533,  // Ceremonial Book
 		6534,  // Imperor's Trident
 		2745,  // Blue Rose
+		8003,  // Katon Chakra
+		8002,  // Suiton Chakra
+		8006,  // Raiton Chakra
+		8004,  // Fuuton Chakra
+		8005,  // Doton Chakra
 	},
 	ItemCategoryDolls: {
 		12875, // Bandit King Doll
@@ -706,16 +712,20 @@ var Items = map[ItemCategory][]uint16{
 		12893, // Code Doll
 		12894, // Chino Doll
 	},
-	ItemCategoryCollectables: {
+	ItemCategoryMissions: {
 		12104, // Teddy Bear
 		12099, // Deadly Poison
+		2547,  // Explosive Note
 		11896, // Glass Tube
 		12016, // Medic Bandages
 		12103, // Kyokushin Costume
 		12105, // Sun Medal
 		12106, // Chimes of Terror
-		12100, // Legendary Icon
+		2136,  // Undying God Emblem
+		11880, // Neurotoxin
+		12059, // Ice Shard
 		12862, // Golden Dust
+
 		11527, // Green Leaf
 		11533, // Shadow Leaf
 		11532, // Imperial Leaf
@@ -723,6 +733,7 @@ var Items = map[ItemCategory][]uint16{
 		11520, // Ancient Stone
 		11881, // Thorn Leaf
 		11897, // Shadow Fabric
+
 		12267, // Hell Bells
 		12268, // Prism Glasses
 		12266, // Undead Coin
@@ -732,44 +743,65 @@ var Items = map[ItemCategory][]uint16{
 		12277, // Crystal Gem
 		12219, // Broken Light Emblem
 		12220, // Light Emblem
+
+		11901, // Heart Ring
+		12064, // Frozen Stone
+		12052, // Kagero Jewel
+		12100, // Legendary Icon
+		11900, // Jungle Net
+		12873, // Akatsuki Piece of Cloth
+
 		11511, // Fertile Soil
 		11506, // Muddy Hay
 		8930,  // Anti-bug powder
+		12291, // Vigor Spore
+		12292, // Heaven Matter
+		12833, // Concentrated Heaven Matter
+		12066, // Iron Key
+
 		11503, // Bamboo Stick
 		1959,  // Darui Report
 		11519, // Armor Piece
 		11523, // Raiton Heart
 		11524, // Katon Heart
 		11522, // Aegis of Light
+
 		11509, // Muddy Twig
 		11512, // Frost Giant Fur
 		11518, // Giant Snake Skull
 		11539, // Empty Antidote
 		8925,  // Full Antidote
+
+		12057, // Godflower Shard
 		12065, // Samurai Jewel
 		12017, // Confidential Scrolls
+
 		11935, // Power Shard
 		11528, // Prism Book
 		8017,  // Delphic Device
+		12804, // Kara Emblem
+
 		11521, // Sentinel Gooey
 		11895, // Golden Coin
 		11916, // Otsutsuki Soul
 		8266,  // Otsutsuki Parchment
+
 		12279, // Golden Sand
 		12281, // Crimson Blossom
 		12282, // Cursed Claw
 		12283, // Vile Root
 		12252, // Declaration
 		12243, // Kageboshi Soul
+
+		12758, // Torment Seed
+		12682, // Vial of Gore Blood
+		12480, // Heaven Plans
+		12840, // Dark Essence
+
 		11517, // Katon Feather
 		11515, // Suiton Feather
 		11514, // Raiton Feather
 		11513, // Fuuton Feather
 		11516, // Doton Feather
-		8003,  // Katon Chakra
-		8002,  // Suiton Chakra
-		8006,  // Raiton Chakra
-		8004,  // Fuuton Chakra
-		8005,  // Doton Chakra
 	},
 }
