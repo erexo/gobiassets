@@ -22,6 +22,7 @@ const (
 	ItemCategoryFood
 	ItemCategoryCurrency
 	ItemCategoryValuables
+	ItemCategoryDolls
 	ItemCategoryCollectables
 
 	ItemCategoryFirst = ItemCategoryContainers
@@ -78,6 +79,7 @@ const (
 	ItemCategoryFood
 	ItemCategoryCurrency
 	ItemCategoryValuables
+	ItemCategoryDolls
 	ItemCategoryCollectables
 
 	ItemCategoryFirst = ItemCategoryContainers
@@ -681,6 +683,28 @@ var Items = map[ItemCategory][]uint16{
 		6533,  // Ceremonial Book
 		6534,  // Imperor's Trident
 		2745,  // Blue Rose
+	},
+	ItemCategoryDolls: {
+		12875, // Bandit King Doll
+		12876, // Gravedigger Doll
+		12877, // Fuguki Doll
+		12878, // Raiga Doll
+		12879, // Ginkaku Doll
+		12880, // Kinkaku Doll
+		12881, // Aoi Doll
+		12882, // Outcast Nemesis Doll
+		12883, // Kagero Kage Doll
+		12884, // Doto Doll
+		12885, // Delphic Kernel Doll
+		12886, // Kinshiki Doll
+		12887, // Momoshiki Doll
+		12888, // Samurai Emperor Doll
+		12889, // Mecha Naruto Doll
+		12890, // Kageboshi Doll
+		12891, // Boro Doll
+		12892, // Delta Doll
+		12893, // Code Doll
+		12894, // Chino Doll
 	},
 	ItemCategoryCollectables: {
 		12104, // Teddy Bear
