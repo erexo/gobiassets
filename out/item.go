@@ -31,6 +31,7 @@ const (
 	ItemAttributeArmor
 	ItemAttributeContainerSize
 	ItemAttributeDuration
+	ItemAttributeCharges
 	ItemAttributeLevel
 
 	ItemAttributeSpeed
@@ -109,6 +110,7 @@ func NewItem(client uint16, item *in.Item) *Item {
 	attr.writeAttr(ItemAttributeArmor, readAttribute(item.Attributes, "armor"))
 	attr.writeAttr(ItemAttributeContainerSize, readAttribute(item.Attributes, "containersize"))
 	attr.writeAttr(ItemAttributeDuration, readAttribute(item.Attributes, "duration"))
+	attr.writeAttr(ItemAttributeCharges, readAttribute(item.Attributes, "charges"))
 	attr.writeAttr(ItemAttributeLevel, readAttribute(item.Attributes, "level"))
 	attr.writeAttr(ItemAttributeSpeed, readAttribute(item.Attributes, "speed"))
 	attr.writeAttr(ItemAttributePreventDrop, readAttribute(item.Attributes, "preventdrop"))
@@ -202,6 +204,7 @@ const (
 	ItemAttributeArmor
 	ItemAttributeContainerSize
 	ItemAttributeDuration
+	ItemAttributeCharges
 	ItemAttributeLevel
 
 	ItemAttributeSpeed

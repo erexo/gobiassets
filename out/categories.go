@@ -263,7 +263,6 @@ var Items = map[ItemCategory][]uint16{
 		12852, // Suna Legs
 		2478,  // White Legs
 		2530,  // Vampire Legs
-		2469,  // Pharaoh Bandages
 		2654,  // Monk Legs
 		2648,  // Kyokushin Legs
 		2470,  // Cursed Guard Legs
@@ -376,7 +375,6 @@ var Items = map[ItemCategory][]uint16{
 		2496,  // Konoha Protector
 		2665,  // Suna Protector
 		2537,  // Oto Protector
-		2518,  // Honour Ball
 		6579,  // Shinobi Mask
 		2481,  // Konoha Defender
 		2135,  // Bandit Necklace
@@ -692,11 +690,8 @@ var Items = map[ItemCategory][]uint16{
 		1986,  // Tome of Sins
 		7620,  // Kami Skull
 		2149,  // Gold Bar
-		5670,  // Voodoo Skull
 		6533,  // Ceremonial Book
 		7765,  // Weak Sand Chakra
-		6534,  // Imperor's Trident
-		2745,  // Blue Rose
 		7437,  // Strange Key
 		7453,  // Broken Strange Key
 		8003,  // Katon Chakra
