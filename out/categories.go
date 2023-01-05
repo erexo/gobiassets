@@ -801,6 +801,11 @@ var Items = map[ItemCategory][]uint16{
 		12480, // Heaven Plans
 		12840, // Dark Essence
 
+		5909, // White Fur
+		5911, // Brown Fur
+		5912, // Black Fur
+		5910, // Green Fur
+
 		11517, // Katon Feather
 		11515, // Suiton Feather
 		11514, // Raiton Feather
