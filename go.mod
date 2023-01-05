@@ -1,4 +1,4 @@
-module github.com/erexo/gobiaitem
+module github.com/erexo/gobiassets
 
 go 1.19
 

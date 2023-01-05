@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/erexo/gobiaitem/in"
+	"github.com/erexo/gobiassets/in"
 )
 
 type Monster struct {
