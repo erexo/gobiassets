@@ -107,7 +107,9 @@ var Items = map[ItemCategory][]uint16{
 		3939,  // Forest Bag
 		5927,  // Pirate Bag
 		1997,  // Golden Bag
+		8019,  // Shopping Bag
 		12861, // Sand Jug
+		1988,  // Backpack
 		1998,  // Konoha Backpack
 		1999,  // Suna Backpack
 		2002,  // Kumo Backpack
@@ -115,6 +117,7 @@ var Items = map[ItemCategory][]uint16{
 		1993,  // Hoshi Backpack
 		2003,  // Iwa Backpack
 		2001,  // Oto Backpack
+		2004,  // Kiri Backpack
 		1996,  // Marble Backpack
 		8922,  // Toad Pouch
 		2365,  // Akatsuki Backpack
@@ -400,7 +403,7 @@ var Items = map[ItemCategory][]uint16{
 	ItemCategoryRings: {
 		2446,  // Chakra Wings
 		2404,  // Sound Belt
-		12790, // Inner Ring
+		12791, // Inner Ring
 		2173,  // Akatsuki Ring
 		2174,  // Akatsuki Ring
 		11452, // Sannin Ring
@@ -462,6 +465,7 @@ var Items = map[ItemCategory][]uint16{
 		2121,  // Kyokushin Gloves
 		2442,  // Bloody Gloves
 		2407,  // Sound Glove
+		2424,  // Yellow Gloves
 		2411,  // Samurai Gloves
 		12858, // Enforcer Glove
 		2444,  // Legendary Gloves
@@ -508,9 +512,9 @@ var Items = map[ItemCategory][]uint16{
 	ItemCategorySwords: {
 		2428,  // Short Sword
 		2419,  // Bandit Sword
-		7591,  // Jagged Sword
-		11477, // Katana
+		2403,  // Sword
 		2386,  // Machete
+		2376,  // Katana
 		2384,  // Katanas
 		2438,  // Assassin Katanas
 		2434,  // Cyborg Katana
@@ -664,6 +668,7 @@ var Items = map[ItemCategory][]uint16{
 		8300,  // Perfect Piece of Chakra
 		7768,  // Mystery Chakra
 		6535,  // Chakred Scroll
+		7759,  // Sharingan Eye
 		11525, // Frozen Gem
 		12140, // Unstable Device
 		2500,  // Spring Box
@@ -677,6 +682,10 @@ var Items = map[ItemCategory][]uint16{
 		1965,  // prism hokage sign
 		12134, // disenchanting device
 		12299, // Toad Statue
+		7499,  // Joint
+		2093,  // Water-pipe
+		2099,  // Water-pipe
+		5953,  // Marijuana
 		1982,  // Authority Tome
 		1983,  // Blessed Tome
 		1985,  // Tome of Destruction
@@ -685,8 +694,11 @@ var Items = map[ItemCategory][]uint16{
 		2149,  // Gold Bar
 		5670,  // Voodoo Skull
 		6533,  // Ceremonial Book
+		7765,  // Weak Sand Chakra
 		6534,  // Imperor's Trident
 		2745,  // Blue Rose
+		7437,  // Strange Key
+		7453,  // Broken Strange Key
 		8003,  // Katon Chakra
 		8002,  // Suiton Chakra
 		8006,  // Raiton Chakra
