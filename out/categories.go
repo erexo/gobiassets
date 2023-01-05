@@ -635,17 +635,16 @@ var Items = map[ItemCategory][]uint16{
 		6569, // Candy
 	},
 	ItemCategoryFood: {
-		2674, // Cookies
-		2695, // Egg
-		7372, // Ice Cream
-		6278, // Cake
-		2667, // Fish
-		2684, // Chips
-		6394, // Cream Cake
 		2666, // Meat
-		2793, // Mushroom
 		2671, // Ham
-		2696, // Ramen
+		2689, // Onigiri
+		2695, // Egg
+		2687, // Cookie
+		8111, // Exploding Cookie
+		2362, // Chips
+		2672, // Ramen
+		6278, // Cake
+		7966, // Birthday Cake
 	},
 	ItemCategoryCurrency: {
 		2148, // Yen
