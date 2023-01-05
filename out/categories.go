@@ -402,9 +402,13 @@ var Items = map[ItemCategory][]uint16{
 		2404,  // Sound Belt
 		12790, // Inner Ring
 		2173,  // Akatsuki Ring
+		2174,  // Akatsuki Ring
 		11452, // Sannin Ring
+		11453, // Sannin Ring
 		12805, // Kara Ring
+		12806, // Kara Ring
 		12293, // Nukenin Ring
+		12294, // Nukenin Ring
 		12136, // Blood Signed
 		2179,  // Gold Ring
 		7697,  // Ruby Signet
