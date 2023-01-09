@@ -71,8 +71,21 @@ type AttributeValue struct {
 	Value     int32
 }
 
+const attSize = 5
+
+func (w Attributes) ReadAttribute(attribute ItemAttribute) (int32, bool) {
+	for i := 0; i+attSize <= len(w); i += attSize {
+		if ItemAttribute(w[i]) == attribute {
+			return int32(w[i+1]) |
+				int32(w[i+2])<<8 |
+				int32(w[i+3])<<16 |
+				int32(w[i+4])<<24, true
+		}
+	}
+	return 0, false
+}
+
 func (w Attributes) ReadAttributes() []AttributeValue {
-	const attSize = 5
 	ret := []AttributeValue{}
 	for i := 0; i+attSize <= len(w); i += attSize {
 		ret = append(ret, AttributeValue{
@@ -244,8 +257,21 @@ type AttributeValue struct {
 	Value     int32
 }
 
+const attSize = 5
+
+func (w Attributes) ReadAttribute(attribute ItemAttribute) (int32, bool) {
+	for i := 0; i+attSize <= len(w); i += attSize {
+		if ItemAttribute(w[i]) == attribute {
+			return int32(w[i+1]) |
+				int32(w[i+2])<<8 |
+				int32(w[i+3])<<16 |
+				int32(w[i+4])<<24, true
+		}
+	}
+	return 0, false
+}
+
 func (w Attributes) ReadAttributes() []AttributeValue {
-	const attSize = 5
 	ret := []AttributeValue{}
 	for i := 0; i+attSize <= len(w); i += attSize {
 		ret = append(ret, AttributeValue{
