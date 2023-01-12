@@ -9,15 +9,21 @@ import (
 )
 
 type Monster struct {
-	Name       string
-	Level      uint32
-	Health     int32
-	Experience uint64
-	Speed      int32
-	LookType   uint32
-	AverageDPS float64
-	AverageHPS float64
-	Loot       []LootItem
+	Id            uint16
+	Name          string
+	Level         uint32
+	Health        int32
+	Experience    uint64
+	Speed         int32
+	LookType      uint16
+	LookHead      uint8
+	LookPrimary   uint8
+	LookSecondary uint8
+	LookDetails   uint8
+	LookAddon     uint8
+	AverageDPS    float64
+	AverageHPS    float64
+	Loot          []LootItem
 }
 
 type LootItem struct {
@@ -29,18 +35,24 @@ type LootItem struct {
 
 func MonsterType() string {
 	return `type Monster struct {
-	Name       string
-	Level      uint32
-	Health     int32
-	Experience uint64
-	Speed      int32
-	LookType   uint32
-	AverageDPS float64
-	AverageHPS float64
-	Loot       []Item
+	Id            uint16
+	Name          string
+	Level         uint32
+	Health        int32
+	Experience    uint64
+	Speed         int32
+	LookType      uint16
+	LookHead      uint8
+	LookPrimary   uint8
+	LookSecondary uint8
+	LookDetails   uint8
+	LookAddon     uint8
+	AverageDPS    float64
+	AverageHPS    float64
+	Loot          []LootItem
 }
 
-type Item struct {
+type LootItem struct {
 	Id       uint16
 	Chance   float64
 	MinCount uint16
@@ -48,7 +60,7 @@ type Item struct {
 }`
 }
 
-func GetMonster(m *in.Monster) *Monster {
+func GetMonster(id uint16, m *in.Monster) *Monster {
 	var level uint32
 	if lvl, ok := m.Flags["level"]; ok {
 		level = uint32(lvl)
@@ -59,12 +71,20 @@ func GetMonster(m *in.Monster) *Monster {
 	}
 	var items []LootItem
 	for _, item := range m.Loot {
-		items = append(items, LootItem{
-			Id:       uint16(item.Id),
-			Chance:   item.Chance,
-			MinCount: uint16(item.MinCount),
-			MaxCount: uint16(item.MaxCount),
-		})
+		ids := strings.Split(item.Id, ";")
+		chance := item.Chance / float64(len(ids))
+		for _, idstr := range ids {
+			id, err := strconv.Atoi(idstr)
+			if err != nil {
+				panic(err)
+			}
+			items = append(items, LootItem{
+				Id:       uint16(id),
+				Chance:   chance,
+				MinCount: uint16(item.MinCount),
+				MaxCount: uint16(item.MaxCount),
+			})
+		}
 	}
 
 	var dps, hps float64
@@ -87,28 +107,38 @@ func GetMonster(m *in.Monster) *Monster {
 	}
 
 	return &Monster{
-		Name:       Title(m.Name),
-		Level:      level,
-		Health:     int32(m.Health.Now),
-		Experience: uint64(m.Experience),
-		Speed:      int32(m.Speed),
-		LookType:   uint32(lookType),
-		AverageDPS: dps,
-		AverageHPS: hps,
-		Loot:       items,
+		Id:            id,
+		Name:          Title(m.Name),
+		Level:         level,
+		Health:        int32(m.Health.Now),
+		Experience:    uint64(m.Experience),
+		Speed:         int32(m.Speed),
+		LookType:      uint16(lookType),
+		LookHead:      m.Look.Head,
+		LookPrimary:   m.Look.Body,
+		LookSecondary: m.Look.Legs,
+		LookDetails:   m.Look.Feet,
+		LookAddon:     m.Look.Addons,
+		AverageDPS:    dps,
+		AverageHPS:    hps,
+		Loot:          items,
 	}
 }
 
 func (m *Monster) String() string {
 	var items strings.Builder
-	items.WriteString(`[]Item{`)
-	for i, item := range m.Loot {
-		items.WriteString(fmt.Sprintf("{%d, %.5f, %d, %d}", item.Id, item.Chance, item.MinCount, item.MaxCount))
-		if i < len(m.Loot)-1 {
-			items.WriteString(", ")
+	if len(m.Loot) > 0 {
+		items.WriteString(`[]LootItem{`)
+		for i, item := range m.Loot {
+			items.WriteString(fmt.Sprintf("{%d, %.5f, %d, %d}", item.Id, item.Chance, item.MinCount, item.MaxCount))
+			if i < len(m.Loot)-1 {
+				items.WriteString(", ")
+			}
 		}
+		items.WriteByte('}')
+	} else {
+		items.WriteString("nil")
 	}
-	items.WriteByte('}')
 
-	return fmt.Sprintf(`&Monster{"%s", %d, %d, %d, %d, %d, %.2f, %.2f, %s}`, m.Name, m.Level, m.Health, m.Experience, m.Speed, m.LookType, m.AverageDPS, m.AverageHPS, items.String())
+	return fmt.Sprintf(`&Monster{%d, "%s", %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %.2f, %.2f, %s}`, m.Id, m.Name, m.Level, m.Health, m.Experience, m.Speed, m.LookType, m.LookHead, m.LookPrimary, m.LookSecondary, m.LookDetails, m.LookAddon, m.AverageDPS, m.AverageHPS, items.String())
 }

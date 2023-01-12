@@ -15,17 +15,18 @@ func logTime(msg string) func() {
 }
 
 func Variable(s string) string {
-	first := true
+	first := false
 	return strings.Map(
 		func(r rune) rune {
 			if unicode.IsSpace(r) {
+				first = true
 				return -1
 			}
 			if first {
 				first = false
-				return unicode.ToLower(r)
+				return unicode.ToUpper(r)
 			}
-			return r
+			return unicode.ToLower(r)
 		},
 		s)
 }

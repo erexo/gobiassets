@@ -53,7 +53,7 @@ func (i ItemRole) String() string {
 	}
 }
 
-func Category() string {
+func ItemCategoryPrefix() string {
 	return `//go:generate enumer -type=ItemCategory -trimprefix ItemCategory -output itemcategory_string.go
 //go:generate enumer -type=ItemRole -trimprefix ItemRole -output itemrole_string.go
 
@@ -651,6 +651,7 @@ var Items = map[ItemCategory][]uint16{
 		2672, // Ramen
 		6278, // Cake
 		7966, // Birthday Cake
+		6394, // Cream Cake
 	},
 	ItemCategoryCurrency: {
 		2148, // Yen
@@ -694,6 +695,15 @@ var Items = map[ItemCategory][]uint16{
 		7765,  // Weak Sand Chakra
 		7437,  // Strange Key
 		7453,  // Broken Strange Key
+		12842, // Erexo's Eye
+		12843, // Erexo's Horn
+		12844, // Erexo's Brain
+		11747, // Katon Stone
+		11749, // Suiton Stone
+		11750, // Fuuton Stone
+		11751, // Raiton Stone
+		11748, // Doton Stone
+		12258, // Cursed Stone
 		8003,  // Katon Chakra
 		8002,  // Suiton Chakra
 		8006,  // Raiton Chakra

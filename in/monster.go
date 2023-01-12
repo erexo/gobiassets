@@ -11,6 +11,7 @@ const (
 )
 
 type Monster struct {
+	Path       string
 	Name       string    `xml:"name,attr"`
 	Experience int       `xml:"experience,attr"`
 	Speed      int       `xml:"speed,attr"`
@@ -19,11 +20,12 @@ type Monster struct {
 	Flags      Flags     `xml:"flags>flag"`
 	Attacks    []Attack  `xml:"attacks>attack"`
 	Defenses   []Defense `xml:"defenses>defense"`
-	Loot       Loot     `xml:"loot>item"`
+	Loot       Loot      `xml:"loot>item"`
 }
 
-func NewMonster() *Monster {
+func NewMonster(path string) *Monster {
 	return &Monster{
+		Path:  path,
 		Flags: make(Flags),
 	}
 }
@@ -33,11 +35,12 @@ type Health struct {
 }
 
 type Look struct {
-	Type string `xml:"type,attr"`
-	Head int    `xml:"head,attr"`
-	Body int    `xml:"body,attr"`
-	Legs int    `xml:"legs,attr"`
-	Feet int    `xml:"feet,attr"`
+	Type   string `xml:"type,attr"`
+	Head   uint8  `xml:"head,attr"`
+	Body   uint8  `xml:"body,attr"`
+	Legs   uint8  `xml:"legs,attr"`
+	Feet   uint8  `xml:"feet,attr"`
+	Addons uint8  `xml:"addons,attr"`
 }
 
 type Flags map[string]int
@@ -127,7 +130,7 @@ func getItems(items []itemInside, chanceMul float64) []LootItem {
 }
 
 type LootItem struct {
-	Id       int     `xml:"id,attr"`
+	Id       string  `xml:"id,attr"`
 	Chance   float64 `xml:"chance,attr"`
 	MinCount int     `xml:"mincount,attr"`
 	MaxCount int     `xml:"count,attr"`
