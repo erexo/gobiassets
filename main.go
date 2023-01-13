@@ -431,6 +431,9 @@ func (s monsterByLevel) Len() int      { return len(s) }
 func (s monsterByLevel) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
 func (s monsterByLevel) Less(i, j int) bool {
 	if s[i].Level == s[j].Level {
+		if s[i].Health == s[j].Health {
+			return s[i].Experience < s[j].Experience
+		}
 		return s[i].Health < s[j].Health
 	}
 	return s[i].Level < s[j].Level
