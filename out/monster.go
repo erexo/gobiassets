@@ -87,19 +87,14 @@ func GetMonster(id uint16, m *in.Monster) *Monster {
 		}
 	}
 
-	var dps, hps float64
-	for _, atk := range m.Attacks {
-		chs := atk.Chance / (float64(atk.Interval) / 1000)
-		var dmg float64
-		if atk.Skill > 0 && atk.Attack > 0 {
-			dmg = (float64(atk.Skill)*(float64(atk.Attack)*0.05) + (float64(atk.Attack) * 0.5)) / 2
-			dmg *= 0.9 // ~ -10% for shield/armor block
-		} else {
-			dmg = -(float64(atk.Min) + float64(atk.Max)) / 2
+	var dps float64
+	for _, stage := range m.Stages {
+		if stageDps := calculateDmg(stage.Attacks); dps < stageDps {
+			dps = stageDps
 		}
-		// (int32_t)std::ceil((attackSkill * (attackValue * 0.05)) + (attackValue * 0.5));
-		dps += dmg * chs
 	}
+	dps += calculateDmg(m.Attacks)
+	var hps float64
 	for _, def := range m.Defenses {
 		chs := def.Chance / (float64(def.Interval) / 1000)
 		heal := (float64(def.Min) + float64(def.Max)) / 2
@@ -141,4 +136,20 @@ func (m *Monster) String() string {
 	}
 
 	return fmt.Sprintf(`&Monster{%d, "%s", %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %.2f, %.2f, %s}`, m.Id, m.Name, m.Level, m.Health, m.Experience, m.Speed, m.LookType, m.LookHead, m.LookPrimary, m.LookSecondary, m.LookDetails, m.LookAddon, m.AverageDPS, m.AverageHPS, items.String())
+}
+
+func calculateDmg(attacks []in.Attack) float64 {
+	var dps float64
+	for _, atk := range attacks {
+		chs := atk.Chance / (float64(atk.Interval) / 1000)
+		var dmg float64
+		if atk.Skill > 0 && atk.Attack > 0 {
+			dmg = (float64(atk.Skill)*(float64(atk.Attack)*0.05) + (float64(atk.Attack) * 0.5)) / 2
+			dmg *= 0.9 // ~ -10% for shield/armor block
+		} else {
+			dmg = -(float64(atk.Min) + float64(atk.Max)) / 2
+		}
+		dps += dmg * chs
+	}
+	return dps
 }

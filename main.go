@@ -433,7 +433,7 @@ func (s monsterByLevel) Less(i, j int) bool {
 	if s[i].Level == s[j].Level {
 		if s[i].Health == s[j].Health {
 			if s[i].Experience == s[j].Experience {
-				return strings.Compare(s[i].Name, s[j].Name) < 0
+				return s[i].Name < s[j].Name
 			}
 			return s[i].Experience < s[j].Experience
 		}

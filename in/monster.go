@@ -19,6 +19,7 @@ type Monster struct {
 	Look       Look      `xml:"look"`
 	Flags      Flags     `xml:"flags>flag"`
 	Attacks    []Attack  `xml:"attacks>attack"`
+	Stages     []Stage   `xml:"attacks>stage"`
 	Defenses   []Defense `xml:"defenses>defense"`
 	Loot       Loot      `xml:"loot>item"`
 }
@@ -55,6 +56,11 @@ func (f Flags) UnmarshalXML(dec *xml.Decoder, start xml.StartElement) error {
 	}
 	dec.Skip()
 	return nil
+}
+
+type Stage struct {
+	Id      int      `xml:"id,attr"`
+	Attacks []Attack `xml:"attack"`
 }
 
 type Attack struct {
