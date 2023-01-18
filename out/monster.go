@@ -2,6 +2,7 @@ package out
 
 import (
 	"fmt"
+	"math"
 	"strconv"
 	"strings"
 
@@ -29,8 +30,8 @@ type Monster struct {
 type LootItem struct {
 	Id       uint16
 	Chance   float64
-	MinCount uint16
-	MaxCount uint16
+	MinCount uint8
+	MaxCount uint8
 }
 
 func MonsterType() string {
@@ -55,12 +56,12 @@ func MonsterType() string {
 type LootItem struct {
 	Id       uint16
 	Chance   float64
-	MinCount uint16
-	MaxCount uint16
+	MinCount uint8
+	MaxCount uint8
 }`
 }
 
-func GetMonster(id uint16, m *in.Monster) *Monster {
+func GetMonster(id uint16, m *in.Monster, it map[uint16]uint16) *Monster {
 	var level uint32
 	if lvl, ok := m.Flags["level"]; ok {
 		level = uint32(lvl)
@@ -72,17 +73,27 @@ func GetMonster(id uint16, m *in.Monster) *Monster {
 	var items []LootItem
 	for _, item := range m.Loot {
 		ids := strings.Split(item.Id, ";")
-		chance := item.Chance / float64(len(ids))
+		chance := item.Chance / float64(len(ids)) * 100
 		for _, idstr := range ids {
 			id, err := strconv.Atoi(idstr)
 			if err != nil {
 				panic(err)
 			}
+			clientId, ok := it[uint16(id)]
+			if !ok {
+				panic("Unknown item")
+			}
+			if item.MinCount > math.MaxUint8 {
+				panic("MinCount")
+			}
+			if item.MaxCount > math.MaxUint8 {
+				panic("MaxCount")
+			}
 			items = append(items, LootItem{
-				Id:       uint16(id),
+				Id:       clientId,
 				Chance:   chance,
-				MinCount: uint16(item.MinCount),
-				MaxCount: uint16(item.MaxCount),
+				MinCount: uint8(item.MinCount),
+				MaxCount: uint8(item.MaxCount),
 			})
 		}
 	}
@@ -103,7 +114,7 @@ func GetMonster(id uint16, m *in.Monster) *Monster {
 
 	return &Monster{
 		Id:            id,
-		Name:          Title(m.Name),
+		Name:          Title(strings.TrimSpace(m.Name)),
 		Level:         level,
 		Health:        int32(m.Health.Now),
 		Experience:    uint64(m.Experience),
@@ -125,7 +136,7 @@ func (m *Monster) String() string {
 	if len(m.Loot) > 0 {
 		items.WriteString(`[]LootItem{`)
 		for i, item := range m.Loot {
-			items.WriteString(fmt.Sprintf("{%d, %.5f, %d, %d}", item.Id, item.Chance, item.MinCount, item.MaxCount))
+			items.WriteString(fmt.Sprintf("{%d, %.3g, %d, %d}", item.Id, item.Chance, item.MinCount, item.MaxCount))
 			if i < len(m.Loot)-1 {
 				items.WriteString(", ")
 			}
@@ -135,7 +146,7 @@ func (m *Monster) String() string {
 		items.WriteString("nil")
 	}
 
-	return fmt.Sprintf(`&Monster{%d, "%s", %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %.2f, %.2f, %s}`, m.Id, m.Name, m.Level, m.Health, m.Experience, m.Speed, m.LookType, m.LookHead, m.LookPrimary, m.LookSecondary, m.LookDetails, m.LookAddon, m.AverageDPS, m.AverageHPS, items.String())
+	return fmt.Sprintf(`&Monster{%d, "%s", %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %.1f, %.1f, %s}`, m.Id, m.Name, m.Level, m.Health, m.Experience, m.Speed, m.LookType, m.LookHead, m.LookPrimary, m.LookSecondary, m.LookDetails, m.LookAddon, m.AverageDPS, m.AverageHPS, items.String())
 }
 
 func calculateDmg(attacks []in.Attack) float64 {

@@ -36,9 +36,8 @@ func main() {
 
 	prices := readPrices()
 	items := saveItems(prices)
-	monsters := saveMonsters()
+	saveMonsters(items)
 
-	verifyLoot(items, monsters)
 	verifyPrices(items, prices)
 
 	fmt.Println("BYE")
@@ -150,7 +149,7 @@ func GetItem(clientId uint16) *Item {
 	return items
 }
 
-func saveMonsters() []*out.Monster {
+func saveMonsters(items []*out.Item) []*out.Monster {
 	defer logTime("Monsters")()
 
 	f, err := os.OpenFile(monstersFileName, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0755)
@@ -161,6 +160,10 @@ func saveMonsters() []*out.Monster {
 
 	monsterFile := readMonsterFile()
 
+	itemServerClientId := make(map[uint16]uint16)
+	for _, item := range items {
+		itemServerClientId[item.ServerId] = item.ClientId
+	}
 	monsters := make(map[out.MonsterCategory][]*out.Monster)
 	variables := make(map[*out.Monster]string)
 	var variableChars int
@@ -173,7 +176,7 @@ func saveMonsters() []*out.Monster {
 		mon := make([]*out.Monster, len(input))
 		for i, monster := range input {
 			meta := monsterFile[monster.Path]
-			m := out.GetMonster(meta.Id, monster)
+			m := out.GetMonster(meta.Id, monster, itemServerClientId)
 			mon[i] = m
 			variables[m] = meta.Name
 			varName := Variable(meta.Name)
@@ -250,28 +253,6 @@ func GetMonster(name string) *Monster {
 		panic(err)
 	}
 	return ret
-}
-
-func verifyLoot(items []*out.Item, monsters []*out.Monster) {
-	desired := make(map[uint16]struct{})
-	for _, monster := range monsters {
-		for _, loot := range monster.Loot {
-			desired[loot.Id] = struct{}{}
-		}
-	}
-	for _, item := range items {
-		delete(desired, item.ServerId)
-	}
-	if len(desired) == 0 {
-		return
-	}
-
-	var sb strings.Builder
-	sb.WriteString("Omitted Loot item ids:\n")
-	for id := range desired {
-		fmt.Fprintf(&sb, "%d, ", id)
-	}
-	log.Println(sb.String())
 }
 
 func verifyPrices(items []*out.Item, prices prices) {

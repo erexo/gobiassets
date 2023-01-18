@@ -2,6 +2,7 @@ package in
 
 import (
 	"encoding/xml"
+	"sort"
 	"strconv"
 )
 
@@ -120,7 +121,14 @@ func (i *Loot) UnmarshalXML(dec *xml.Decoder, start xml.StartElement) error {
 		return err
 	}
 	*i = append(*i, getItems(s, 1)...)
+	sort.Sort(*i)
 	return nil
+}
+
+func (l Loot) Len() int      { return len(l) }
+func (l Loot) Swap(i, j int) { l[i], l[j] = l[j], l[i] }
+func (l Loot) Less(i, j int) bool {
+	return l[i].Chance > l[j].Chance
 }
 
 func getItems(items []itemInside, chanceMul float64) []LootItem {
