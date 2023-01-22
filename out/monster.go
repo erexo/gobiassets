@@ -61,7 +61,7 @@ type LootItem struct {
 }`
 }
 
-func GetMonster(id uint16, m *in.Monster, it map[uint16]uint16) *Monster {
+func GetMonster(id uint16, m *in.Monster, it map[uint16]*Item) *Monster {
 	var level uint32
 	if lvl, ok := m.Flags["level"]; ok {
 		level = uint32(lvl)
@@ -70,16 +70,17 @@ func GetMonster(id uint16, m *in.Monster, it map[uint16]uint16) *Monster {
 	if err != nil {
 		panic(err)
 	}
+	var worth float64
 	var items []LootItem
 	for _, item := range m.Loot {
 		ids := strings.Split(item.Id, ";")
-		chance := item.Chance / float64(len(ids)) * 100
+		chance := item.Chance / float64(len(ids))
 		for _, idstr := range ids {
 			id, err := strconv.Atoi(idstr)
 			if err != nil {
 				panic(err)
 			}
-			clientId, ok := it[uint16(id)]
+			it, ok := it[uint16(id)]
 			if !ok {
 				panic("Unknown item")
 			}
@@ -90,11 +91,15 @@ func GetMonster(id uint16, m *in.Monster, it map[uint16]uint16) *Monster {
 				panic("MaxCount")
 			}
 			items = append(items, LootItem{
-				Id:       clientId,
-				Chance:   chance,
+				Id:       it.ClientId,
+				Chance:   chance * 100,
 				MinCount: uint8(item.MinCount),
 				MaxCount: uint8(item.MaxCount),
 			})
+			if it.Worth > 0 {
+				avgCount := (float64(item.MinCount) + float64(item.MaxCount)) / 2
+				worth += chance * float64(it.Worth) * avgCount
+			}
 		}
 	}
 
@@ -125,8 +130,8 @@ func GetMonster(id uint16, m *in.Monster, it map[uint16]uint16) *Monster {
 		LookSecondary: m.Look.Legs,
 		LookDetails:   m.Look.Feet,
 		LookAddon:     m.Look.Addons,
-		AverageDPS:    dps,
-		AverageHPS:    hps,
+		AverageDPS:    dps, // worth,
+		AverageHPS:    hps, // worth / float64(m.Health.Now) * 1000,
 		Loot:          items,
 	}
 }

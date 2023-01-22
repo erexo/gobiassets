@@ -128,6 +128,9 @@ func (i *Loot) UnmarshalXML(dec *xml.Decoder, start xml.StartElement) error {
 func (l Loot) Len() int      { return len(l) }
 func (l Loot) Swap(i, j int) { l[i], l[j] = l[j], l[i] }
 func (l Loot) Less(i, j int) bool {
+	if l[i].Chance == l[j].Chance {
+		return l[i].Id < l[j].Id
+	}
 	return l[i].Chance > l[j].Chance
 }
 

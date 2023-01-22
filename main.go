@@ -160,9 +160,9 @@ func saveMonsters(items []*out.Item) []*out.Monster {
 
 	monsterFile := readMonsterFile()
 
-	itemServerClientId := make(map[uint16]uint16)
+	itemsByServerId := make(map[uint16]*out.Item)
 	for _, item := range items {
-		itemServerClientId[item.ServerId] = item.ClientId
+		itemsByServerId[item.ServerId] = item
 	}
 	monsters := make(map[out.MonsterCategory][]*out.Monster)
 	variables := make(map[*out.Monster]string)
@@ -176,7 +176,7 @@ func saveMonsters(items []*out.Item) []*out.Monster {
 		mon := make([]*out.Monster, len(input))
 		for i, monster := range input {
 			meta := monsterFile[monster.Path]
-			m := out.GetMonster(meta.Id, monster, itemServerClientId)
+			m := out.GetMonster(meta.Id, monster, itemsByServerId)
 			mon[i] = m
 			variables[m] = meta.Name
 			varName := Variable(meta.Name)

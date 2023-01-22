@@ -638,7 +638,6 @@ var Items = map[ItemCategory][]uint16{
 		5900, // Raiton Gem
 		7850, // Blue Shard
 		8309, // Red Shard
-		6569, // Candy
 	},
 	ItemCategoryFood: {
 		2666, // Meat
