@@ -15,7 +15,7 @@ func logTime(msg string) func() {
 }
 
 func Variable(s string) string {
-	first := false
+	first := true
 	return strings.Map(
 		func(r rune) rune {
 			if unicode.IsSpace(r) {
