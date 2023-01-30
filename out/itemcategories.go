@@ -635,9 +635,6 @@ var Items = map[ItemCategory][]uint16{
 		8936, // Raiton Soldier Pill
 		8940, // Fuuton Soldier Pill
 		8932, // Doton Soldier Pill
-		5900, // Raiton Gem
-		7850, // Blue Shard
-		8309, // Red Shard
 	},
 	ItemCategoryFood: {
 		2666, // Meat
