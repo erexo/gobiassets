@@ -2,7 +2,6 @@ package out
 
 import (
 	"fmt"
-	"log"
 	"math"
 	"strconv"
 	"strings"
@@ -114,85 +113,59 @@ func (w *Attributes) writeAttr(attr ItemAttribute, value int64) {
 		uint8(value>>24))
 }
 
-func NewItem(client uint16, item *in.Item) *Item {
-	attr := Attributes{}
-	attr.writeAttr(ItemAttributeAttack, readAttribute(item.Attributes, "attack", "extraatk", "elementphysical", "elementfire", "elementenergy", "elementearth", "elementice", "elementholy", "elementdeath"))
-	attr.writeAttr(ItemAttributeDefense, readAttribute(item.Attributes, "defense", "extradef"))
-	attr.writeAttr(ItemAttributeRange, readAttribute(item.Attributes, "range"))
-	attr.writeAttr(ItemAttributeBreakChance, readAttribute(item.Attributes, "breakchance"))
-	attr.writeAttr(ItemAttributeArmor, readAttribute(item.Attributes, "armor"))
-	attr.writeAttr(ItemAttributeContainerSize, readAttribute(item.Attributes, "containersize"))
-	attr.writeAttr(ItemAttributeDuration, readAttribute(item.Attributes, "duration"))
-	attr.writeAttr(ItemAttributeCharges, readAttribute(item.Attributes, "charges"))
-	attr.writeAttr(ItemAttributeLevel, readAttribute(item.Attributes, "level"))
-	attr.writeAttr(ItemAttributeSpeed, readAttribute(item.Attributes, "speed"))
-	attr.writeAttr(ItemAttributePreventDrop, readAttribute(item.Attributes, "preventdrop"))
-	attr.writeAttr(ItemAttributeReduceDeath, readAttribute(item.Attributes, "reducedeathpercent"))
-	attr.writeAttr(ItemAttributeManaShield, readAttribute(item.Attributes, "manashield"))
-	attr.writeAttr(ItemAttributeMaxHealth, readAttribute(item.Attributes, "maxhealthpoints"))
-	attr.writeAttr(ItemAttributeMaxHealthPercent, readAttributePercent(item.Attributes, "maxhealthpercent"))
-	attr.writeAttr(ItemAttributeMaxMana, readAttribute(item.Attributes, "maxmanapoints"))
-	attr.writeAttr(ItemAttributeMaxManaPercent, readAttributePercent(item.Attributes, "maxmanapercent"))
-	attr.writeAttr(ItemAttributeHealthTicks, readAttribute(item.Attributes, "healthticks"))
-	attr.writeAttr(ItemAttributeHealthGain, readAttribute(item.Attributes, "healthgain"))
-	attr.writeAttr(ItemAttributeManaTicks, readAttribute(item.Attributes, "manaticks"))
-	attr.writeAttr(ItemAttributeManaGain, readAttribute(item.Attributes, "managain"))
-	attr.writeAttr(ItemAttributeSoul, readAttribute(item.Attributes, "soulpoints"))
-	attr.writeAttr(ItemAttributeSkillAll, readAttribute(item.Attributes, "allskills"))
-	attr.writeAttr(ItemAttributeSkillWeapons, readAttribute(item.Attributes, "skillweapons"))
-	attr.writeAttr(ItemAttributeSkillMagic, readAttribute(item.Attributes, "magiclevelpoints"))
-	attr.writeAttr(ItemAttributeSkillFist, readAttribute(item.Attributes, "skillfist"))
-	attr.writeAttr(ItemAttributeSkillClub, readAttribute(item.Attributes, "skillclub"))
-	attr.writeAttr(ItemAttributeSkillSword, readAttribute(item.Attributes, "skillsword"))
-	attr.writeAttr(ItemAttributeSkillDist, readAttribute(item.Attributes, "skilldist"))
-	attr.writeAttr(ItemAttributeSkillShield, readAttribute(item.Attributes, "skillshield"))
-	attr.writeAttr(ItemAttributeSkillAxe, readAttribute(item.Attributes, "skillaxe"))
-	attr.writeAttr(ItemAttributeSkillFish, readAttribute(item.Attributes, "skillfish"))
-	attr.writeAttr(ItemAttributeMagicPercent, readAttributePercent(item.Attributes, "increasemagicpercent"))
-	attr.writeAttr(ItemAttributeMagicPvePercent, readAttributePercent(item.Attributes, "increasemagicpvepercent"))
-	attr.writeAttr(ItemAttributeMeleePercent, readAttributePercent(item.Attributes, "increasemeleepercent"))
-	attr.writeAttr(ItemAttributeHealingPercent, readAttributePercent(item.Attributes, "increasehealingpercent"))
-	attr.writeAttr(ItemAttributeProtection, readAttribute(item.Attributes, "absorbpercentall"))
-
+func NewItem(client uint16, item *in.Item, attrItem *in.Item) *Item {
 	return &Item{
 		ServerId:    uint16(item.Id),
 		ClientId:    client,
 		Name:        Title(item.Name),
-		Role:        Role(readAttributeString(item.Attributes, "role")),
-		Description: readAttributeString(item.Attributes, "description"),
-		Weight:      float32(readAttribute(item.Attributes, "weight")) / 100,
-		Worth:       readAttribute(item.Attributes, "worth"),
-		Attributes:  attr,
+		Role:        Role(item.Attributes.ReadString("role")),
+		Description: item.Attributes.ReadString("description"),
+		Weight:      float32(item.Attributes.Read("weight")) / 100,
+		Worth:       item.Attributes.Read("worth"),
+		Attributes:  getAttrs(attrItem),
 	}
 }
 
-func readAttribute(attr in.Attributes, names ...string) int64 {
-	var ret int64
-	for _, name := range names {
-		if v, ok := attr[strings.ToLower(name)]; ok {
-			value, err := strconv.ParseInt(v, 10, 64)
-			if err != nil {
-				log.Println(err)
-			}
-			ret += value
-		}
-	}
-	return ret
-}
-
-func readAttributeString(attr in.Attributes, name string) string {
-	if v, ok := attr[strings.ToLower(name)]; ok {
-		return v
-	}
-	return ""
-}
-
-func readAttributePercent(attr in.Attributes, name string) int64 {
-	v := readAttribute(attr, name)
-	if v == 0 {
-		return 0
-	}
-	return v - 100
+func getAttrs(item *in.Item) Attributes {
+	attr := Attributes{}
+	attr.writeAttr(ItemAttributeAttack, item.Attributes.Read("attack", "extraatk", "elementphysical", "elementfire", "elementenergy", "elementearth", "elementice", "elementholy", "elementdeath"))
+	attr.writeAttr(ItemAttributeDefense, item.Attributes.Read("defense", "extradef"))
+	attr.writeAttr(ItemAttributeRange, item.Attributes.Read("range"))
+	attr.writeAttr(ItemAttributeBreakChance, item.Attributes.Read("breakchance"))
+	attr.writeAttr(ItemAttributeArmor, item.Attributes.Read("armor"))
+	attr.writeAttr(ItemAttributeContainerSize, item.Attributes.Read("containersize"))
+	attr.writeAttr(ItemAttributeDuration, item.Attributes.Read("duration"))
+	attr.writeAttr(ItemAttributeCharges, item.Attributes.Read("charges"))
+	attr.writeAttr(ItemAttributeLevel, item.Attributes.Read("level"))
+	attr.writeAttr(ItemAttributeSpeed, item.Attributes.Read("speed"))
+	attr.writeAttr(ItemAttributePreventDrop, item.Attributes.Read("preventdrop"))
+	attr.writeAttr(ItemAttributeReduceDeath, item.Attributes.Read("reducedeathpercent"))
+	attr.writeAttr(ItemAttributeManaShield, item.Attributes.Read("manashield"))
+	attr.writeAttr(ItemAttributeMaxHealth, item.Attributes.Read("maxhealthpoints"))
+	attr.writeAttr(ItemAttributeMaxHealthPercent, item.Attributes.ReadPercent("maxhealthpercent"))
+	attr.writeAttr(ItemAttributeMaxMana, item.Attributes.Read("maxmanapoints"))
+	attr.writeAttr(ItemAttributeMaxManaPercent, item.Attributes.ReadPercent("maxmanapercent"))
+	attr.writeAttr(ItemAttributeHealthTicks, item.Attributes.Read("healthticks"))
+	attr.writeAttr(ItemAttributeHealthGain, item.Attributes.Read("healthgain"))
+	attr.writeAttr(ItemAttributeManaTicks, item.Attributes.Read("manaticks"))
+	attr.writeAttr(ItemAttributeManaGain, item.Attributes.Read("managain"))
+	attr.writeAttr(ItemAttributeSoul, item.Attributes.Read("soulpoints"))
+	attr.writeAttr(ItemAttributeSkillAll, item.Attributes.Read("allskills"))
+	attr.writeAttr(ItemAttributeSkillWeapons, item.Attributes.Read("skillweapons"))
+	attr.writeAttr(ItemAttributeSkillMagic, item.Attributes.Read("magiclevelpoints"))
+	attr.writeAttr(ItemAttributeSkillFist, item.Attributes.Read("skillfist"))
+	attr.writeAttr(ItemAttributeSkillClub, item.Attributes.Read("skillclub"))
+	attr.writeAttr(ItemAttributeSkillSword, item.Attributes.Read("skillsword"))
+	attr.writeAttr(ItemAttributeSkillDist, item.Attributes.Read("skilldist"))
+	attr.writeAttr(ItemAttributeSkillShield, item.Attributes.Read("skillshield"))
+	attr.writeAttr(ItemAttributeSkillAxe, item.Attributes.Read("skillaxe"))
+	attr.writeAttr(ItemAttributeSkillFish, item.Attributes.Read("skillfish"))
+	attr.writeAttr(ItemAttributeMagicPercent, item.Attributes.ReadPercent("increasemagicpercent"))
+	attr.writeAttr(ItemAttributeMagicPvePercent, item.Attributes.ReadPercent("increasemagicpvepercent"))
+	attr.writeAttr(ItemAttributeMeleePercent, item.Attributes.ReadPercent("increasemeleepercent"))
+	attr.writeAttr(ItemAttributeHealingPercent, item.Attributes.ReadPercent("increasehealingpercent"))
+	attr.writeAttr(ItemAttributeProtection, item.Attributes.Read("absorbpercentall"))
+	return attr
 }
 
 func ItemType() string {

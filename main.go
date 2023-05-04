@@ -83,7 +83,16 @@ func saveItems(prices prices) []*out.Item {
 			continue
 		}
 		if client, ok := serverClient[uint16(item.Id)]; ok {
-			it := out.NewItem(client, item)
+			attrItem := item
+			if equipTo := item.Attributes.Read("transformEquipTo"); equipTo != 0 {
+				for _, it := range input {
+					if it.Id == int(equipTo) {
+						attrItem = it
+						break
+					}
+				}
+			}
+			it := out.NewItem(client, item, attrItem)
 			if it.Worth == 0 {
 				if price, ok := prices[item.Id]; ok {
 					it.Worth = int64(price)

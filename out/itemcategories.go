@@ -98,15 +98,10 @@ const (
 
 var Items = map[ItemCategory][]uint16{
 	ItemCategoryContainers: {
-		1990,  // Present
-		6104,  // Jewel Case
 		1987,  // Bag
 		1991,  // Konoha Bag
 		1992,  // Suna Bag
 		1995,  // Kumo Bag
-		3939,  // Forest Bag
-		5927,  // Pirate Bag
-		1997,  // Golden Bag
 		8019,  // Shopping Bag
 		12861, // Sand Jug
 		1988,  // Backpack
@@ -158,10 +153,10 @@ var Items = map[ItemCategory][]uint16{
 		11408, // Kagero Shawl
 		11990, // Rikudou Bandana
 		7432,  // Black Samurai Helmet
-		2659,  // Hanzo Mask
 		11917, // Outcast Mask
 		6536,  // Raiton Helmet
 		2218,  // Katon Mask
+		2659,  // Hanzo Mask
 		7454,  // Madara Mask
 		11415, // Sentinel's Mask
 		11965, // Kara Hood
@@ -657,12 +652,11 @@ var Items = map[ItemCategory][]uint16{
 		1691, // Premium Ticket
 	},
 	ItemCategoryValuables: {
-		5890,  // Adrenaline
 		8306,  // Small Piece of Chakra
 		8302,  // Piece of Chakra
 		8300,  // Perfect Piece of Chakra
 		7768,  // Mystery Chakra
-		6535,  // Chakred Scroll
+		2676,  // Chakra Orb
 		7759,  // Sharingan Eye
 		11525, // Frozen Gem
 		12140, // Unstable Device
@@ -681,12 +675,6 @@ var Items = map[ItemCategory][]uint16{
 		2093,  // Water-pipe
 		2099,  // Water-pipe
 		5953,  // Marijuana
-		1982,  // Authority Tome
-		1983,  // Blessed Tome
-		1985,  // Tome of Destruction
-		1986,  // Tome of Sins
-		7620,  // Kami Skull
-		2149,  // Gold Bar
 		6533,  // Ceremonial Book
 		7765,  // Weak Sand Chakra
 		7437,  // Strange Key

@@ -2,6 +2,8 @@ package in
 
 import (
 	"encoding/xml"
+	"log"
+	"strconv"
 	"strings"
 )
 
@@ -33,4 +35,33 @@ func (a *Attributes) UnmarshalXML(dec *xml.Decoder, start xml.StartElement) erro
 	(*a)[key] = value
 	dec.Skip()
 	return nil
+}
+
+func (a Attributes) Read(names ...string) int64 {
+	var ret int64
+	for _, name := range names {
+		if v, ok := a[strings.ToLower(name)]; ok {
+			value, err := strconv.ParseInt(v, 10, 64)
+			if err != nil {
+				log.Println(err)
+			}
+			ret += value
+		}
+	}
+	return ret
+}
+
+func (a Attributes) ReadString(name string) string {
+	if v, ok := a[strings.ToLower(name)]; ok {
+		return v
+	}
+	return ""
+}
+
+func (a Attributes) ReadPercent(name string) int64 {
+	v := a.Read(name)
+	if v == 0 {
+		return 0
+	}
+	return v - 100
 }
