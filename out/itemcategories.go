@@ -24,9 +24,10 @@ const (
 	ItemCategoryValuables
 	ItemCategoryDolls
 	ItemCategoryMissions
+	ItemCategoryNindoCoins
 
 	ItemCategoryFirst = ItemCategoryContainers
-	ItemCategoryLast  = ItemCategoryMissions
+	ItemCategoryLast  = ItemCategoryNindoCoins
 )
 
 type ItemRole uint8
@@ -81,9 +82,10 @@ const (
 	ItemCategoryValuables
 	ItemCategoryDolls
 	ItemCategoryMissions
+	ItemCategoryNindoCoins
 
 	ItemCategoryFirst = ItemCategoryContainers
-	ItemCategoryLast  = ItemCategoryMissions
+	ItemCategoryLast  = ItemCategoryNindoCoins
 )
 
 type ItemRole uint8
@@ -812,5 +814,8 @@ var Items = map[ItemCategory][]uint16{
 		11514, // Raiton Feather
 		11513, // Fuuton Feather
 		11516, // Doton Feather
+	},
+	ItemCategoryNindoCoins: {
+		12899, // Nindo Coins
 	},
 }
