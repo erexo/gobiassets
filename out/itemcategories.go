@@ -21,13 +21,13 @@ const (
 	ItemCategoryPills
 	ItemCategoryFood
 	ItemCategoryCurrency
+	ItemCategoryNindoCoins
 	ItemCategoryValuables
 	ItemCategoryDolls
 	ItemCategoryMissions
-	ItemCategoryNindoCoins
 
 	ItemCategoryFirst = ItemCategoryContainers
-	ItemCategoryLast  = ItemCategoryNindoCoins
+	ItemCategoryLast  = ItemCategoryMissions
 )
 
 type ItemRole uint8
@@ -79,13 +79,13 @@ const (
 	ItemCategoryPills
 	ItemCategoryFood
 	ItemCategoryCurrency
+	ItemCategoryNindoCoins
 	ItemCategoryValuables
 	ItemCategoryDolls
 	ItemCategoryMissions
-	ItemCategoryNindoCoins
 
 	ItemCategoryFirst = ItemCategoryContainers
-	ItemCategoryLast  = ItemCategoryNindoCoins
+	ItemCategoryLast  = ItemCategoryMissions
 )
 
 type ItemRole uint8
@@ -651,45 +651,34 @@ var Items = map[ItemCategory][]uint16{
 		2152, // Green Yen Note
 		2160, // Red Yen Note
 		2685, // Crystal Yen Note
-		1691, // Premium Ticket
 	},
 	ItemCategoryValuables: {
-		8306,  // Small Piece of Chakra
-		8302,  // Piece of Chakra
-		8300,  // Perfect Piece of Chakra
-		7768,  // Mystery Chakra
-		2676,  // Chakra Orb
-		7759,  // Sharingan Eye
-		11525, // Frozen Gem
-		12140, // Unstable Device
-		2500,  // Spring Box
-		2445,  // Summer Box
-		3970,  // Autumn Box
-		2427,  // Winter Box
-		2090,  // +20% experience box
-		2142,  // +20% Experience Box [Event]
-		1964,  // green hokage sign
-		1963,  // blue hokage sign
-		1965,  // prism hokage sign
-		12134, // disenchanting device
-		12299, // Toad Statue
-		7499,  // Joint
-		2093,  // Water-pipe
-		2099,  // Water-pipe
-		5953,  // Marijuana
-		6533,  // Ceremonial Book
-		7765,  // Weak Sand Chakra
-		7437,  // Strange Key
-		7453,  // Broken Strange Key
-		12842, // Erexo's Eye
-		12843, // Erexo's Horn
-		12844, // Erexo's Brain
+		12906, // Piece of Chakra
 		11747, // Katon Stone
 		11749, // Suiton Stone
 		11750, // Fuuton Stone
 		11751, // Raiton Stone
 		11748, // Doton Stone
 		12258, // Cursed Stone
+		12908, // Chakra Dust
+		12134, // disenchanting device
+		12909, // disenchanting hammer
+		2676,  // Chakra Orb
+		7759,  // Sharingan Eye
+		11525, // Frozen Gem
+		12140, // Unstable Device
+		2090,  // +20% experience box
+		2142,  // +20% Experience Box [Event]
+		1964,  // green hokage sign
+		1963,  // blue hokage sign
+		1965,  // prism hokage sign
+		12299, // Toad Statue
+		6533,  // Ceremonial Book
+		7765,  // Weak Sand Chakra
+		7437,  // Strange Key
+		12842, // Erexo's Eye
+		12843, // Erexo's Horn
+		12844, // Erexo's Brain
 		8003,  // Katon Chakra
 		8002,  // Suiton Chakra
 		8006,  // Raiton Chakra
