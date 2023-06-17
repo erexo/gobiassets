@@ -152,7 +152,7 @@ func GetItem(clientId uint16) *Item {
 		return nil
 	}
 }
-`, packageName, out.ItemCategoryPrefix(), out.ItemType(), varStr.String(), categoriesStr.String(), switchStr.String()); err != nil {
+`, packageName, out.ItemCategoryPrefix(), out.ItemHeader(), varStr.String(), categoriesStr.String(), switchStr.String()); err != nil {
 		panic(err)
 	}
 	return items
@@ -247,7 +247,7 @@ var (
 
 var MonstersCategory = map[MonsterCategory][]*Monster{
 %s}
-`, packageName, out.MonsterCategoryPrefix(), out.MonsterType(), varStr.String(), categoriesStr.String()); err != nil {
+`, packageName, out.MonsterCategoryPrefix(), out.MonsterHeader(), varStr.String(), categoriesStr.String()); err != nil {
 		panic(err)
 	}
 	return ret

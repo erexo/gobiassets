@@ -31,3 +31,14 @@ func Role(s string) ItemRole {
 		return ItemRoleAll
 	}
 }
+
+func Type(s string) ItemType {
+	switch s {
+	case "boss":
+		return ItemTypeBoss
+	case "mission":
+		return ItemTypeMission
+	default:
+		return ItemTypeNone
+	}
+}

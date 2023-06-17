@@ -18,10 +18,13 @@ const (
 	ItemCategoryShooters
 	ItemCategoryAmmunition
 	ItemCategoryBands
+	ItemCategoryExercise
+	ItemCategoryTrainers
 	ItemCategoryPills
 	ItemCategoryFood
 	ItemCategoryCurrency
 	ItemCategoryNindoCoins
+	ItemCategoryEnchanting
 	ItemCategoryValuables
 	ItemCategoryDolls
 	ItemCategoryMissions
@@ -37,6 +40,14 @@ const (
 	ItemRoleNinjutsu
 	ItemRoleWeapons
 	ItemRoleDefense
+)
+
+type ItemType uint8
+
+const (
+	ItemTypeNone ItemType = iota
+	ItemTypeBoss
+	ItemTypeMission
 )
 
 func (i ItemRole) String() string {
@@ -76,10 +87,13 @@ const (
 	ItemCategoryShooters
 	ItemCategoryAmmunition
 	ItemCategoryBands
+	ItemCategoryExercise
+	ItemCategoryTrainers
 	ItemCategoryPills
 	ItemCategoryFood
 	ItemCategoryCurrency
 	ItemCategoryNindoCoins
+	ItemCategoryEnchanting
 	ItemCategoryValuables
 	ItemCategoryDolls
 	ItemCategoryMissions
@@ -95,6 +109,14 @@ const (
 	ItemRoleNinjutsu
 	ItemRoleWeapons
 	ItemRoleDefense
+)
+
+type ItemType uint8
+
+const (
+	ItemTypeNone ItemType = iota
+	ItemTypeBoss
+	ItemTypeMission
 )`
 }
 
@@ -138,15 +160,10 @@ var Items = map[ItemCategory][]uint16{
 		2516,  // Vampire Mask
 		11971, // Sound Mask
 		2652,  // Cursed Protector
-		6537,  // Obito Goggles
-		2475,  // Blue ANBU Mask
-		2523,  // Red ANBU Mask
-		2515,  // Tobi Mask
 		7462,  // Samurai Helmet
 		11972, // Elite Samurai Helmet
 		12854, // Enforcer Mask
 		2356,  // Red Headband
-		11419, // Ultimate ANBU Mask
 		2471,  // Ninja Helmet
 		2409,  // Akatsuki Hat
 		11591, // Yuki Cap
@@ -154,12 +171,14 @@ var Items = map[ItemCategory][]uint16{
 		7448,  // Golden Helmet
 		11408, // Kagero Shawl
 		11990, // Rikudou Bandana
+		2515,  // Tobi Mask
+		11419, // ANBU Mask
 		7432,  // Black Samurai Helmet
+		12918, // Shinigami Mask
 		11917, // Outcast Mask
 		6536,  // Raiton Helmet
 		2218,  // Katon Mask
 		2659,  // Hanzo Mask
-		7454,  // Madara Mask
 		11415, // Sentinel's Mask
 		11965, // Kara Hood
 		2091,  // Vile Protector
@@ -191,17 +210,10 @@ var Items = map[ItemCategory][]uint16{
 		2656,  // Stranger Coat
 		2462,  // Chunnin Armor
 		3975,  // Monk Robe
-		2465,  // Jiraya Armor
-		2486,  // Tsunade Armor
-		2487,  // Orochimaru Armor
-		2474,  // Temari Armor
 		2459,  // Kyokushin Armor
 		3969,  // Sound Armor
 		3971,  // Cursed Armor
 		2510,  // Samurai Armor
-		2514,  // Sasuke Shirt
-		2655,  // Madara Armor
-		6539,  // Hashirama Armor
 		11973, // Elite Samurai Armor
 		12855, // Enforcer Cloak
 		2520,  // Legendary Shirt
@@ -215,6 +227,7 @@ var Items = map[ItemCategory][]uint16{
 		11977, // Samurai Kimono
 		11442, // Uchiha Coat
 		2441,  // Rikudou Armor
+		12923, // Training Tracksuit
 		2113,  // Kagero Armor
 		2645,  // Mystic Cape
 		11911, // Fuguki Armor
@@ -253,7 +266,6 @@ var Items = map[ItemCategory][]uint16{
 		2519,  // Bandit Legs
 		7451,  // Fat Ninja Legs
 		2468,  // Cyborg Legs
-		2477,  // Training Legs
 		11993, // Skeleton Legs
 		2452,  // Hoshi Legs
 		12316, // Iwa Legs
@@ -275,6 +287,7 @@ var Items = map[ItemCategory][]uint16{
 		11948, // Gravedigger Legs
 		11994, // Nadare Legs
 		11443, // Uchiha Legs
+		12924, // Training Pants
 		11989, // Pierced Legs
 		2542,  // Friar Legs
 		2447,  // Rikudou Legs
@@ -331,7 +344,9 @@ var Items = map[ItemCategory][]uint16{
 		11944, // Bandit King Boots
 		11908, // Winged Shoes
 		11988, // Golden Boots
-		7429,  // Impulsed Plate Boots
+		12922, // Uchiha Shoes
+		12925, // Training Sandals
+		12920, // Senju Boots
 		11975, // Black Samurai Boots
 		2531,  // Fuguki Boots
 		11891, // Outcast Shoes
@@ -358,7 +373,9 @@ var Items = map[ItemCategory][]uint16{
 		12085, // Momoshiki Shoes
 	},
 	ItemCategoryShields: {
+		12921, // Chakra Codex
 		2353,  // Yagai Glove
+		12919, // Retractable Shield
 		2457,  // Chakra Amplifier
 		11479, // Gunbai
 		11478, // Sussano Shield
@@ -372,8 +389,6 @@ var Items = map[ItemCategory][]uint16{
 		2496,  // Konoha Protector
 		2665,  // Suna Protector
 		2537,  // Oto Protector
-		6579,  // Shinobi Mask
-		2481,  // Konoha Defender
 		2135,  // Bandit Necklace
 		11951, // Undead Amulet
 		11978, // Legendary Cloak
@@ -399,6 +414,7 @@ var Items = map[ItemCategory][]uint16{
 		2446,  // Chakra Wings
 		2404,  // Sound Belt
 		12791, // Inner Ring
+		11914, // Pure Chakra
 		2173,  // Akatsuki Ring
 		2174,  // Akatsuki Ring
 		11452, // Sannin Ring
@@ -413,25 +429,14 @@ var Items = map[ItemCategory][]uint16{
 		11952, // Doto Belt
 	},
 	ItemCategoryScrolls: {
-		2164,  // Might Scroll
-		2165,  // Scroll of Nature
-		2166,  // Power Scroll
-		2167,  // Skill Scroll
-		2168,  // Chakra Scroll
-		2209,  // Healing Scroll
-		2169,  // Protection Scroll
-		2208,  // Speed Scroll
-		2130,  // Scroll of Earth
-		2134,  // Scroll of Heaven
-		2361,  // Sage Scroll
-		11914, // Pure Chakra
-		11746, // Support Shinobi
+		12874, // Onbu
 		11741, // Gamakichi
 		11742, // Katsuyuu
-		11743, // Pakkun
-		11744, // Tarantula
 		11745, // Urushi
+		11744, // Tarantula
+		11743, // Pakkun
 		12041, // Sharingan Spy
+		11746, // Support Shinobi
 		11985, // Ginkaku Soul
 		11984, // Kinkaku Soul
 		12044, // Denka
@@ -500,7 +505,6 @@ var Items = map[ItemCategory][]uint16{
 		12796, // Code Kama
 		11883, // Emperor Staff
 		11957, // Prism Glove
-		2658,  // Sealed Golden Glove
 		11396, // Katon Hakai Glove
 		12086, // Vital Knuckle Dusters
 	},
@@ -545,13 +549,13 @@ var Items = map[ItemCategory][]uint16{
 		7438,  // Samehada
 		2185,  // Fuuton Tweak Katana
 		2632,  // Sealed Hatchet
+		7434,  // Royal Katana
 		12245, // Ninshu Katana
 		12785, // Inner Katana
 		12835, // Ravage Sword
 		2182,  // Suiton Tweak Katana
 		2382,  // Raiga Katana
 		12255, // Akuma Katana
-		7434,  // Royal Katana
 		11885, // Blossom Katana
 		12073, // Lightning Chakra Sword
 		12296, // Oinin Katana
@@ -563,7 +567,6 @@ var Items = map[ItemCategory][]uint16{
 		12801, // Boro Dagger
 		11956, // Chakred Sword
 		11910, // Shadow Dagger
-		6528,  // Searing Katana
 		2187,  // Katon Tweak Katana
 		12087, // Vital Katana
 
@@ -576,21 +579,21 @@ var Items = map[ItemCategory][]uint16{
 		7368,  // Kunai with Note
 		2389,  // Demonwing Shuriken
 		7367,  // Clone Kunais
+		2143,  // Explosive Throwing Ball
 		11469, // Elite Chain
 		11397, // Twisted Kunai
-		2157,  // Reinforced Kunai
 		11398, // Doton Twisted Kunai
 		11399, // Fuuton Twisted Kunai
+		2144,  // Raiton Shuriken
+		1294,  // Heavy Throwing Ball
+		2157,  // Reinforced Kunai
 		7460,  // Yondaime Kunai
 		11894, // Outcast Blade
-		2143,  // Explosive Throwing Ball
 		11400, // Suiton Twisted Kunai
-		2144,  // Raiton Shuriken
 		12295, // Oinin Shuriken
-		1294,  // Heavy Throwing Ball
 		2501,  // Bashosen
-		11401, // Raiton Twisted Kunai
 		11936, // Unreal Blade
+		11401, // Raiton Twisted Kunai
 		12800, // Delta Blaster
 		11402, // Katon Twisted Kunai
 	},
@@ -623,6 +626,23 @@ var Items = map[ItemCategory][]uint16{
 		11414, // Black Band
 		12088, // Vital Halberd
 	},
+	ItemCategoryExercise: {
+		12910, // Exercise Scroll
+		12911, // Exercise Glove
+		12912, // Exercise Sword
+		12913, // Exercise Kunai
+		12914, // Exercise Note
+	},
+	ItemCategoryTrainers: {
+		12108, // Chunnin Training Kit
+		12109, // Jounin Training Kit
+		12110, // Swordman Training Kit
+		12111, // ANBU Training Kit
+		12112, // Akatsuki Training Kit
+		12113, // Kage Training Kit
+		12114, // Kendo Training Kit
+		12115, // Shaolin Training Kit
+	},
 	ItemCategoryPills: {
 		2673, // Medic Pill
 		2159, // Chakra Pill
@@ -652,7 +672,10 @@ var Items = map[ItemCategory][]uint16{
 		2160, // Red Yen Note
 		2685, // Crystal Yen Note
 	},
-	ItemCategoryValuables: {
+	ItemCategoryNindoCoins: {
+		12899, // Nindo Coins
+	},
+	ItemCategoryEnchanting: {
 		12906, // Piece of Chakra
 		11747, // Katon Stone
 		11749, // Suiton Stone
@@ -661,17 +684,14 @@ var Items = map[ItemCategory][]uint16{
 		11748, // Doton Stone
 		12258, // Cursed Stone
 		12908, // Chakra Dust
-		12134, // disenchanting device
-		12909, // disenchanting hammer
+		12134, // Disenchanting Device
+		12909, // Disenchanting Mallet
+	},
+	ItemCategoryValuables: {
 		2676,  // Chakra Orb
 		7759,  // Sharingan Eye
 		11525, // Frozen Gem
 		12140, // Unstable Device
-		2090,  // +20% experience box
-		2142,  // +20% Experience Box [Event]
-		1964,  // green hokage sign
-		1963,  // blue hokage sign
-		1965,  // prism hokage sign
 		12299, // Toad Statue
 		6533,  // Ceremonial Book
 		7765,  // Weak Sand Chakra
@@ -803,8 +823,5 @@ var Items = map[ItemCategory][]uint16{
 		11514, // Raiton Feather
 		11513, // Fuuton Feather
 		11516, // Doton Feather
-	},
-	ItemCategoryNindoCoins: {
-		12899, // Nindo Coins
 	},
 }

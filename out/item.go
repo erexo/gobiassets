@@ -13,6 +13,7 @@ type Item struct {
 	ServerId    uint16
 	ClientId    uint16
 	Name        string
+	Type        ItemType
 	Role        ItemRole
 	Description string
 	Weight      float32
@@ -118,6 +119,7 @@ func NewItem(client uint16, item *in.Item, attrItem *in.Item) *Item {
 		ServerId:    uint16(item.Id),
 		ClientId:    client,
 		Name:        Title(item.Name),
+		Type:        Type(item.Attributes.ReadString("itemType")),
 		Role:        Role(item.Attributes.ReadString("role")),
 		Description: item.Attributes.ReadString("description"),
 		Weight:      float32(item.Attributes.Read("weight")) / 100,
@@ -168,11 +170,12 @@ func getAttrs(item *in.Item) Attributes {
 	return attr
 }
 
-func ItemType() string {
+func ItemHeader() string {
 	return `type Item struct {
 	ServerId    uint16
 	ClientId    uint16
 	Name        string
+	Type        ItemType
 	Role        ItemRole
 	Description string
 	Weight      float32
@@ -273,6 +276,6 @@ func (i *Item) String() string {
 		}
 		attrsStr.WriteByte('}')
 	}
-	return fmt.Sprintf(`Item{%d, %d, "%s", %d, "%s", %.2f, %d, %s}`,
-		i.ServerId, i.ClientId, i.Name, i.Role, i.Description, i.Weight, i.Worth, attrsStr.String())
+	return fmt.Sprintf(`Item{%d, %d, "%s", %d, %d, "%s", %.2f, %d, %s}`,
+		i.ServerId, i.ClientId, i.Name, i.Type, i.Role, i.Description, i.Weight, i.Worth, attrsStr.String())
 }

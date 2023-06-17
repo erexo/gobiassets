@@ -34,7 +34,7 @@ type LootItem struct {
 	MaxCount uint8
 }
 
-func MonsterType() string {
+func MonsterHeader() string {
 	return `type Monster struct {
 	Id            uint16
 	Name          string
@@ -82,7 +82,7 @@ func GetMonster(id uint16, m *in.Monster, it map[uint16]*Item) *Monster {
 			}
 			it, ok := it[uint16(id)]
 			if !ok {
-				panic("Unknown item")
+				panic(fmt.Sprintf("Unknown item '%d' in monster \"%s\"", id, m.Name))
 			}
 			if item.MinCount > math.MaxUint8 {
 				panic("MinCount")
