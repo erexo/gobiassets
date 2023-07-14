@@ -696,6 +696,7 @@ var Items = map[ItemCategory][]uint16{
 		6533,  // Ceremonial Book
 		7765,  // Weak Sand Chakra
 		7437,  // Strange Key
+		12132, // Blood Cell
 		12842, // Erexo's Eye
 		12843, // Erexo's Horn
 		12844, // Erexo's Brain
