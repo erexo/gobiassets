@@ -695,6 +695,7 @@ var Items = map[ItemCategory][]uint16{
 		12299, // Toad Statue
 		6533,  // Ceremonial Book
 		7765,  // Weak Sand Chakra
+		12300, // Oinin Money
 		7437,  // Strange Key
 		12132, // Blood Cell
 		12842, // Erexo's Eye
