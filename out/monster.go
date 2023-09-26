@@ -11,6 +11,7 @@ import (
 
 type Monster struct {
 	Id            uint16
+	BossClass     BossClass
 	Name          string
 	Level         uint32
 	Health        int32
@@ -37,6 +38,7 @@ type LootItem struct {
 func MonsterHeader() string {
 	return `type Monster struct {
 	Id            uint16
+	BossClass     BossClass
 	Name          string
 	Level         uint32
 	Health        int32
@@ -63,8 +65,20 @@ type LootItem struct {
 
 func GetMonster(id uint16, m *in.Monster, it map[uint16]*Item) *Monster {
 	var level uint32
-	if lvl, ok := m.Flags["level"]; ok {
+	if flag, ok := m.Flags["level"]; ok {
+		lvl, _ := strconv.Atoi(flag)
 		level = uint32(lvl)
+	}
+	bossClass := BossClassNone
+	if flag, ok := m.Flags["boss"]; ok {
+		switch flag {
+		case "regular":
+			bossClass = BossClassRegular
+		case "daily":
+			bossClass = BossClassDaily
+		case "mini":
+			bossClass = BossClassMini
+		}
 	}
 	lookType, err := strconv.Atoi(strings.Split(m.Look.Type, ";")[0])
 	if err != nil {
@@ -119,6 +133,7 @@ func GetMonster(id uint16, m *in.Monster, it map[uint16]*Item) *Monster {
 
 	return &Monster{
 		Id:            id,
+		BossClass:     bossClass,
 		Name:          Title(strings.TrimSpace(m.Name)),
 		Level:         level,
 		Health:        int32(m.Health.Now),
@@ -151,7 +166,7 @@ func (m *Monster) String() string {
 		items.WriteString("nil")
 	}
 
-	return fmt.Sprintf(`&Monster{%d, "%s", %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %.1f, %.1f, %s}`, m.Id, m.Name, m.Level, m.Health, m.Experience, m.Speed, m.LookType, m.LookHead, m.LookPrimary, m.LookSecondary, m.LookDetails, m.LookAddon, m.AverageDPS, m.AverageHPS, items.String())
+	return fmt.Sprintf(`&Monster{%d, %d, "%s", %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %.1f, %.1f, %s}`, m.Id, m.BossClass, m.Name, m.Level, m.Health, m.Experience, m.Speed, m.LookType, m.LookHead, m.LookPrimary, m.LookSecondary, m.LookDetails, m.LookAddon, m.AverageDPS, m.AverageHPS, items.String())
 }
 
 func calculateDmg(attacks []in.Attack) float64 {

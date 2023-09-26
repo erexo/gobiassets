@@ -1,6 +1,6 @@
 package out
 
-type MonsterCategory int
+type MonsterCategory uint8
 
 const (
 	MonsterCategoryMonsters MonsterCategory = iota
@@ -14,7 +14,7 @@ const (
 func MonsterCategoryPrefix() string {
 	return `//go:generate enumer -type=MonsterCategory -trimprefix MonsterCategory -output monstercategory_string.go
 
-type MonsterCategory int
+type MonsterCategory uint8
 
 const (
 	MonsterCategoryMonsters MonsterCategory = iota

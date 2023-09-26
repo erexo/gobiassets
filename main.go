@@ -242,12 +242,14 @@ package %s
 
 %s
 
+%s
+
 var (
 %s)
 
 var MonstersCategory = map[MonsterCategory][]*Monster{
 %s}
-`, packageName, out.MonsterCategoryPrefix(), out.MonsterHeader(), varStr.String(), categoriesStr.String()); err != nil {
+`, packageName, out.MonsterCategoryPrefix(), out.BossClassPrefix(), out.MonsterHeader(), varStr.String(), categoriesStr.String()); err != nil {
 		panic(err)
 	}
 	return ret

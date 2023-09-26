@@ -45,15 +45,11 @@ type Look struct {
 	Addons uint8  `xml:"addons,attr"`
 }
 
-type Flags map[string]int
+type Flags map[string]string
 
 func (f Flags) UnmarshalXML(dec *xml.Decoder, start xml.StartElement) error {
 	for _, attr := range start.Attr {
-		v, err := strconv.Atoi(attr.Value)
-		if err != nil || v == 0 {
-			continue
-		}
-		f[attr.Name.Local] = v
+		f[attr.Name.Local] = attr.Value
 	}
 	dec.Skip()
 	return nil
