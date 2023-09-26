@@ -141,6 +141,7 @@ var Items = map[ItemCategory][]uint16{
 		8922,  // Toad Pouch
 		2365,  // Akatsuki Backpack
 		2000,  // Sealed Backpack
+		12936, // Uchiha Backpack
 		12046, // Emperor Backpack
 		12079, // Mecha Backpack
 		12254, // Akuma Backpack
@@ -183,6 +184,7 @@ var Items = map[ItemCategory][]uint16{
 		11965, // Kara Hood
 		2091,  // Vile Protector
 		12836, // Dark Helmet
+		12937, // Sharingan Implant
 		12045, // Emperor Helmet
 		3973,  // Yami Headpiece
 		8010,  // Kagero Kage Hat
@@ -260,6 +262,7 @@ var Items = map[ItemCategory][]uint16{
 		12794, // Code Jacket
 		12082, // Momoshiki Robe
 		12083, // Kinshiki Armor
+		12945, // Jigen Robe
 	},
 	ItemCategoryLegs: {
 		2647,  // Shinobi Legs
@@ -381,9 +384,11 @@ var Items = map[ItemCategory][]uint16{
 		11478, // Sussano Shield
 		7459,  // Sealed Glove
 		12301, // Oinin Shield
+		12939, // Jagged Shield
 		11953, // Frozen Chakra
 		12802, // Boro Armguard
 		11955, // Tal Shield
+		12944, // Jigen Armguard
 	},
 	ItemCategoryAmulets: {
 		2496,  // Konoha Protector
@@ -409,6 +414,7 @@ var Items = map[ItemCategory][]uint16{
 		2197,  // Tsunade Amulet
 		12797, // Delta Earrings
 		2200,  // Jashin Amulet
+		12946, // Jigen Necklace
 	},
 	ItemCategoryRings: {
 		2446,  // Chakra Wings
@@ -426,6 +432,7 @@ var Items = map[ItemCategory][]uint16{
 		12136, // Blood Signed
 		2179,  // Gold Ring
 		7697,  // Ruby Signet
+		12938, // Uchiha Ring
 		11952, // Doto Belt
 	},
 	ItemCategoryScrolls: {
@@ -439,6 +446,7 @@ var Items = map[ItemCategory][]uint16{
 		11746, // Support Shinobi
 		11985, // Ginkaku Soul
 		11984, // Kinkaku Soul
+		12932, // Shin
 		12044, // Denka
 		12043, // Kamatari
 		12042, // Ningame
@@ -506,6 +514,7 @@ var Items = map[ItemCategory][]uint16{
 		11883, // Emperor Staff
 		11957, // Prism Glove
 		11396, // Katon Hakai Glove
+		12941, // Celestial Glove
 		12086, // Vital Knuckle Dusters
 	},
 	ItemCategorySwords: {
@@ -568,6 +577,7 @@ var Items = map[ItemCategory][]uint16{
 		11956, // Chakred Sword
 		11910, // Shadow Dagger
 		2187,  // Katon Tweak Katana
+		12942, // Celestial Sword
 		12087, // Vital Katana
 
 	},
@@ -598,11 +608,15 @@ var Items = map[ItemCategory][]uint16{
 		11402, // Katon Twisted Kunai
 	},
 	ItemCategoryShooters: {
+		12948, // Red Thrower
+		12949, // Blue Thrower
+		12950, // Green Thrower
 		2455,  // Senbon Shooter
 		2456,  // Shooting Umbrella
 		12077, // Aoi Umbrella
 		12256, // Akuma Curse
 		11960, // Shinobi Gauntlet
+		12943, // Celestial Gauntlet
 	},
 	ItemCategoryAmmunition: {
 		2546,  // Burst Senbon
@@ -624,6 +638,7 @@ var Items = map[ItemCategory][]uint16{
 		2580,  // Green Band
 		2533,  // Gray Band
 		11414, // Black Band
+		12940, // Dimension Band
 		12088, // Vital Halberd
 	},
 	ItemCategoryExercise: {
