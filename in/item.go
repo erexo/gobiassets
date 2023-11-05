@@ -2,6 +2,7 @@ package in
 
 import (
 	"encoding/xml"
+	"fmt"
 	"log"
 	"strconv"
 	"strings"
@@ -15,6 +16,10 @@ type Item struct {
 	Id         int        `xml:"id,attr"`
 	Name       string     `xml:"name,attr"`
 	Attributes Attributes `xml:"attribute"`
+}
+
+func (i *Item) String() string {
+	return fmt.Sprintf("%s(%d)", i.Name, i.Id)
 }
 
 type Attributes map[string]string

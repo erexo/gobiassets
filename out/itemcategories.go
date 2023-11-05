@@ -184,8 +184,8 @@ var Items = map[ItemCategory][]uint16{
 		11965, // Kara Hood
 		2091,  // Vile Protector
 		12836, // Dark Helmet
-		12937, // Sharingan Implant
 		12045, // Emperor Helmet
+		12937, // Sharingan Implant
 		3973,  // Yami Headpiece
 		8010,  // Kagero Kage Hat
 		12793, // Code Headpiece
@@ -260,9 +260,9 @@ var Items = map[ItemCategory][]uint16{
 		2436,  // Hyuuga Cloak
 		12129, // Infected Armor
 		12794, // Code Jacket
+		12945, // Jigen Robe
 		12082, // Momoshiki Robe
 		12083, // Kinshiki Armor
-		12945, // Jigen Robe
 	},
 	ItemCategoryLegs: {
 		2647,  // Shinobi Legs
@@ -387,8 +387,8 @@ var Items = map[ItemCategory][]uint16{
 		12939, // Jagged Shield
 		11953, // Frozen Chakra
 		12802, // Boro Armguard
-		11955, // Tal Shield
 		12944, // Jigen Armguard
+		11955, // Tal Shield
 	},
 	ItemCategoryAmulets: {
 		2496,  // Konoha Protector
@@ -742,6 +742,8 @@ var Items = map[ItemCategory][]uint16{
 		12891, // Boro Doll
 		12892, // Delta Doll
 		12893, // Code Doll
+		12957, // Shin Doll
+		12958, // Jigen Doll
 		12894, // Chino Doll
 	},
 	ItemCategoryMissions: {
@@ -790,6 +792,8 @@ var Items = map[ItemCategory][]uint16{
 		12292, // Heaven Matter
 		12833, // Concentrated Heaven Matter
 		12066, // Iron Key
+
+		1958, // Uchiha Book
 
 		11503, // Bamboo Stick
 		1959,  // Darui Report

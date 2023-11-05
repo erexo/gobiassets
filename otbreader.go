@@ -1,6 +1,11 @@
 package main
 
-func ReadOtb(data []byte) map[uint16]uint16 {
+type (
+	ServerClientMap = map[uint16]uint16
+	ClientServerMap = map[uint16][]uint16
+)
+
+func ReadOtb(data []byte) (ServerClientMap, ClientServerMap) {
 	tree := NewBinaryTreeReader(data)
 	node := tree.GetNode()
 
@@ -22,7 +27,8 @@ func ReadOtb(data []byte) map[uint16]uint16 {
 		panic("node")
 	}
 
-	ret := make(map[uint16]uint16)
+	serverClient := make(ServerClientMap)
+	clientServer := make(ClientServerMap)
 	for {
 		node.ReadU8()
 		flags := node.ReadU32()
@@ -59,15 +65,16 @@ func ReadOtb(data []byte) map[uint16]uint16 {
 			}
 		}
 		if flags&(1<<5) != 0 { // pickupable
-			ret[serverId] = clientId
+			serverClient[serverId] = clientId
 		}
+		clientServer[clientId] = append(clientServer[clientId], serverId)
 
 		node = tree.GetNextNode()
 		if node == nil {
 			break
 		}
 	}
-	return ret
+	return serverClient, clientServer
 }
 
 const (

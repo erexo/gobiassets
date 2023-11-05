@@ -50,7 +50,7 @@ func saveItems(prices prices) []*out.Item {
 	if err != nil {
 		panic(err)
 	}
-	serverClient := ReadOtb(data)
+	serverClient, clientServer := ReadOtb(data)
 
 	input := readItems()
 	itemsToInclude := make(map[uint16]struct{})
@@ -155,6 +155,8 @@ func GetItem(clientId uint16) *Item {
 `, packageName, out.ItemCategoryPrefix(), out.ItemHeader(), varStr.String(), categoriesStr.String(), switchStr.String()); err != nil {
 		panic(err)
 	}
+
+	verifyClientId(items, input, clientServer)
 	return items
 }
 
@@ -271,6 +273,41 @@ func verifyPrices(items []*out.Item, prices prices) {
 	sb.WriteString("Omitted Price item ids:\n")
 	for id := range desired {
 		fmt.Fprintf(&sb, "%d, ", id)
+	}
+	log.Println(sb.String())
+}
+
+func verifyClientId(items []*out.Item, initems []*in.Item, clientServer ClientServerMap) {
+	desired := make(map[uint16][]*in.Item)
+	for _, item := range items {
+		if servers, ok := clientServer[item.ClientId]; ok {
+			srv := make([]*in.Item, 0, len(servers))
+			for _, serverId := range servers {
+				if serverId == item.ServerId {
+					continue
+				}
+				for _, it := range initems {
+					if it.Id == int(serverId) {
+						if it.Name != "" {
+							srv = append(srv, it)
+							break
+						}
+					}
+				}
+			}
+			if len(srv) > 0 {
+				desired[item.ServerId] = srv
+			}
+		}
+	}
+	if len(desired) == 0 {
+		return
+	}
+
+	var sb strings.Builder
+	sb.WriteString("Items with reused client ids:\n")
+	for id, servers := range desired {
+		fmt.Fprintf(&sb, "%d:%v, ", id, servers)
 	}
 	log.Println(sb.String())
 }
