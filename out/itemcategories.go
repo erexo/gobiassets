@@ -190,6 +190,7 @@ var Items = map[ItemCategory][]uint16{
 		8010,  // Kagero Kage Hat
 		12793, // Code Headpiece
 		12784, // Boro Chakra Vents
+		12986, // Toneri Headband
 		12084, // Kinshiki Headpiece
 
 	},
@@ -261,6 +262,7 @@ var Items = map[ItemCategory][]uint16{
 		12129, // Infected Armor
 		12794, // Code Jacket
 		12945, // Jigen Robe
+		12987, // Toneri Robe
 		12082, // Momoshiki Robe
 		12083, // Kinshiki Armor
 	},
@@ -324,6 +326,8 @@ var Items = map[ItemCategory][]uint16{
 		12131, // Infected Legs
 		11884, // Glacier Legs
 		12798, // Delta Pants
+		12988, // Toneri Legs
+		12992, // Energy Legs
 	},
 	ItemCategoryShoes: {
 		2396,  // Shinobi Sandals
@@ -373,12 +377,14 @@ var Items = map[ItemCategory][]uint16{
 		12795, // Code Boots
 		12799, // Delta Boots
 		12803, // Boro Boots
+		12989, // Toneri Shoes
 		12085, // Momoshiki Shoes
 	},
 	ItemCategoryShields: {
 		12921, // Chakra Codex
 		2353,  // Yagai Glove
 		12919, // Retractable Shield
+		12984, // Crystal Shield
 		2457,  // Chakra Amplifier
 		11479, // Gunbai
 		11478, // Sussano Shield
@@ -388,6 +394,7 @@ var Items = map[ItemCategory][]uint16{
 		11953, // Frozen Chakra
 		12802, // Boro Armguard
 		12944, // Jigen Armguard
+		12990, // Toneri Gaze
 		11955, // Tal Shield
 	},
 	ItemCategoryAmulets: {
@@ -401,6 +408,7 @@ var Items = map[ItemCategory][]uint16{
 		2528,  // Golden Laurel
 		7763,  // Sand Chakra
 		7618,  // Chain of Betrayers Teeth
+		12985, // Crystal Amulet
 		7433,  // Genjutsu Necklace
 		12047, // Samurai Amulet
 		11588, // Rokkaku
@@ -411,10 +419,11 @@ var Items = map[ItemCategory][]uint16{
 		11907, // Otsutsuki Necklace
 		11579, // Juubi Amulet
 		12081, // Mecha Amulet
-		2197,  // Tsunade Amulet
 		12797, // Delta Earrings
 		2200,  // Jashin Amulet
 		12946, // Jigen Necklace
+		12991, // Toneri Pendant
+		2197,  // Tsunade Amulet
 	},
 	ItemCategoryRings: {
 		2446,  // Chakra Wings
@@ -443,6 +452,7 @@ var Items = map[ItemCategory][]uint16{
 		11744, // Tarantula
 		11743, // Pakkun
 		12041, // Sharingan Spy
+		13059, // Crystal
 		11746, // Support Shinobi
 		11985, // Ginkaku Soul
 		11984, // Kinkaku Soul
@@ -451,6 +461,7 @@ var Items = map[ItemCategory][]uint16{
 		12043, // Kamatari
 		12042, // Ningame
 		12133, // Blood Blob
+		13060, // Soul
 		11954, // Chakred Support Shinobi
 		12253, // Akuma
 		12815, // Hate
@@ -496,6 +507,7 @@ var Items = map[ItemCategory][]uint16{
 		2509,  // Heaven Glove
 		11958, // Demonic Glove
 		11393, // Fuuton Hakai Glove
+		12982, // Crystal Glove
 		2633,  // Sealed Basher
 		12246, // Ninshu Glove
 		2492,  // Heavy Spiked Glove
@@ -557,6 +569,7 @@ var Items = map[ItemCategory][]uint16{
 		2461,  // Heaven Sword
 		7438,  // Samehada
 		2185,  // Fuuton Tweak Katana
+		12981, // Crystal Sword
 		2632,  // Sealed Hatchet
 		7434,  // Royal Katana
 		12245, // Ninshu Katana
@@ -595,6 +608,7 @@ var Items = map[ItemCategory][]uint16{
 		11398, // Doton Twisted Kunai
 		11399, // Fuuton Twisted Kunai
 		2144,  // Raiton Shuriken
+		12983, // Crystal Kunai
 		1294,  // Heavy Throwing Ball
 		2157,  // Reinforced Kunai
 		7460,  // Yondaime Kunai
@@ -617,6 +631,8 @@ var Items = map[ItemCategory][]uint16{
 		12256, // Akuma Curse
 		11960, // Shinobi Gauntlet
 		12943, // Celestial Gauntlet
+		12993, // Energy Gauntlet
+		12994, // Vital Gauntlet
 	},
 	ItemCategoryAmmunition: {
 		2546,  // Burst Senbon
@@ -657,6 +673,8 @@ var Items = map[ItemCategory][]uint16{
 		12113, // Kage Training Kit
 		12114, // Kendo Training Kit
 		12115, // Shaolin Training Kit
+		12901, // Personal Locker Kit
+		12980, // Hireling Kit
 	},
 	ItemCategoryPills: {
 		2673, // Medic Pill
@@ -742,9 +760,12 @@ var Items = map[ItemCategory][]uint16{
 		12891, // Boro Doll
 		12892, // Delta Doll
 		12893, // Code Doll
+		12978, // Guren Doll
 		12957, // Shin Doll
 		12958, // Jigen Doll
+		12979, // Toneri Doll
 		12894, // Chino Doll
+		13061, // Dark Lord Doll
 	},
 	ItemCategoryMissions: {
 		12104, // Teddy Bear
