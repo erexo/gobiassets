@@ -727,6 +727,7 @@ var Items = map[ItemCategory][]uint16{
 		12140, // Unstable Device
 		12299, // Toad Statue
 		6533,  // Ceremonial Book
+		12080, // Mecha Ticket
 		7765,  // Weak Sand Chakra
 		12300, // Oinin Money
 		7437,  // Strange Key

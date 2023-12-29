@@ -18,7 +18,7 @@ import (
 )
 
 const (
-	dataPath       = `X:\servers\ntsw\data`
+	dataPath       = `D:\servers\ntsw\data`
 	itemsOtbFile   = `items\items.otb`
 	itemsXmlFile   = `items\items.xml`
 	npcDir         = "npc"
