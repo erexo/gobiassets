@@ -505,9 +505,9 @@ var Items = map[ItemCategory][]uint16{
 		7385,  // Kagero Glove
 		11392, // Doton Hakai Glove
 		2509,  // Heaven Glove
+		12982, // Crystal Glove
 		11958, // Demonic Glove
 		11393, // Fuuton Hakai Glove
-		12982, // Crystal Glove
 		2633,  // Sealed Basher
 		12246, // Ninshu Glove
 		2492,  // Heavy Spiked Glove
@@ -567,9 +567,9 @@ var Items = map[ItemCategory][]uint16{
 		2630,  // Kagero Sword
 		2181,  // Doton Tweak Katana
 		2461,  // Heaven Sword
+		12981, // Crystal Sword
 		7438,  // Samehada
 		2185,  // Fuuton Tweak Katana
-		12981, // Crystal Sword
 		2632,  // Sealed Hatchet
 		7434,  // Royal Katana
 		12245, // Ninshu Katana
@@ -606,9 +606,9 @@ var Items = map[ItemCategory][]uint16{
 		11469, // Elite Chain
 		11397, // Twisted Kunai
 		11398, // Doton Twisted Kunai
+		12983, // Crystal Kunai
 		11399, // Fuuton Twisted Kunai
 		2144,  // Raiton Shuriken
-		12983, // Crystal Kunai
 		1294,  // Heavy Throwing Ball
 		2157,  // Reinforced Kunai
 		7460,  // Yondaime Kunai
