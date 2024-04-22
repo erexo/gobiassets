@@ -498,22 +498,18 @@ var Items = map[ItemCategory][]uint16{
 		2440,  // Chakra Spikes
 		2499,  // Black Glove
 		11949, // Undead Glove
-		11391, // Hakai Glove
 		2120,  // Razor Claws
 		2505,  // Raiton Master Gloves
 		7379,  // Katon Glove
 		7385,  // Kagero Glove
-		11392, // Doton Hakai Glove
 		2509,  // Heaven Glove
 		12982, // Crystal Glove
 		11958, // Demonic Glove
-		11393, // Fuuton Hakai Glove
 		2633,  // Sealed Basher
 		12246, // Ninshu Glove
 		2492,  // Heavy Spiked Glove
 		12786, // Inner Gloves
 		12834, // Ravage Glove
-		11394, // Suiton Hakai Glove
 		2423,  // Shiver Gloves
 		11416, // Uprising Gloves
 		12078, // Shallow Glove
@@ -521,11 +517,9 @@ var Items = map[ItemCategory][]uint16{
 		11418, // Shadow Gloves
 		12297, // Oinin Gloves
 		2629,  // Kokinjo Gloves
-		11395, // Raiton Hakai Glove
 		12796, // Code Kama
 		11883, // Emperor Staff
 		11957, // Prism Glove
-		11396, // Katon Hakai Glove
 		12941, // Celestial Glove
 		12086, // Vital Knuckle Dusters
 	},
@@ -561,21 +555,17 @@ var Items = map[ItemCategory][]uint16{
 		11947, // Undead Sword
 		2489,  // Crystal Katana
 		11909, // Magma Sword
-		2188,  // Tweak Katana
 		6540,  // Raiton Katana
 		2627,  // Katon Sword
 		2630,  // Kagero Sword
-		2181,  // Doton Tweak Katana
 		2461,  // Heaven Sword
 		12981, // Crystal Sword
 		7438,  // Samehada
-		2185,  // Fuuton Tweak Katana
 		2632,  // Sealed Hatchet
 		7434,  // Royal Katana
 		12245, // Ninshu Katana
 		12785, // Inner Katana
 		12835, // Ravage Sword
-		2182,  // Suiton Tweak Katana
 		2382,  // Raiga Katana
 		12255, // Akuma Katana
 		11885, // Blossom Katana
@@ -583,13 +573,11 @@ var Items = map[ItemCategory][]uint16{
 		12296, // Oinin Katana
 		8927,  // Ruby Sword
 		11913, // Emperor Sword
-		2183,  // Raiton Tweak Katana
 		2385,  // Unreal Sword
 		2190,  // Hiramekarei
 		12801, // Boro Dagger
 		11956, // Chakred Sword
 		11910, // Shadow Dagger
-		2187,  // Katon Tweak Katana
 		12942, // Celestial Sword
 		12087, // Vital Katana
 
@@ -604,22 +592,16 @@ var Items = map[ItemCategory][]uint16{
 		7367,  // Clone Kunais
 		2143,  // Explosive Throwing Ball
 		11469, // Elite Chain
-		11397, // Twisted Kunai
-		11398, // Doton Twisted Kunai
 		12983, // Crystal Kunai
-		11399, // Fuuton Twisted Kunai
 		2144,  // Raiton Shuriken
 		1294,  // Heavy Throwing Ball
 		2157,  // Reinforced Kunai
 		7460,  // Yondaime Kunai
 		11894, // Outcast Blade
-		11400, // Suiton Twisted Kunai
 		12295, // Oinin Shuriken
 		2501,  // Bashosen
 		11936, // Unreal Blade
-		11401, // Raiton Twisted Kunai
 		12800, // Delta Blaster
-		11402, // Katon Twisted Kunai
 	},
 	ItemCategoryShooters: {
 		12948, // Red Thrower
@@ -677,14 +659,15 @@ var Items = map[ItemCategory][]uint16{
 		12980, // Hireling Kit
 	},
 	ItemCategoryPills: {
-		2673, // Medic Pill
-		2159, // Chakra Pill
-		2111, // Soldier Pill
-		8931, // Katon Soldier Pill
-		8944, // Suiton Soldier Pill
-		8936, // Raiton Soldier Pill
-		8940, // Fuuton Soldier Pill
-		8932, // Doton Soldier Pill
+		2673,  // Medic Pill
+		2159,  // Chakra Pill
+		2111,  // Soldier Pill
+		8931,  // Katon Soldier Pill
+		8944,  // Suiton Soldier Pill
+		8936,  // Raiton Soldier Pill
+		8940,  // Fuuton Soldier Pill
+		8932,  // Doton Soldier Pill
+		13072, // Soul Pill
 	},
 	ItemCategoryFood: {
 		2666, // Meat
@@ -732,6 +715,9 @@ var Items = map[ItemCategory][]uint16{
 		12300, // Oinin Money
 		7437,  // Strange Key
 		12132, // Blood Cell
+		13069, // Mutable Token
+		13070, // Unstable Token
+		13071, // Volatile Token
 		12842, // Erexo's Eye
 		12843, // Erexo's Horn
 		12844, // Erexo's Brain
