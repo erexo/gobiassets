@@ -362,7 +362,10 @@ func readPrices() prices {
 						}
 						values := strings.Split(item, ",")
 						if len(values) < 3 {
-							panic(fmt.Sprintf("Invalid values parameters for '%s' in %s", item, path))
+							if strings.TrimSpace(values[0]) != "" {
+								panic(fmt.Sprintf("Invalid values parameters for '%s' in %s", item, path))
+							}
+							continue
 						}
 						//name := values[0]
 						id, err := strconv.Atoi(values[1])

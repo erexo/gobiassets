@@ -184,6 +184,7 @@ var Items = map[ItemCategory][]uint16{
 		11965, // Kara Hood
 		2091,  // Vile Protector
 		12836, // Dark Helmet
+		13581, // Puppet Mask
 		12045, // Emperor Helmet
 		12937, // Sharingan Implant
 		3973,  // Yami Headpiece
@@ -256,6 +257,7 @@ var Items = map[ItemCategory][]uint16{
 		2138,  // Vile Robe
 		2540,  // Yami Cloak
 		12837, // Dark Armor
+		13582, // Puppet Cloak
 		12090, // Mecha Armor
 		2508,  // Sage Robe
 		2436,  // Hyuuga Cloak
@@ -320,6 +322,7 @@ var Items = map[ItemCategory][]uint16{
 		12788, // Inner Kilt
 		11986, // Yami Legs
 		12838, // Dark Legs
+		13583, // Puppet Leg Piece
 		11889, // Kagero Battle Legs
 		3967,  // Bounded Leg Piece
 		12091, // Mecha Legs
@@ -371,6 +374,7 @@ var Items = map[ItemCategory][]uint16{
 		12248, // Ninshu Boots
 		12789, // Inner Boots
 		12839, // Dark Boots
+		13584, // Puppet Shoes
 		12130, // Infected Shoes
 		8009,  // Kagero Kage shoes
 		12092, // Mecha Boots
@@ -502,6 +506,11 @@ var Items = map[ItemCategory][]uint16{
 		2505,  // Raiton Master Gloves
 		7379,  // Katon Glove
 		7385,  // Kagero Glove
+		11392, // Doton Hakai Glove
+		11393, // Fuuton Hakai Glove
+		11394, // Suiton Hakai Glove
+		11395, // Raiton Hakai Glove
+		11396, // Katon Hakai Glove
 		2509,  // Heaven Glove
 		12982, // Crystal Glove
 		11958, // Demonic Glove
@@ -558,6 +567,11 @@ var Items = map[ItemCategory][]uint16{
 		6540,  // Raiton Katana
 		2627,  // Katon Sword
 		2630,  // Kagero Sword
+		2181,  // Doton Tweak Katana
+		2185,  // Fuuton Tweak Katana
+		2182,  // Suiton Tweak Katana
+		2183,  // Raiton Tweak Katana
+		2187,  // Katon Tweak Katana
 		2461,  // Heaven Sword
 		12981, // Crystal Sword
 		7438,  // Samehada
@@ -592,6 +606,11 @@ var Items = map[ItemCategory][]uint16{
 		7367,  // Clone Kunais
 		2143,  // Explosive Throwing Ball
 		11469, // Elite Chain
+		11398, // Doton Twisted Kunai
+		11399, // Fuuton Twisted Kunai
+		11400, // Suiton Twisted Kunai
+		11401, // Raiton Twisted Kunai
+		11402, // Katon Twisted Kunai
 		12983, // Crystal Kunai
 		2144,  // Raiton Shuriken
 		1294,  // Heavy Throwing Ball
@@ -670,17 +689,19 @@ var Items = map[ItemCategory][]uint16{
 		13072, // Soul Pill
 	},
 	ItemCategoryFood: {
-		2666, // Meat
-		2671, // Ham
-		2689, // Onigiri
-		2695, // Egg
-		2687, // Cookie
-		8111, // Exploding Cookie
-		2362, // Chips
-		2672, // Ramen
-		6278, // Cake
-		7966, // Birthday Cake
-		6394, // Cream Cake
+		2666,  // Meat
+		2671,  // Ham
+		2689,  // Onigiri
+		2695,  // Egg
+		2687,  // Cookie
+		8111,  // Exploding Cookie
+		2362,  // Chips
+		13571, // Carrot
+		13586, // Grapes
+		2672,  // Ramen
+		6278,  // Cake
+		7966,  // Birthday Cake
+		6394,  // Cream Cake
 	},
 	ItemCategoryCurrency: {
 		2148, // Yen
