@@ -687,6 +687,7 @@ var Items = map[ItemCategory][]uint16{
 		8940,  // Fuuton Soldier Pill
 		8932,  // Doton Soldier Pill
 		13072, // Soul Pill
+		13562, // Moon Cupcake
 	},
 	ItemCategoryFood: {
 		2666,  // Meat
@@ -727,12 +728,14 @@ var Items = map[ItemCategory][]uint16{
 	ItemCategoryValuables: {
 		2676,  // Chakra Orb
 		7759,  // Sharingan Eye
+		13572, // Byakugan Eye
 		11525, // Frozen Gem
 		12140, // Unstable Device
 		12299, // Toad Statue
 		6533,  // Ceremonial Book
 		12080, // Mecha Ticket
 		7765,  // Weak Sand Chakra
+		13564, // Cupcake Recipe
 		12300, // Oinin Money
 		7437,  // Strange Key
 		12132, // Blood Cell
