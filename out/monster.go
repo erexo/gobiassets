@@ -10,22 +10,24 @@ import (
 )
 
 type Monster struct {
-	Id            uint16
-	BossClass     BossClass
-	Name          string
-	Level         uint32
-	Health        int32
-	Experience    uint64
-	Speed         int32
-	LookType      uint16
-	LookHead      uint8
-	LookPrimary   uint8
-	LookSecondary uint8
-	LookDetails   uint8
-	LookAddon     uint8
-	AverageDPS    float64
-	AverageHPS    float64
-	Loot          []LootItem
+	Id                 uint16
+	BossClass          BossClass
+	Name               string
+	Level              uint32
+	Health             int32
+	Experience         uint64
+	Speed              int32
+	LookType           uint16
+	LookHead           uint8
+	LookPrimary        uint8
+	LookSecondary      uint8
+	LookDetails        uint8
+	LookAddon          uint8
+	AverageDPS         float64
+	AverageHPS         float64
+	AverageLoot        float64
+	AverageLootPer1khp float64
+	Loot               []LootItem
 }
 
 type LootItem struct {
@@ -37,22 +39,24 @@ type LootItem struct {
 
 func MonsterHeader() string {
 	return `type Monster struct {
-	Id            uint16
-	BossClass     BossClass
-	Name          string
-	Level         uint32
-	Health        int32
-	Experience    uint64
-	Speed         int32
-	LookType      uint16
-	LookHead      uint8
-	LookPrimary   uint8
-	LookSecondary uint8
-	LookDetails   uint8
-	LookAddon     uint8
-	AverageDPS    float64
-	AverageHPS    float64
-	Loot          []LootItem
+	Id                 uint16
+	BossClass          BossClass
+	Name               string
+	Level              uint32
+	Health             int32
+	Experience         uint64
+	Speed              int32
+	LookType           uint16
+	LookHead           uint8
+	LookPrimary        uint8
+	LookSecondary      uint8
+	LookDetails        uint8
+	LookAddon          uint8
+	AverageDPS         float64
+	AverageHPS         float64
+	AverageLoot        float64
+	AverageLootPer1khp float64
+	Loot               []LootItem
 }
 
 type LootItem struct {
@@ -132,22 +136,24 @@ func GetMonster(id uint16, m *in.Monster, it map[uint16]*Item) *Monster {
 	}
 
 	return &Monster{
-		Id:            id,
-		BossClass:     bossClass,
-		Name:          Title(strings.TrimSpace(m.Name)),
-		Level:         level,
-		Health:        int32(m.Health.Now),
-		Experience:    uint64(m.Experience),
-		Speed:         int32(m.Speed),
-		LookType:      uint16(lookType),
-		LookHead:      m.Look.Head,
-		LookPrimary:   m.Look.Body,
-		LookSecondary: m.Look.Legs,
-		LookDetails:   m.Look.Feet,
-		LookAddon:     m.Look.Addons,
-		AverageDPS:    dps, // worth,
-		AverageHPS:    hps, // worth / float64(m.Health.Now) * 1000,
-		Loot:          items,
+		Id:                 id,
+		BossClass:          bossClass,
+		Name:               Title(strings.TrimSpace(m.Name)),
+		Level:              level,
+		Health:             int32(m.Health.Now),
+		Experience:         uint64(m.Experience),
+		Speed:              int32(m.Speed),
+		LookType:           uint16(lookType),
+		LookHead:           m.Look.Head,
+		LookPrimary:        m.Look.Body,
+		LookSecondary:      m.Look.Legs,
+		LookDetails:        m.Look.Feet,
+		LookAddon:          m.Look.Addons,
+		AverageDPS:         dps,
+		AverageHPS:         hps,
+		AverageLoot:        worth,
+		AverageLootPer1khp: worth / float64(m.Health.Now) * 1000,
+		Loot:               items,
 	}
 }
 
@@ -166,7 +172,7 @@ func (m *Monster) String() string {
 		items.WriteString("nil")
 	}
 
-	return fmt.Sprintf(`&Monster{%d, %d, "%s", %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %.1f, %.1f, %s}`, m.Id, m.BossClass, m.Name, m.Level, m.Health, m.Experience, m.Speed, m.LookType, m.LookHead, m.LookPrimary, m.LookSecondary, m.LookDetails, m.LookAddon, m.AverageDPS, m.AverageHPS, items.String())
+	return fmt.Sprintf(`&Monster{%d, %d, "%s", %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %.1f, %.1f, %.1f, %.1f, %s}`, m.Id, m.BossClass, m.Name, m.Level, m.Health, m.Experience, m.Speed, m.LookType, m.LookHead, m.LookPrimary, m.LookSecondary, m.LookDetails, m.LookAddon, m.AverageDPS, m.AverageHPS, m.AverageLoot, m.AverageLootPer1khp, items.String())
 }
 
 func calculateDmg(attacks []in.Attack) float64 {

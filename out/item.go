@@ -57,6 +57,8 @@ const (
 	ItemAttributeSkillShield
 	ItemAttributeSkillAxe
 	ItemAttributeSkillFish
+	ItemAttributeMagicCritChance
+	ItemAttributeMeleeCritChance
 	ItemAttributeMagicPercent
 	ItemAttributeMagicPvePercent
 	ItemAttributeMeleePercent
@@ -162,6 +164,8 @@ func getAttrs(item *in.Item) Attributes {
 	attr.writeAttr(ItemAttributeSkillShield, item.Attributes.Read("skillshield"))
 	attr.writeAttr(ItemAttributeSkillAxe, item.Attributes.Read("skillaxe"))
 	attr.writeAttr(ItemAttributeSkillFish, item.Attributes.Read("skillfish"))
+	attr.writeAttr(ItemAttributeMagicCritChance, item.Attributes.Read("magiccritchance"))
+	attr.writeAttr(ItemAttributeMeleeCritChance, item.Attributes.Read("meleecritchance"))
 	attr.writeAttr(ItemAttributeMagicPercent, item.Attributes.ReadPercent("increasemagicpercent"))
 	attr.writeAttr(ItemAttributeMagicPvePercent, item.Attributes.ReadPercent("increasemagicpvepercent"))
 	attr.writeAttr(ItemAttributeMeleePercent, item.Attributes.ReadPercent("increasemeleepercent"))
@@ -219,6 +223,8 @@ const (
 	ItemAttributeSkillShield
 	ItemAttributeSkillAxe
 	ItemAttributeSkillFish
+	ItemAttributeMagicCritChance
+	ItemAttributeMeleeCritChance
 	ItemAttributeMagicPercent
 	ItemAttributeMagicPvePercent
 	ItemAttributeMeleePercent

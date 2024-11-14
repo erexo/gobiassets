@@ -146,6 +146,7 @@ var Items = map[ItemCategory][]uint16{
 		12079, // Mecha Backpack
 		12254, // Akuma Backpack
 		12807, // Kara Backpack
+		13965, // Togedama Backpack
 	},
 	ItemCategoryHelmets: {
 		2664,  // Goggles
@@ -185,6 +186,7 @@ var Items = map[ItemCategory][]uint16{
 		2091,  // Vile Protector
 		12836, // Dark Helmet
 		13581, // Puppet Mask
+		13938, // Tsumeato Headpiece
 		12045, // Emperor Helmet
 		12937, // Sharingan Implant
 		3973,  // Yami Headpiece
@@ -192,8 +194,11 @@ var Items = map[ItemCategory][]uint16{
 		12793, // Code Headpiece
 		12784, // Boro Chakra Vents
 		12986, // Toneri Headband
+		13941, // Matsuri Hat
+		13945, // Ryu Headband
 		12084, // Kinshiki Headpiece
-
+		13953, // Hidari Hood
+		13962, // Jura Hood
 	},
 	ItemCategoryArmors: {
 		2650,  // Gennin Armor
@@ -258,6 +263,7 @@ var Items = map[ItemCategory][]uint16{
 		2540,  // Yami Cloak
 		12837, // Dark Armor
 		13582, // Puppet Cloak
+		13939, // Tsumeato Armor
 		12090, // Mecha Armor
 		2508,  // Sage Robe
 		2436,  // Hyuuga Cloak
@@ -265,8 +271,12 @@ var Items = map[ItemCategory][]uint16{
 		12794, // Code Jacket
 		12945, // Jigen Robe
 		12987, // Toneri Robe
+		13942, // Matsuri Cloak
+		13949, // Mamushi Armor
 		12082, // Momoshiki Robe
 		12083, // Kinshiki Armor
+		13954, // Hidari Cloak
+		13963, // Jura Cloak
 	},
 	ItemCategoryLegs: {
 		2647,  // Shinobi Legs
@@ -331,6 +341,9 @@ var Items = map[ItemCategory][]uint16{
 		12798, // Delta Pants
 		12988, // Toneri Legs
 		12992, // Energy Legs
+		13946, // Ryu Leg Piece
+		13955, // Hidari Legs
+		13964, // Jura Legs
 	},
 	ItemCategoryShoes: {
 		2396,  // Shinobi Sandals
@@ -382,7 +395,9 @@ var Items = map[ItemCategory][]uint16{
 		12799, // Delta Boots
 		12803, // Boro Boots
 		12989, // Toneri Shoes
+		13950, // Mamushi Boots
 		12085, // Momoshiki Shoes
+		13956, // Hidari Shoes
 	},
 	ItemCategoryShields: {
 		12921, // Chakra Codex
@@ -400,6 +415,8 @@ var Items = map[ItemCategory][]uint16{
 		12944, // Jigen Armguard
 		12990, // Toneri Gaze
 		11955, // Tal Shield
+		13947, // Ryu Shield
+		13958, // Hidari Shield
 	},
 	ItemCategoryAmulets: {
 		2496,  // Konoha Protector
@@ -428,6 +445,9 @@ var Items = map[ItemCategory][]uint16{
 		12946, // Jigen Necklace
 		12991, // Toneri Pendant
 		2197,  // Tsunade Amulet
+		13943, // Matsuri Scarf
+		13951, // Mamushi Chain
+		13957, // Hidari Chain
 	},
 	ItemCategoryRings: {
 		2446,  // Chakra Wings
@@ -471,6 +491,7 @@ var Items = map[ItemCategory][]uint16{
 		12815, // Hate
 		12816, // Terror
 		12817, // Destruction
+		13966, // Tsumeaka
 	},
 	ItemCategoryGloves: {
 		2387,  // Bandages
@@ -519,6 +540,7 @@ var Items = map[ItemCategory][]uint16{
 		2492,  // Heavy Spiked Glove
 		12786, // Inner Gloves
 		12834, // Ravage Glove
+		13936, // Tsumeato Gloves
 		2423,  // Shiver Gloves
 		11416, // Uprising Gloves
 		12078, // Shallow Glove
@@ -530,7 +552,9 @@ var Items = map[ItemCategory][]uint16{
 		11883, // Emperor Staff
 		11957, // Prism Glove
 		12941, // Celestial Glove
+		13940, // Matsuri Glove
 		12086, // Vital Knuckle Dusters
+		13960, // Togedama Glove
 	},
 	ItemCategorySwords: {
 		2428,  // Short Sword
@@ -580,6 +604,7 @@ var Items = map[ItemCategory][]uint16{
 		12245, // Ninshu Katana
 		12785, // Inner Katana
 		12835, // Ravage Sword
+		13937, // Tsumeato Sword
 		2382,  // Raiga Katana
 		12255, // Akuma Katana
 		11885, // Blossom Katana
@@ -593,7 +618,9 @@ var Items = map[ItemCategory][]uint16{
 		11956, // Chakred Sword
 		11910, // Shadow Dagger
 		12942, // Celestial Sword
+		13952, // Mamushi Cleaver
 		12087, // Vital Katana
+		13961, // Togedama Sword
 
 	},
 	ItemCategoryDistance: {
@@ -621,6 +648,7 @@ var Items = map[ItemCategory][]uint16{
 		2501,  // Bashosen
 		11936, // Unreal Blade
 		12800, // Delta Blaster
+		13944, // Ryu Blaster
 	},
 	ItemCategoryShooters: {
 		12948, // Red Thrower
@@ -634,6 +662,7 @@ var Items = map[ItemCategory][]uint16{
 		12943, // Celestial Gauntlet
 		12993, // Energy Gauntlet
 		12994, // Vital Gauntlet
+		13959, // Togedama Gauntlet
 	},
 	ItemCategoryAmmunition: {
 		2546,  // Burst Senbon
@@ -777,6 +806,11 @@ var Items = map[ItemCategory][]uint16{
 		12979, // Toneri Doll
 		12894, // Chino Doll
 		13061, // Dark Lord Doll
+		13971, // Matsuri Doll
+		13972, // Ryu Doll
+		13973, // Mamushi Doll
+		13974, // Hidari Doll
+		13975, // Jura Doll
 	},
 	ItemCategoryMissions: {
 		12104, // Teddy Bear
@@ -848,6 +882,7 @@ var Items = map[ItemCategory][]uint16{
 		11528, // Prism Book
 		8017,  // Delphic Device
 		12804, // Kara Emblem
+		12907, // Inner Flower
 
 		11521, // Sentinel Gooey
 		11895, // Golden Coin
