@@ -146,6 +146,7 @@ var Items = map[ItemCategory][]uint16{
 		12079, // Mecha Backpack
 		12254, // Akuma Backpack
 		12807, // Kara Backpack
+		14201, // Shinju Backpack
 		13965, // Togedama Backpack
 	},
 	ItemCategoryHelmets: {
@@ -194,8 +195,8 @@ var Items = map[ItemCategory][]uint16{
 		12793, // Code Headpiece
 		12784, // Boro Chakra Vents
 		12986, // Toneri Headband
-		13941, // Matsuri Hat
 		13945, // Ryu Headband
+		13941, // Matsuri Hat
 		12084, // Kinshiki Headpiece
 		13953, // Hidari Hood
 		13962, // Jura Hood
@@ -341,6 +342,7 @@ var Items = map[ItemCategory][]uint16{
 		12798, // Delta Pants
 		12988, // Toneri Legs
 		12992, // Energy Legs
+		14188, // Mamushi Pants
 		13946, // Ryu Leg Piece
 		13955, // Hidari Legs
 		13964, // Jura Legs
@@ -395,6 +397,7 @@ var Items = map[ItemCategory][]uint16{
 		12799, // Delta Boots
 		12803, // Boro Boots
 		12989, // Toneri Shoes
+		14189, // Ryu Shoes
 		13950, // Mamushi Boots
 		12085, // Momoshiki Shoes
 		13956, // Hidari Shoes
@@ -415,7 +418,8 @@ var Items = map[ItemCategory][]uint16{
 		12944, // Jigen Armguard
 		12990, // Toneri Gaze
 		11955, // Tal Shield
-		13947, // Ryu Shield
+		13947, // Matsuri Armguard
+		14187, // Ryu Shield
 		13958, // Hidari Shield
 	},
 	ItemCategoryAmulets: {
@@ -445,6 +449,7 @@ var Items = map[ItemCategory][]uint16{
 		12946, // Jigen Necklace
 		12991, // Toneri Pendant
 		2197,  // Tsunade Amulet
+		14200, // Shinju Amulet
 		13943, // Matsuri Scarf
 		13951, // Mamushi Chain
 		13957, // Hidari Chain
@@ -491,6 +496,16 @@ var Items = map[ItemCategory][]uint16{
 		12815, // Hate
 		12816, // Terror
 		12817, // Destruction
+		14190, // Ichibi
+		14191, // Nibi
+		14192, // Sanbi
+		14193, // Yonbi
+		14194, // Gobi
+		14195, // Rokubi
+		14196, // Nanabi
+		14197, // Hachibi
+		14198, // Kyuubi
+		14199, // Juubi
 		13966, // Tsumeaka
 	},
 	ItemCategoryGloves: {
@@ -774,6 +789,8 @@ var Items = map[ItemCategory][]uint16{
 		12842, // Erexo's Eye
 		12843, // Erexo's Horn
 		12844, // Erexo's Brain
+		14183, // Transmutation Cone
+		13923, // Flower Petal
 		8003,  // Katon Chakra
 		8002,  // Suiton Chakra
 		8006,  // Raiton Chakra
