@@ -17,6 +17,7 @@ type Monster struct {
 	Health             int32
 	Experience         uint64
 	Speed              int32
+	Armor              uint16
 	LookType           uint16
 	LookHead           uint8
 	LookPrimary        uint8
@@ -47,6 +48,7 @@ func MonsterHeader() string {
 	Health             int32
 	Experience         uint64
 	Speed              int32
+	Armor              uint16
 	LookType           uint16
 	LookHead           uint8
 	LookPrimary        uint8
@@ -131,7 +133,7 @@ func GetMonster(id uint16, m *in.Monster, it map[uint16]*Item) *Monster {
 	}
 	dps += calculateDmg(m.Attacks)
 	var hps float64
-	for _, def := range m.Defenses {
+	for _, def := range m.Defenses.Defenses {
 		chs := def.Chance / (float64(def.Interval) / 1000)
 		heal := (float64(def.Min) + float64(def.Max)) / 2
 		hps += heal * chs
@@ -145,6 +147,7 @@ func GetMonster(id uint16, m *in.Monster, it map[uint16]*Item) *Monster {
 		Health:             int32(m.Health.Now),
 		Experience:         uint64(m.Experience),
 		Speed:              int32(m.Speed),
+		Armor:              uint16(m.Defenses.Armor),
 		LookType:           uint16(lookType),
 		LookHead:           m.Look.Head,
 		LookPrimary:        m.Look.Body,
@@ -175,12 +178,16 @@ func (m *Monster) String() string {
 		items.WriteString("nil")
 	}
 
-	return fmt.Sprintf(`&Monster{%d, %d, "%s", %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %.1f, %.1f, %.1f, %.2f, %.3f, %s}`, m.Id, m.BossClass, m.Name, m.Level, m.Health, m.Experience, m.Speed, m.LookType, m.LookHead, m.LookPrimary, m.LookSecondary, m.LookDetails, m.LookAddon, m.AverageDPS, m.AverageHPS, m.AverageLoot, m.AverageLootPer1khp, m.ExpHpRatio, items.String())
+	return fmt.Sprintf(`&Monster{%d, %d, "%s", %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %.1f, %.1f, %.1f, %.2f, %.3f, %s}`, m.Id, m.BossClass, m.Name, m.Level, m.Health, m.Experience, m.Speed, m.Armor, m.LookType, m.LookHead, m.LookPrimary, m.LookSecondary, m.LookDetails, m.LookAddon, m.AverageDPS, m.AverageHPS, m.AverageLoot, m.AverageLootPer1khp, m.ExpHpRatio, items.String())
 }
 
 func calculateDmg(attacks []in.Attack) float64 {
 	var dps float64
 	for _, atk := range attacks {
+		if atk.DelayType > 1 {
+			continue
+		}
+
 		chs := atk.Chance / (float64(atk.Interval) / 1000)
 		var dmg float64
 		if atk.Skill > 0 && atk.Attack > 0 {

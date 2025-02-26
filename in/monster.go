@@ -13,16 +13,16 @@ const (
 
 type Monster struct {
 	Path       string
-	Name       string    `xml:"name,attr"`
-	Experience int       `xml:"experience,attr"`
-	Speed      int       `xml:"speed,attr"`
-	Health     Health    `xml:"health"`
-	Look       Look      `xml:"look"`
-	Flags      Flags     `xml:"flags>flag"`
-	Attacks    []Attack  `xml:"attacks>attack"`
-	Stages     []Stage   `xml:"attacks>stage"`
-	Defenses   []Defense `xml:"defenses>defense"`
-	Loot       Loot      `xml:"loot>item"`
+	Name       string   `xml:"name,attr"`
+	Experience int      `xml:"experience,attr"`
+	Speed      int      `xml:"speed,attr"`
+	Health     Health   `xml:"health"`
+	Look       Look     `xml:"look"`
+	Flags      Flags    `xml:"flags>flag"`
+	Attacks    []Attack `xml:"attacks>attack"`
+	Stages     []Stage  `xml:"attacks>stage"`
+	Defenses   Defenses `xml:"defenses"`
+	Loot       Loot     `xml:"loot>item"`
 }
 
 func NewMonster(path string) *Monster {
@@ -61,18 +61,19 @@ type Stage struct {
 }
 
 type Attack struct {
-	Name     string  `xml:"name,attr"`
-	Interval int     `xml:"interval,attr"`
-	Chance   float64 `xml:"chance,attr"`
-	Skill    int     `xml:"skill,attr"`
-	Attack   int     `xml:"attack,attr"`
-	Min      int     `xml:"min,attr"`
-	Max      int     `xml:"max,attr"`
-	Radius   int     `xml:"radius,attr"`
-	Target   int     `xml:"target,attr"`
-	Range    int     `xml:"range,attr"`
-	Length   int     `xml:"length,attr"`
-	Spread   int     `xml:"spread,attr"`
+	Name      string  `xml:"name,attr"`
+	Interval  int     `xml:"interval,attr"`
+	Chance    float64 `xml:"chance,attr"`
+	Skill     int     `xml:"skill,attr"`
+	Attack    int     `xml:"attack,attr"`
+	Min       int     `xml:"min,attr"`
+	Max       int     `xml:"max,attr"`
+	Radius    int     `xml:"radius,attr"`
+	Target    int     `xml:"target,attr"`
+	Range     int     `xml:"range,attr"`
+	Length    int     `xml:"length,attr"`
+	Spread    int     `xml:"spread,attr"`
+	DelayType int     `xml:"delayType,attr"`
 }
 
 func (a *Attack) UnmarshalXML(dec *xml.Decoder, start xml.StartElement) error {
@@ -86,6 +87,11 @@ func (a *Attack) UnmarshalXML(dec *xml.Decoder, start xml.StartElement) error {
 	new.Chance = clamp(new.Chance, 0, maxSpellChance) / maxSpellChance
 	*a = (Attack)(new)
 	return nil
+}
+
+type Defenses struct {
+	Armor    int       `xml:"armor,attr"`
+	Defenses []Defense `xml:"defense"`
 }
 
 type Defense struct {

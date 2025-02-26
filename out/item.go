@@ -25,7 +25,6 @@ type ItemAttribute uint8
 
 const (
 	ItemAttributeAttack ItemAttribute = iota
-	ItemAttributeDefense
 	ItemAttributeRange
 	ItemAttributeBreakChance
 	ItemAttributeArmor
@@ -64,6 +63,8 @@ const (
 	ItemAttributeMeleePercent
 	ItemAttributeHealingPercent
 	ItemAttributeProtection
+	ItemAttributeMagicCritDamage
+	ItemAttributeMeleeCritDamage
 )
 
 type Attributes []byte
@@ -133,7 +134,6 @@ func NewItem(client uint16, item *in.Item, attrItem *in.Item) *Item {
 func getAttrs(item *in.Item) Attributes {
 	attr := Attributes{}
 	attr.writeAttr(ItemAttributeAttack, item.Attributes.Read("attack", "extraatk", "elementphysical", "elementfire", "elementenergy", "elementearth", "elementice", "elementholy", "elementdeath"))
-	attr.writeAttr(ItemAttributeDefense, item.Attributes.Read("defense", "extradef"))
 	attr.writeAttr(ItemAttributeRange, item.Attributes.Read("range"))
 	attr.writeAttr(ItemAttributeBreakChance, item.Attributes.Read("breakchance"))
 	attr.writeAttr(ItemAttributeArmor, item.Attributes.Read("armor"))
@@ -171,6 +171,8 @@ func getAttrs(item *in.Item) Attributes {
 	attr.writeAttr(ItemAttributeMeleePercent, item.Attributes.ReadPercent("increasemeleepercent"))
 	attr.writeAttr(ItemAttributeHealingPercent, item.Attributes.ReadPercent("increasehealingpercent"))
 	attr.writeAttr(ItemAttributeProtection, item.Attributes.Read("absorbpercentall"))
+	attr.writeAttr(ItemAttributeMagicCritDamage, item.Attributes.Read("magiccritdamage"))
+	attr.writeAttr(ItemAttributeMeleeCritDamage, item.Attributes.Read("meleecritdamage"))
 	return attr
 }
 
@@ -191,7 +193,6 @@ type ItemAttribute uint8
 
 const (
 	ItemAttributeAttack ItemAttribute = iota
-	ItemAttributeDefense
 	ItemAttributeRange
 	ItemAttributeBreakChance
 	ItemAttributeArmor
@@ -230,6 +231,8 @@ const (
 	ItemAttributeMeleePercent
 	ItemAttributeHealingPercent
 	ItemAttributeProtection
+	ItemAttributeMagicCritDamage
+	ItemAttributeMeleeCritDamage
 )
 
 type Attributes []byte
