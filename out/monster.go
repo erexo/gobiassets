@@ -27,6 +27,7 @@ type Monster struct {
 	AverageHPS         float64
 	AverageLoot        float64
 	AverageLootPer1khp float64
+	ExpHpRatio         float64
 	Loot               []LootItem
 }
 
@@ -56,6 +57,7 @@ func MonsterHeader() string {
 	AverageHPS         float64
 	AverageLoot        float64
 	AverageLootPer1khp float64
+	ExpHpRatio         float64
 	Loot               []LootItem
 }
 
@@ -153,6 +155,7 @@ func GetMonster(id uint16, m *in.Monster, it map[uint16]*Item) *Monster {
 		AverageHPS:         hps,
 		AverageLoot:        worth,
 		AverageLootPer1khp: worth / float64(m.Health.Now) * 1000,
+		ExpHpRatio:         float64(m.Experience) / float64(m.Health.Now),
 		Loot:               items,
 	}
 }
@@ -172,7 +175,7 @@ func (m *Monster) String() string {
 		items.WriteString("nil")
 	}
 
-	return fmt.Sprintf(`&Monster{%d, %d, "%s", %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %.1f, %.1f, %.1f, %.1f, %s}`, m.Id, m.BossClass, m.Name, m.Level, m.Health, m.Experience, m.Speed, m.LookType, m.LookHead, m.LookPrimary, m.LookSecondary, m.LookDetails, m.LookAddon, m.AverageDPS, m.AverageHPS, m.AverageLoot, m.AverageLootPer1khp, items.String())
+	return fmt.Sprintf(`&Monster{%d, %d, "%s", %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %.1f, %.1f, %.1f, %.2f, %.3f, %s}`, m.Id, m.BossClass, m.Name, m.Level, m.Health, m.Experience, m.Speed, m.LookType, m.LookHead, m.LookPrimary, m.LookSecondary, m.LookDetails, m.LookAddon, m.AverageDPS, m.AverageHPS, m.AverageLoot, m.AverageLootPer1khp, m.ExpHpRatio, items.String())
 }
 
 func calculateDmg(attacks []in.Attack) float64 {
