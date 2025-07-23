@@ -125,7 +125,8 @@ type Monster struct {
 	LookSecondary      uint8
 	LookDetails        uint8
 	LookAddon          uint8
-	AverageDPS         float64
+	AverageWeaponDPS   float64
+	AverageJutsuDPS    float64
 	AverageHPS         float64
 	AverageLoot        float64
 	AverageLootPer1khp float64
@@ -156,7 +157,8 @@ func MonsterHeader() string {
 	LookSecondary      uint8
 	LookDetails        uint8
 	LookAddon          uint8
-	AverageDPS         float64
+	AverageWeaponDPS   float64
+	AverageJutsuDPS    float64
 	AverageHPS         float64
 	AverageLoot        float64
 	AverageLootPer1khp float64
@@ -226,13 +228,18 @@ func GetMonster(id uint16, m *in.Monster, it map[uint16]*Item) *Monster {
 		}
 	}
 
-	var dps float64
+	var weaponDps, jutsuDps float64
 	for _, stage := range m.Stages {
-		if stageDps := calculateDmg(stage.Attacks); dps < stageDps {
-			dps = stageDps
+		stageWeapon, stageJutsu := calculateDmg(stage.Attacks)
+		total := stageWeapon + stageJutsu
+		if total > weaponDps+jutsuDps {
+			weaponDps, jutsuDps = stageWeapon, stageJutsu
 		}
 	}
-	dps += calculateDmg(m.Attacks)
+	gweapon, gjutsu := calculateDmg(m.Attacks)
+	weaponDps += gweapon
+	jutsuDps += gjutsu
+
 	var hps float64
 	for _, def := range m.Defenses.Defenses {
 		chs := def.Chance / (float64(def.Interval) / 1000)
@@ -255,7 +262,8 @@ func GetMonster(id uint16, m *in.Monster, it map[uint16]*Item) *Monster {
 		LookSecondary:      m.Look.Legs,
 		LookDetails:        m.Look.Feet,
 		LookAddon:          m.Look.Addons,
-		AverageDPS:         dps,
+		AverageWeaponDPS:   weaponDps,
+		AverageJutsuDPS:    jutsuDps,
 		AverageHPS:         hps,
 		AverageLoot:        worth,
 		AverageLootPer1khp: worth / float64(m.Health.Now) * 1000,
@@ -279,11 +287,10 @@ func (m *Monster) String() string {
 		items.WriteString("nil")
 	}
 
-	return fmt.Sprintf(`&Monster{%d, %d, "%s", %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %.1f, %.1f, %.1f, %.2f, %.3f, %s}`, m.Id, m.BossClass, m.Name, m.Level, m.Health, m.Experience, m.Speed, m.Armor, m.LookType, m.LookHead, m.LookPrimary, m.LookSecondary, m.LookDetails, m.LookAddon, m.AverageDPS, m.AverageHPS, m.AverageLoot, m.AverageLootPer1khp, m.ExpHpRatio, items.String())
+	return fmt.Sprintf(`&Monster{%d, %d, "%s", %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %.1f, %.1f, %.1f, %.1f, %.2f, %.3f, %s}`, m.Id, m.BossClass, m.Name, m.Level, m.Health, m.Experience, m.Speed, m.Armor, m.LookType, m.LookHead, m.LookPrimary, m.LookSecondary, m.LookDetails, m.LookAddon, m.AverageWeaponDPS, m.AverageJutsuDPS, m.AverageHPS, m.AverageLoot, m.AverageLootPer1khp, m.ExpHpRatio, items.String())
 }
 
-func calculateDmg(attacks []in.Attack) float64 {
-	var dps float64
+func calculateDmg(attacks []in.Attack) (weapon float64, jutsu float64) {
 	for _, atk := range attacks {
 		if atk.DelayType > 1 {
 			continue
@@ -293,13 +300,19 @@ func calculateDmg(attacks []in.Attack) float64 {
 		var dmg float64
 		if atk.Skill > 0 && atk.Attack > 0 {
 			dmg = (float64(atk.Skill)*(float64(atk.Attack)*0.05) + (float64(atk.Attack) * 0.5)) / 2
-			dmg *= 0.9 // ~ -10% for shield/armor block
 		} else {
 			dmg = -(float64(atk.Min) + float64(atk.Max)) / 2
 		}
-		dps += dmg * chs
+
+		dmg *= chs
+
+		if atk.Name == "melee" {
+			weapon += dmg
+		} else {
+			jutsu += dmg
+		}
 	}
-	return dps
+	return
 }
 
 type monsterByLevel []*Monster

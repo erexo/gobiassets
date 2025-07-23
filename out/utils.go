@@ -10,7 +10,7 @@ import (
 func LogTime(msg string) func() {
 	now := time.Now()
 	return func() {
-		fmt.Printf("%s\tin %s\n", msg, time.Now().Sub(now))
+		fmt.Printf("%s\tin %s\n", msg, time.Since(now))
 	}
 }
 
