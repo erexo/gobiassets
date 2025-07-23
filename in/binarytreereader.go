@@ -1,4 +1,4 @@
-package main
+package in
 
 const (
 	nodeStart  = 0xfe

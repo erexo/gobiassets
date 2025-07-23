@@ -1,11 +1,21 @@
-package main
+package in
+
+import (
+	"os"
+	"path/filepath"
+)
 
 type (
 	ServerClientMap = map[uint16]uint16
 	ClientServerMap = map[uint16][]uint16
 )
 
-func ReadOtb(data []byte) (ServerClientMap, ClientServerMap) {
+func ReadOtb() (ServerClientMap, ClientServerMap) {
+	data, err := os.ReadFile(filepath.Join(dataPath, itemsOtbFile))
+	if err != nil {
+		panic(err)
+	}
+
 	tree := NewBinaryTreeReader(data)
 	node := tree.GetNode()
 

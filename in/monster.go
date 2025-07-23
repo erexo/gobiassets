@@ -2,6 +2,10 @@ package in
 
 import (
 	"encoding/xml"
+	"io/ioutil"
+	"os"
+	"path"
+	"path/filepath"
 	"sort"
 	"strconv"
 )
@@ -10,6 +14,62 @@ const (
 	maxSpellChance = 100
 	maxItemChance  = 50000
 )
+
+func ReadMonsterFile() map[string]IdName {
+	f, err := os.Open(filepath.Join(dataPath, monsterXmlFile))
+	if err != nil {
+		panic(err)
+	}
+	defer f.Close()
+
+	var m struct {
+		Monsters []struct {
+			Id   uint16 `xml:"id,attr"`
+			Name string `xml:"name,attr"`
+			File string `xml:"file,attr"`
+		} `xml:"monster"`
+	}
+	if err := xml.NewDecoder(f).Decode(&m); err != nil {
+		panic(err)
+	}
+	ret := make(map[string]IdName)
+	for _, monster := range m.Monsters {
+		ret[monster.File] = IdName{monster.Id, monster.Name}
+	}
+	return ret
+}
+
+func ReadMonsters(dir string) []*Monster {
+	basePath := filepath.Join(dataPath, monsterDir, dir)
+	files, err := ioutil.ReadDir(basePath)
+	if err != nil {
+		panic(err)
+	}
+
+	var monsters []*Monster
+	for _, file := range files {
+		fpath := filepath.Join(basePath, file.Name())
+		if file.IsDir() || filepath.Ext(fpath) != ".xml" {
+			continue
+		}
+		f, err := os.Open(fpath)
+		if err != nil {
+			panic(err)
+		}
+		defer f.Close()
+		m := NewMonster(path.Join(dir, filepath.Base(fpath)))
+		if err := xml.NewDecoder(f).Decode(m); err != nil {
+			panic(err)
+		}
+		monsters = append(monsters, m)
+	}
+	return monsters
+}
+
+type IdName struct {
+	Id   uint16
+	Name string
+}
 
 type Monster struct {
 	Path       string

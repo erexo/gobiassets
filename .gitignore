@@ -32,5 +32,4 @@ __debug_bin
 #go.work
 *.work*
 
-_items.go
-_monsters.go
+/output

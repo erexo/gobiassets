@@ -4,9 +4,26 @@ import (
 	"encoding/xml"
 	"fmt"
 	"log"
+	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 )
+
+func ReadItems() []*Item {
+	f, err := os.Open(filepath.Join(dataPath, itemsXmlFile))
+	if err != nil {
+		panic(err)
+	}
+	defer f.Close()
+
+	items := &Items{}
+	if err := xml.NewDecoder(f).Decode(items); err != nil {
+		panic(err)
+	}
+
+	return items.Items
+}
 
 type Items struct {
 	Items []*Item `xml:"item"`
