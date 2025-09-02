@@ -8,16 +8,15 @@ const (
 	ItemCategoryArmors
 	ItemCategoryLegs
 	ItemCategoryShoes
-	ItemCategoryShields
 	ItemCategoryAmulets
+	ItemCategoryShields
+	ItemCategoryGloves
 	ItemCategoryRings
 	ItemCategoryScrolls
-	ItemCategoryGloves
 	ItemCategorySwords
 	ItemCategoryDistance
 	ItemCategoryShooters
 	ItemCategoryAmmunition
-	ItemCategoryBands
 	ItemCategoryExercise
 	ItemCategoryTrainers
 	ItemCategoryPills
@@ -77,16 +76,15 @@ const (
 	ItemCategoryArmors
 	ItemCategoryLegs
 	ItemCategoryShoes
-	ItemCategoryShields
 	ItemCategoryAmulets
+	ItemCategoryShields
+	ItemCategoryGloves
 	ItemCategoryRings
 	ItemCategoryScrolls
-	ItemCategoryGloves
 	ItemCategorySwords
 	ItemCategoryDistance
 	ItemCategoryShooters
 	ItemCategoryAmmunition
-	ItemCategoryBands
 	ItemCategoryExercise
 	ItemCategoryTrainers
 	ItemCategoryPills
@@ -164,10 +162,10 @@ var Items = map[ItemCategory][]uint16{
 		11971, // Sound Mask
 		2652,  // Cursed Protector
 		7462,  // Samurai Helmet
-		11972, // Elite Samurai Helmet
 		12854, // Enforcer Mask
+		11972, // Elite Samurai Helmet
 		2356,  // Red Headband
-		2471,  // Ninja Helmet
+		2471,  // Ninja Shawl
 		2409,  // Akatsuki Hat
 		11591, // Yuki Cap
 		8929,  // Crimson Mask
@@ -176,8 +174,9 @@ var Items = map[ItemCategory][]uint16{
 		11990, // Rikudou Bandana
 		2515,  // Tobi Mask
 		11419, // ANBU Mask
-		7432,  // Black Samurai Helmet
 		12918, // Shinigami Mask
+		7432,  // Black Samurai Helmet
+		14278, // Iron Helmet
 		11917, // Outcast Mask
 		6536,  // Raiton Helmet
 		2218,  // Katon Mask
@@ -192,8 +191,8 @@ var Items = map[ItemCategory][]uint16{
 		12937, // Sharingan Implant
 		3973,  // Yami Headpiece
 		8010,  // Kagero Kage Hat
-		12793, // Code Headpiece
 		12784, // Boro Chakra Vents
+		12793, // Code Headpiece
 		12986, // Toneri Headband
 		13945, // Ryu Headband
 		13941, // Matsuri Hat
@@ -219,15 +218,15 @@ var Items = map[ItemCategory][]uint16{
 		2482,  // Vampire Coat
 		2656,  // Stranger Coat
 		2462,  // Chunnin Armor
-		3975,  // Monk Robe
 		2459,  // Kyokushin Armor
+		3975,  // Monk Robe
 		3969,  // Sound Armor
 		3971,  // Cursed Armor
 		2510,  // Samurai Armor
-		11973, // Elite Samurai Armor
 		12855, // Enforcer Cloak
-		2520,  // Legendary Shirt
+		11973, // Elite Samurai Armor
 		2539,  // Kagero Shirt
+		2520,  // Legendary Shirt
 		12809, // Nukenin Cape
 		2472,  // Akatsuki Suit
 		2458,  // Sachiko Armor
@@ -236,16 +235,16 @@ var Items = map[ItemCategory][]uint16{
 		7382,  // Shadow Robe
 		11977, // Samurai Kimono
 		11442, // Uchiha Coat
-		2441,  // Rikudou Armor
 		12923, // Training Tracksuit
+		11440, // Senju Armor
 		2113,  // Kagero Armor
+		2441,  // Rikudou Armor
 		2645,  // Mystic Cape
 		11911, // Fuguki Armor
-		11440, // Senju Armor
 		3963,  // Black Samurai Armor
-		11892, // Outcast Cloak
-		7900,  // Black Armor
+		14279, // Iron Armor
 		5885,  // Raiton Armor
+		11892, // Outcast Cloak
 		7380,  // Katon Armor
 		7903,  // Sentinel's Robe
 		2139,  // Kagero Robe
@@ -256,6 +255,7 @@ var Items = map[ItemCategory][]uint16{
 		12076, // Aoi Armor
 		11937, // Unreal Cloak
 		2557,  // Sannin Armor
+		7900,  // Black Armor
 		11966, // Kara Cloak
 		11904, // Otsutsuki Armor
 		12244, // Ninshu Armor
@@ -269,8 +269,8 @@ var Items = map[ItemCategory][]uint16{
 		2508,  // Sage Robe
 		2436,  // Hyuuga Cloak
 		12129, // Infected Armor
-		12794, // Code Jacket
 		12945, // Jigen Robe
+		12794, // Code Jacket
 		12987, // Toneri Robe
 		13942, // Matsuri Cloak
 		13949, // Mamushi Armor
@@ -294,10 +294,10 @@ var Items = map[ItemCategory][]uint16{
 		2648,  // Kyokushin Legs
 		2470,  // Cursed Guard Legs
 		2504,  // Samurai Legs
-		11974, // Elite Samurai Legs
 		12856, // Enforcer Legs
-		5940,  // Legendary Legs
+		11974, // Elite Samurai Legs
 		11409, // Kagero Shorts
+		5940,  // Legendary Legs
 		11946, // Bandit King Pants
 		2649,  // Gray Pants
 		2426,  // Akatsuki Legs
@@ -306,16 +306,16 @@ var Items = map[ItemCategory][]uint16{
 		11994, // Nadare Legs
 		11443, // Uchiha Legs
 		12924, // Training Pants
+		11441, // Senju Legs
 		11989, // Pierced Legs
 		2542,  // Friar Legs
 		2447,  // Rikudou Legs
 		11410, // Kagero Pants
 		12860, // Sand Legs
-		11441, // Senju Legs
 		11912, // Fuguki Legs
 		2460,  // Black Samurai Legs
+		14280, // Iron Pants
 		11893, // Outcast Legs
-		7899,  // Black Legs
 		11890, // Raiga Legs
 		5903,  // Raiton Legs
 		7452,  // Katon Legs
@@ -327,6 +327,7 @@ var Items = map[ItemCategory][]uint16{
 		12074, // Aoi Legs
 		11938, // Unreal Legs
 		11412, // Sannin Legs
+		7899,  // Black Legs
 		11967, // Kara Legs
 		11905, // Otsutsuki Legs
 		12247, // Ninshu Legs
@@ -355,8 +356,8 @@ var Items = map[ItemCategory][]uint16{
 		2642,  // Ninja Shoes
 		2641,  // Cyborg Boots
 		2643,  // Skeleton Shoes
-		2644,  // Heavy Boots
 		11992, // Hoshi Shoes
+		2644,  // Heavy Boots
 		7457,  // Vampire Boots
 		2657,  // Kyokushin Shoes
 		11991, // Sound Shoes
@@ -373,6 +374,7 @@ var Items = map[ItemCategory][]uint16{
 		12925, // Training Sandals
 		12920, // Senju Boots
 		11975, // Black Samurai Boots
+		14281, // Iron Boots
 		2531,  // Fuguki Boots
 		11891, // Outcast Shoes
 		5907,  // Raiton Boots
@@ -401,26 +403,6 @@ var Items = map[ItemCategory][]uint16{
 		13950, // Mamushi Boots
 		12085, // Momoshiki Shoes
 		13956, // Hidari Shoes
-	},
-	ItemCategoryShields: {
-		12921, // Chakra Codex
-		2353,  // Yagai Glove
-		12919, // Retractable Shield
-		12984, // Crystal Shield
-		2457,  // Chakra Amplifier
-		11479, // Gunbai
-		11478, // Sussano Shield
-		7459,  // Sealed Glove
-		12301, // Oinin Shield
-		12939, // Jagged Shield
-		11953, // Frozen Chakra
-		12802, // Boro Armguard
-		12944, // Jigen Armguard
-		12990, // Toneri Gaze
-		11955, // Tal Shield
-		13947, // Matsuri Armguard
-		14187, // Ryu Shield
-		13958, // Hidari Shield
 	},
 	ItemCategoryAmulets: {
 		2496,  // Konoha Protector
@@ -454,8 +436,115 @@ var Items = map[ItemCategory][]uint16{
 		13951, // Mamushi Chain
 		13957, // Hidari Chain
 	},
+	ItemCategoryShields: {
+		12921, // Chakra Codex
+		2353,  // Yagai Glove
+		12919, // Retractable Shield
+		12984, // Crystal Shield
+		2457,  // Chakra Amplifier
+		11479, // Gunbai
+		11478, // Sussano Shield
+		7459,  // Sealed Glove
+		12301, // Oinin Shield
+		12939, // Jagged Shield
+		11953, // Frozen Chakra
+		12802, // Boro Armguard
+		12944, // Jigen Armguard
+		12990, // Toneri Gaze
+		11955, // Tal Shield
+		13947, // Matsuri Armguard
+		14187, // Ryu Shield
+		13958, // Hidari Shield
+	},
+	ItemCategoryGloves: {
+		2387,  // Bandages
+		2394,  // Leather Gloves
+		2402,  // Metal Gloves
+		2443,  // Dark Gloves
+		2412,  // Ninja Gloves
+		2172,  // Assassin Gloves
+		2390,  // Cyborg Gloves
+		2446,  // Hoshi Gloves
+		12314, // Iwa Gloves
+		14259, // Suna Gloves
+		2425,  // Red Gloves
+		2421,  // Hyouton Gloves
+		2391,  // Vampire Gloves
+		2442,  // Bloody Gloves
+		2121,  // Kyokushin Gloves
+		2400,  // Gummy Gloves
+		2407,  // Sound Gloves
+		2424,  // Yellow Gloves
+		2411,  // Samurai Gloves
+		12858, // Enforcer Gloves
+		2444,  // Legendary Gloves
+		2422,  // Nukenin Gloves
+		11945, // Bandit King Gloves
+		14271, // Akatsuki Gloves
+		2497,  // Reinforced Gloves
+		8923,  // Fur Claws
+		2494,  // Cursed Gloves
+		14272, // Golden Gloves
+		2440,  // Chakra Spikes
+		14223, // Uchiha Cuffs
+		14224, // Training Weights
+		14225, // Senju Gloves
+		11949, // Undead Gloves
+		11957, // Sand Gloves
+		14273, // Black Gloves
+		14277, // Iron Gloves
+		7385,  // Kagero Gloves
+		2509,  // Heaven Glove
+		// 14265, // Raiton Gloves
+		// 14266, // Katon Gloves
+		// 14284, // Doton Gloves
+		12982, // Crystal Gloves
+		12246, // Ninshu Gloves
+		11958, // Demonic Gloves
+		12786, // Inner Gloves
+		12834, // Ravage Gloves
+		13936, // Tsumeato Gloves
+		14270, // Emperor Gloves
+		2629,  // Kokinjo Gloves
+		14276, // Shin Gloves
+		12078, // Shallow Gloves
+		12257, // Akuma Gloves
+		12297, // Oinin Gloves
+		11416, // Uprising Gloves
+		14285, // Celestial Gloves
+		14262, // Celestial Gloves [nin]
+		14263, // Celestial Gloves [wep]
+		14264, // Celestial Gloves [def]
+		12796, // Code Kama
+		2423,  // Shiver Gloves
+		14269, // Energy Gloves
+		14268, // Mamushi Gloves
+		13940, // Matsuri Gloves
+		14267, // Ryu Gloves
+		13960, // Togedama Gloves
+
+		///
+
+		// 14260, // idk2 gloves
+
+		///
+
+		// 2534,  // Knuckle Duster
+		// 2499,  // Black Glove
+		// 2505,  // Raiton Master Gloves
+		// 7379,  // Katon Glove
+		// 11392, // Doton Hakai Glove
+		// 11393, // Fuuton Hakai Glove
+		// 11394, // Suiton Hakai Glove
+		// 11395, // Raiton Hakai Glove
+		// 11396, // Katon Hakai Glove
+		// 2633,  // Sealed Basher
+		// 2492,  // Heavy Spiked Glove
+		// 11883, // Emperor Staff
+		// 12941, // Celestial Glove
+		// 12086, // Vital Knuckle Dusters
+	},
 	ItemCategoryRings: {
-		2446,  // Chakra Wings
 		2404,  // Sound Belt
 		12791, // Inner Ring
 		11914, // Pure Chakra
@@ -508,78 +597,17 @@ var Items = map[ItemCategory][]uint16{
 		14199, // Juubi
 		13966, // Tsumeaka
 	},
-	ItemCategoryGloves: {
-		2387,  // Bandages
-		2394,  // Leather Gloves
-		2402,  // Metal Gloves
-		2443,  // Black Gloves
-		2412,  // Ninja Gloves
-		2172,  // Assassin Gloves
-		2390,  // Cyborg Gloves
-		2421,  // Hyouton Gloves
-		2400,  // Gummy Gloves
-		12314, // Shinobi Gloves
-		2425,  // Red Gloves
-		2391,  // Vampire Gloves
-		2121,  // Kyokushin Gloves
-		2442,  // Bloody Gloves
-		2407,  // Sound Glove
-		2424,  // Yellow Gloves
-		2411,  // Samurai Gloves
-		12858, // Enforcer Glove
-		2444,  // Legendary Gloves
-		2534,  // Knuckle Duster
-		2422,  // Golden Gloves
-		11945, // Bandit King Glove
-		2439,  // Raiton Gloves
-		2497,  // Reinforced Glove
-		2494,  // Cursed Glove
-		8923,  // Fur Claws
-		2440,  // Chakra Spikes
-		2499,  // Black Glove
-		11949, // Undead Glove
-		2120,  // Razor Claws
-		2505,  // Raiton Master Gloves
-		7379,  // Katon Glove
-		7385,  // Kagero Glove
-		11392, // Doton Hakai Glove
-		11393, // Fuuton Hakai Glove
-		11394, // Suiton Hakai Glove
-		11395, // Raiton Hakai Glove
-		11396, // Katon Hakai Glove
-		2509,  // Heaven Glove
-		12982, // Crystal Glove
-		11958, // Demonic Glove
-		2633,  // Sealed Basher
-		12246, // Ninshu Glove
-		2492,  // Heavy Spiked Glove
-		12786, // Inner Gloves
-		12834, // Ravage Glove
-		13936, // Tsumeato Gloves
-		2423,  // Shiver Gloves
-		11416, // Uprising Gloves
-		12078, // Shallow Glove
-		12257, // Akuma Glove
-		11418, // Shadow Gloves
-		12297, // Oinin Gloves
-		2629,  // Kokinjo Gloves
-		12796, // Code Kama
-		11883, // Emperor Staff
-		11957, // Prism Glove
-		12941, // Celestial Glove
-		13940, // Matsuri Glove
-		12086, // Vital Knuckle Dusters
-		13960, // Togedama Glove
-	},
 	ItemCategorySwords: {
 		2428,  // Short Sword
 		2419,  // Bandit Sword
 		2403,  // Sword
 		2386,  // Machete
+		14275, // Explosive Sword
 		2376,  // Katana
-		2384,  // Katanas
 		2438,  // Assassin Katanas
 		2434,  // Cyborg Katana
+		14254, // Grand Basher
+		14255, // Shibuki
 		2431,  // Heavy Big Sword
 		12313, // Shinobi Katana
 		2383,  // Skeleton Sword
@@ -594,76 +622,79 @@ var Items = map[ItemCategory][]uint16{
 		7391,  // Legendary Sword
 		2379,  // Kusanagi
 		7420,  // Mystic Sword
+		12073, // Lightning Chakra Sword
 		11943, // Bandit King Dirk
 		2432,  // Triple-Blade Scythe
 		2430,  // Shiny Sword
-		2488,  // Cursed Katana
-		8924,  // White Katana
-		2433,  // Raiton Swords
-		11947, // Undead Sword
-		2489,  // Crystal Katana
-		11909, // Magma Sword
-		6540,  // Raiton Katana
-		2627,  // Katon Sword
-		2630,  // Kagero Sword
 		2181,  // Doton Tweak Katana
 		2185,  // Fuuton Tweak Katana
 		2182,  // Suiton Tweak Katana
 		2183,  // Raiton Tweak Katana
 		2187,  // Katon Tweak Katana
+		2488,  // Cursed Katana
+		8924,  // White Katana
+		2433,  // Raiton Swords
+		11947, // Undead Sword
+		2489,  // Crystal Katana
+		14282, // Iron Katana
+		11909, // Magma Sword
+		6540,  // Raiton Katana
+		2627,  // Katon Sword
+		2630,  // Kagero Sword
 		2461,  // Heaven Sword
 		12981, // Crystal Sword
 		7438,  // Samehada
+		14261, // Kuroi Broadsword
 		2632,  // Sealed Hatchet
+		12088, // Vital Halberd
 		7434,  // Royal Katana
 		12245, // Ninshu Katana
 		12785, // Inner Katana
 		12835, // Ravage Sword
+		13952, // Mamushi Cleaver
 		13937, // Tsumeato Sword
 		2382,  // Raiga Katana
 		12255, // Akuma Katana
+		11913, // Emperor Sword
 		11885, // Blossom Katana
-		12073, // Lightning Chakra Sword
+		2385,  // Unreal Sword
 		12296, // Oinin Katana
 		8927,  // Ruby Sword
-		11913, // Emperor Sword
-		2385,  // Unreal Sword
-		2190,  // Hiramekarei
 		12801, // Boro Dagger
-		11956, // Chakred Sword
-		11910, // Shadow Dagger
 		12942, // Celestial Sword
-		13952, // Mamushi Cleaver
+		2190,  // Hiramekarei
+		11910, // Shadow Dagger
+		11956, // Chakred Sword
+		14274, // Matsuri Katar
 		12087, // Vital Katana
 		13961, // Togedama Sword
-
 	},
 	ItemCategoryDistance: {
 		11417, // Training Chain
+		7368,  // Kunai with Note
 		2399,  // Shuriken
 		7366,  // Sand Shuriken
 		2410,  // Kunai
-		7368,  // Kunai with Note
 		2389,  // Demonwing Shuriken
 		7367,  // Clone Kunais
-		2143,  // Explosive Throwing Ball
 		11469, // Elite Chain
+		2143,  // Explosive Throwing Ball
 		11398, // Doton Twisted Kunai
 		11399, // Fuuton Twisted Kunai
 		11400, // Suiton Twisted Kunai
 		11401, // Raiton Twisted Kunai
 		11402, // Katon Twisted Kunai
 		12983, // Crystal Kunai
-		2144,  // Raiton Shuriken
 		1294,  // Heavy Throwing Ball
-		2157,  // Reinforced Kunai
 		7460,  // Yondaime Kunai
-		11894, // Outcast Blade
 		12295, // Oinin Shuriken
+		2157,  // Reinforced Kunai
 		2501,  // Bashosen
 		11936, // Unreal Blade
 		12800, // Delta Blaster
+		11894, // Outcast Blade
 		13944, // Ryu Blaster
+		2144,  // Raiton Shuriken
 	},
 	ItemCategoryShooters: {
 		12948, // Red Thrower
@@ -681,33 +712,42 @@ var Items = map[ItemCategory][]uint16{
 	},
 	ItemCategoryAmmunition: {
 		2546,  // Burst Senbon
-		11963, // Sealed Raiton Scroll
 		12792, // Inner Senbon
+		11963, // Sealed Raiton Scroll
+		14256, // Sealed Explosive Notes
 		2543,  // Senbons
 		2545,  // Poison Senbon
-		8614,  // Silver Senbon
 		11962, // Sealed Suiton Scroll
 		11964, // Sealed Doton Scroll
+		8614,  // Silver Senbon
 		12249, // Ninshu Senbon
 		11961, // Sealed Katon Scroll
 	},
-	ItemCategoryBands: {
-		2553,  // Brown Band
-		2551,  // Red Band
-		2550,  // Blue Band
-		2548,  // Yellow Band
-		2580,  // Green Band
-		2533,  // Gray Band
-		11414, // Black Band
-		12940, // Dimension Band
-		12088, // Vital Halberd
-	},
 	ItemCategoryExercise: {
 		12910, // Exercise Scroll
-		12911, // Exercise Glove
+		14238, // Durable Exercise Scroll
+		14246, // Lasting Exercise Scroll
+		14235, // Exercise Seal
+		14239, // Durable Exercise Seal
+		14247, // Lasting Exercise Seal
 		12912, // Exercise Sword
+		14240, // Durable Exercise Sword
+		14248, // Lasting Exercise Sword
+		12911, // Exercise Glove
+		14241, // Durable Exercise Glove
+		14249, // Lasting Exercise Glove
+		14236, // Exercise Armguard
+		14242, // Durable Exercise Armguard
+		14250, // Lasting Exercise Armguard
 		12913, // Exercise Kunai
+		14243, // Durable Exercise Kunai
+		14251, // Lasting Exercise Kunai
+		14237, // Exercise Weights
+		14244, // Durable Exercise Weights
+		14252, // Lasting Exercise Weights
 		12914, // Exercise Note
+		14245, // Durable Exercise Note
+		14253, // Lasting Exercise Note
 	},
 	ItemCategoryTrainers: {
 		12108, // Chunnin Training Kit
@@ -747,6 +787,7 @@ var Items = map[ItemCategory][]uint16{
 		6278,  // Cake
 		7966,  // Birthday Cake
 		6394,  // Cream Cake
+		14286, // Golden Ramen
 	},
 	ItemCategoryCurrency: {
 		2148, // Yen
@@ -770,7 +811,6 @@ var Items = map[ItemCategory][]uint16{
 		12909, // Disenchanting Mallet
 	},
 	ItemCategoryValuables: {
-		2676,  // Chakra Orb
 		7759,  // Sharingan Eye
 		13572, // Byakugan Eye
 		11525, // Frozen Gem

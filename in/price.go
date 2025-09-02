@@ -6,6 +6,7 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strconv"
 	"strings"
 )
@@ -70,5 +71,77 @@ func ReadPrices() Prices {
 	}); err != nil {
 		panic(err)
 	}
+
+	luaPrices, err := parsePricesFile(filepath.Join(dataPath, npcDir, npcPricesFile))
+	if err != nil {
+		panic(err)
+	}
+
+	for k, v := range luaPrices {
+		if cv, ok := ret[k]; ok && cv >= v {
+			//panic(fmt.Sprintf("lua price for %d [%d] already contain lua price [%d]", key, cv, value))
+			continue
+		}
+		ret[k] = v
+	}
+
 	return ret
+}
+
+func parsePricesFile(filePath string) (map[int]int, error) {
+	// Read file content
+	data, err := os.ReadFile(filePath)
+	if err != nil {
+		return nil, err
+	}
+	content := string(data)
+
+	// Regex to match getItems(firstParam, secondParam)
+	getItemsRe := regexp.MustCompile(`getItems\s*\(\s*(?:nil|\{[^{}]*\})\s*,\s*(nil|\{[^{}]*\})\s*\)`)
+	secondParamMatches := getItemsRe.FindAllStringSubmatch(content, -1)
+
+	result := make(map[int]int)
+
+	// Regex for key-value pairs: [123] = 456,
+	pairRe := regexp.MustCompile(`\[(\d+)\]\s*=\s*(\d+)\s*,?`)
+
+	for _, match := range secondParamMatches {
+		if len(match) < 2 {
+			continue
+		}
+
+		for _, param := range []string{match[0], match[1]} {
+			param = strings.TrimLeft(param, "getItems(")
+
+			// Skip if second param is nil
+			if param == "nil" {
+				continue
+			}
+
+			// Extract key-value pairs from secondParam
+			pairs := pairRe.FindAllStringSubmatch(param, -1)
+			for _, p := range pairs {
+				if len(p) != 3 {
+					continue
+				}
+				key, err := strconv.Atoi(p[1])
+				if err != nil {
+					return nil, err
+				}
+				value, err := strconv.Atoi(p[2])
+				if err != nil {
+					return nil, err
+				}
+
+				if cv, ok := result[key]; ok && cv >= value {
+					//panic(fmt.Sprintf("lua price for %d [%d] already contain lua price [%d]", key, cv, value))
+					continue
+				}
+
+				result[key] = value
+			}
+		}
+	}
+
+	return result, nil
 }

@@ -93,7 +93,8 @@ func NewMonster(path string) *Monster {
 }
 
 type Health struct {
-	Now int `xml:"now,attr"`
+	Now   int `xml:"now,attr"`
+	Armor int `xml:"armor,attr"`
 }
 
 type Look struct {
@@ -150,7 +151,6 @@ func (a *Attack) UnmarshalXML(dec *xml.Decoder, start xml.StartElement) error {
 }
 
 type Defenses struct {
-	Armor    int       `xml:"armor,attr"`
 	Defenses []Defense `xml:"defense"`
 }
 

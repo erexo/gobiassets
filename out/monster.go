@@ -255,7 +255,7 @@ func GetMonster(id uint16, m *in.Monster, it map[uint16]*Item) *Monster {
 		Health:             int32(m.Health.Now),
 		Experience:         uint64(m.Experience),
 		Speed:              int32(m.Speed),
-		Armor:              uint16(m.Defenses.Armor),
+		Armor:              uint16(m.Health.Armor),
 		LookType:           uint16(lookType),
 		LookHead:           m.Look.Head,
 		LookPrimary:        m.Look.Body,
@@ -286,6 +286,9 @@ func (m *Monster) String() string {
 	} else {
 		items.WriteString("nil")
 	}
+
+	//return fmt.Sprintf(`&Monster{%d, health: %d, exp: %d, ratio: %.3f, arm: %d, [wep: %0.1f, jutsu: %0.1f, ratio: %.3f, sum: %.f], hp: %.2f, loot: %.1f, lootr: %.2f}`,
+	//	m.Level, m.Health, m.Experience, m.ExpHpRatio, m.Armor, m.AverageWeaponDPS, m.AverageJutsuDPS, m.AverageWeaponDPS/m.AverageJutsuDPS, m.AverageWeaponDPS+m.AverageJutsuDPS, m.AverageHPS/float64(m.Health)*1000, m.AverageLoot, m.AverageLootPer1khp)
 
 	return fmt.Sprintf(`&Monster{%d, %d, "%s", %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %.1f, %.1f, %.1f, %.1f, %.2f, %.3f, %s}`, m.Id, m.BossClass, m.Name, m.Level, m.Health, m.Experience, m.Speed, m.Armor, m.LookType, m.LookHead, m.LookPrimary, m.LookSecondary, m.LookDetails, m.LookAddon, m.AverageWeaponDPS, m.AverageJutsuDPS, m.AverageHPS, m.AverageLoot, m.AverageLootPer1khp, m.ExpHpRatio, items.String())
 }

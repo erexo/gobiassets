@@ -50,15 +50,14 @@ const (
 	ItemAttributeManaGain
 	ItemAttributeSoul
 	ItemAttributeSkillAll
-	ItemAttributeSkillWeapons
-	ItemAttributeSkillMagic
-	ItemAttributeSkillFist
-	ItemAttributeSkillClub
-	ItemAttributeSkillSword
-	ItemAttributeSkillDist
-	ItemAttributeSkillShield
-	ItemAttributeSkillAxe
-	ItemAttributeSkillFish
+	ItemAttributeSkillNinjutsu
+	ItemAttributeSkillFuinjutsu
+	ItemAttributeSkillBukijutsu
+	ItemAttributeSkillTaijutsu
+	ItemAttributeSkillSenjutsu
+	ItemAttributeSkillGenjutsu
+	ItemAttributeSkillVitality
+	ItemAttributeSkillControl
 	ItemAttributeMagicCritChance
 	ItemAttributeMeleeCritChance
 	ItemAttributeMagicPercent
@@ -272,15 +271,14 @@ func getAttrs(item *in.Item) Attributes {
 	attr.writeAttr(ItemAttributeManaGain, item.Attributes.Read("managain"))
 	attr.writeAttr(ItemAttributeSoul, item.Attributes.Read("soulpoints"))
 	attr.writeAttr(ItemAttributeSkillAll, item.Attributes.Read("allskills"))
-	attr.writeAttr(ItemAttributeSkillWeapons, item.Attributes.Read("skillweapons"))
-	attr.writeAttr(ItemAttributeSkillMagic, item.Attributes.Read("magiclevelpoints"))
-	attr.writeAttr(ItemAttributeSkillFist, item.Attributes.Read("skillfist"))
-	attr.writeAttr(ItemAttributeSkillClub, item.Attributes.Read("skillclub"))
-	attr.writeAttr(ItemAttributeSkillSword, item.Attributes.Read("skillsword"))
-	attr.writeAttr(ItemAttributeSkillDist, item.Attributes.Read("skilldist"))
-	attr.writeAttr(ItemAttributeSkillShield, item.Attributes.Read("skillshield"))
-	attr.writeAttr(ItemAttributeSkillAxe, item.Attributes.Read("skillaxe"))
-	attr.writeAttr(ItemAttributeSkillFish, item.Attributes.Read("skillfish"))
+	attr.writeAttr(ItemAttributeSkillNinjutsu, item.Attributes.Read("ninjutsu"))
+	attr.writeAttr(ItemAttributeSkillFuinjutsu, item.Attributes.Read("fuinjutsu"))
+	attr.writeAttr(ItemAttributeSkillBukijutsu, item.Attributes.Read("bukijutsu"))
+	attr.writeAttr(ItemAttributeSkillTaijutsu, item.Attributes.Read("taijutsu"))
+	attr.writeAttr(ItemAttributeSkillSenjutsu, item.Attributes.Read("senjutsu"))
+	attr.writeAttr(ItemAttributeSkillGenjutsu, item.Attributes.Read("genjutsu"))
+	attr.writeAttr(ItemAttributeSkillVitality, item.Attributes.Read("vitality"))
+	attr.writeAttr(ItemAttributeSkillControl, item.Attributes.Read("control"))
 	attr.writeAttr(ItemAttributeMagicCritChance, item.Attributes.Read("magiccritchance"))
 	attr.writeAttr(ItemAttributeMeleeCritChance, item.Attributes.Read("meleecritchance"))
 	attr.writeAttr(ItemAttributeMagicPercent, item.Attributes.ReadPercent("increasemagicpercent"))
@@ -332,15 +330,14 @@ const (
 	ItemAttributeManaGain
 	ItemAttributeSoul
 	ItemAttributeSkillAll
-	ItemAttributeSkillWeapons
-	ItemAttributeSkillMagic
-	ItemAttributeSkillFist
-	ItemAttributeSkillClub
-	ItemAttributeSkillSword
-	ItemAttributeSkillDist
-	ItemAttributeSkillShield
-	ItemAttributeSkillAxe
-	ItemAttributeSkillFish
+	ItemAttributeSkillNinjutsu
+	ItemAttributeSkillFuinjutsu
+	ItemAttributeSkillBukijutsu
+	ItemAttributeSkillTaijutsu
+	ItemAttributeSkillSenjutsu
+	ItemAttributeSkillGenjutsu
+	ItemAttributeSkillVitality
+	ItemAttributeSkillControl
 	ItemAttributeMagicCritChance
 	ItemAttributeMeleeCritChance
 	ItemAttributeMagicPercent

@@ -5,7 +5,8 @@ const (
 	itemsOtbFile    = `items\items.otb`
 	itemsXmlFile    = `items\items.xml`
 	sageTreeXmlFile = `XML\sagetree.xml`
-	npcDir          = "npc"
+	npcDir          = `npc`
+	npcPricesFile   = `lib/npc.lua`
 	monsterDir      = `monster`
 	monsterXmlFile  = `monster\monsters.xml`
 )
