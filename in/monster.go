@@ -56,14 +56,37 @@ func ReadMonsters(dir string) []*Monster {
 		if err != nil {
 			panic(err)
 		}
-		defer f.Close()
 		m := NewMonster(path.Join(dir, filepath.Base(fpath)))
 		if err := xml.NewDecoder(f).Decode(m); err != nil {
+			f.Close()
 			panic(err)
 		}
+		f.Close()
+
+		//fmt.Println(fpath)
+		//Overwrite(fpath, m)
+
 		monsters = append(monsters, m)
 	}
 	return monsters
+}
+
+func Overwrite(fpath string, m *Monster) {
+	if m.Name != "Hidari" {
+		return
+	}
+
+	f, err := os.OpenFile(fpath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
+	if err != nil {
+		panic(err)
+	}
+
+	err = xml.NewEncoder(f).Encode(m)
+	if err != nil {
+		panic(err)
+	}
+
+	f.Close()
 }
 
 type IdName struct {
@@ -114,6 +137,33 @@ func (f Flags) UnmarshalXML(dec *xml.Decoder, start xml.StartElement) error {
 	}
 	dec.Skip()
 	return nil
+}
+
+func (f Flags) MarshalXML(enc *xml.Encoder, start xml.StartElement) error {
+	// Write the start element <flags>
+	if err := enc.EncodeToken(start); err != nil {
+		return err
+	}
+
+	// Write each <flag .../> element
+	for k, v := range f {
+		flagStart := xml.StartElement{
+			Name: xml.Name{Local: "flag"},
+			Attr: []xml.Attr{
+				{Name: xml.Name{Local: k}, Value: v},
+			},
+		}
+		if err := enc.EncodeToken(flagStart); err != nil {
+			return err
+		}
+		// Self-closing <flag .../>
+		if err := enc.EncodeToken(xml.EndElement{Name: flagStart.Name}); err != nil {
+			return err
+		}
+	}
+
+	// Write the closing </flags>
+	return enc.EncodeToken(xml.EndElement{Name: start.Name})
 }
 
 type Stage struct {

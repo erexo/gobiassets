@@ -182,7 +182,7 @@ func (n NodeIcon) DescribeEpic() (title string, description string, bonusDescrip
 	case 4:
 		return "Chakra Reflux", "Gain {一25%} chance to reset cooldown on casted special jutsu", "   {四When special is reset soul and chakra is refunded}"
 	case 5:
-		return "Lotus", "Weapon attacks grant {一+1%} protection for {一4} seconds, stacking up to {一+10%}", ""
+		return "Lotus", "Weapon attacks grant {一+1%} protection for {一2} seconds, stacking up to {一+7%}", ""
 	case 6:
 		return "Grievous Wounds", "", ""
 	case 7:
@@ -192,7 +192,7 @@ func (n NodeIcon) DescribeEpic() (title string, description string, bonusDescrip
 	case 9:
 		return "Overgrowth", "", ""
 	case 10:
-		return "Thorns", "{一10%} of your armor is reflected on weapon damage you take", ""
+		return "Thorns", "{一25%} of your armor is reflected on weapon damage you take", ""
 	default:
 		return "", "", ""
 	}
@@ -211,15 +211,21 @@ func SaveSageTree() {
 			statsStr = append(statsStr, fmt.Sprintf(`
 			{%d, NodeIcon(%d)},`, stat.Value, stat.Icon))
 		}
+		tabStr := "    "
+		statTabStr := "   "
+		if len(statsStr) != 0 {
+			statsStr = append(statsStr, "\n		")
+			tabStr = ""
+			statTabStr = ""
+		}
 		nodesStr = append(nodesStr, fmt.Sprintf(`
 	{
-		Id:    %d,
-		Type:  NodeType(%d),
-		Icon:  NodeIcon(%d),
-		Stats: []NodeStat{%s
-		},
+		Id:   %s%d,
+		Type: %sNodeType(%d),
+		Icon: %sNodeIcon(%d),
+		Stats: %s[]NodeStat{%s},
 		Position: image.Pt(%d, %d),
-	},`, node.Id, node.Type, node.Icon, strings.Join(statsStr, ""), node.Position.X, node.Position.Y))
+	},`, tabStr, node.Id, tabStr, node.Type, tabStr, node.Icon, statTabStr, strings.Join(statsStr, ""), node.Position.X, node.Position.Y))
 	}
 	for _, link := range tree.Links {
 		linksStr = append(linksStr, fmt.Sprintf(`

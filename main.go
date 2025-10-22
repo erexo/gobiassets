@@ -18,6 +18,8 @@ func main() {
 
 	out.SaveSageTree()
 
+	out.SaveSpells()
+
 	verifyPrices(items, prices)
 
 	fmt.Println("BYE")
