@@ -178,7 +178,7 @@ func (n NodeIcon) DescribeEpic() (title string, description string, bonusDescrip
 	case 2:
 		return "Mistward", "Gain short invisibility when on low health", "   {四Triggers when below} {三20%} {四health}\n   {四Invisibility lasts} {三3 seconds}\n   {四Has} {三2 minutes} {四cooldown}\n   {四Works only in PvP}"
 	case 3:
-		return "Stormshield", "Absorb portion of the damage as chakra", "   {四Gain} {三1%} {四damage absorption for each} {三2500} {四max chakra}\n   {四ie. having 25000 max chakra will absorb 10% damage}"
+		return "Stormshield", "Absorb portion of the damage as chakra", "   {四Gain} {三1%} {四damage absorption for each} {三2500} {四max chakra}\n   {四ie. having 25000 max chakra will absorb 10% damage}\n   {敗Stormshield will do nothing if Chakra Shield is active}"
 	case 4:
 		return "Chakra Reflux", "Gain {一25%} chance to reset cooldown on casted special jutsu", "   {四When special is reset soul and chakra is refunded}"
 	case 5:

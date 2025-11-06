@@ -1,7 +1,7 @@
 package in
 
 const (
-	dataPath         = `D:\servers\ntsw\data`
+	dataPath         = `D:\ntsw\data`
 	itemsOtbFile     = `items\items.otb`
 	itemsXmlFile     = `items\items.xml`
 	sageTreeXmlFile  = `XML\sagetree.xml`
