@@ -122,6 +122,7 @@ type Health struct {
 
 type Look struct {
 	Type   string `xml:"type,attr"`
+	Typeex string `xml:"typeex,attr"`
 	Head   uint8  `xml:"head,attr"`
 	Body   uint8  `xml:"body,attr"`
 	Legs   uint8  `xml:"legs,attr"`

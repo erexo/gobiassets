@@ -41,7 +41,7 @@ func ReadOtb() (ServerClientMap, ClientServerMap) {
 	clientServer := make(ClientServerMap)
 	for {
 		node.ReadU8()
-		flags := node.ReadU32()
+		_ = node.ReadU32() // flags
 		var serverId, clientId uint16
 		for !node.Empty() {
 			attribute := node.ReadU8()
@@ -74,9 +74,9 @@ func ReadOtb() (ServerClientMap, ClientServerMap) {
 				node.Skip(datalen)
 			}
 		}
-		if flags&(1<<5) != 0 { // pickupable
-			serverClient[serverId] = clientId
-		}
+		//if flags&(1<<5) != 0 { // pickupable
+		serverClient[serverId] = clientId
+		//}
 		clientServer[clientId] = append(clientServer[clientId], serverId)
 
 		node = tree.GetNextNode()

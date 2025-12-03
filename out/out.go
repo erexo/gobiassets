@@ -8,4 +8,5 @@ const (
 	monstersFileName    = "monsters.go"
 	sageTreeFileName    = "sagetree.go"
 	professionsFileName = "professions.php"
+	npcMapFileName      = "worldmap_npc.go"
 )

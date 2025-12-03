@@ -20,6 +20,7 @@ func main() {
 
 	out.SaveSpells()
 
+	// out.SaveMapNPCs()
 	verifyPrices(items, prices)
 
 	fmt.Println("BYE")

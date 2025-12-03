@@ -13,4 +13,5 @@ const (
 	spellsLibFile    = `lib\107-spells.lua`
 	spellsXmlFile    = `spells\spells.xml`
 	vocationsXmlFile = `XML\vocations.xml`
+	spawnsXmlFile    = `world\ntsw-spawn.xml`
 )
