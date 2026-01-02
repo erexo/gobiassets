@@ -50,7 +50,7 @@ const (
 	NodeIconChakraPercent    NodeIcon = 13
 	NodeIconArmor            NodeIcon = 14
 	NodeIconJutsuDamage      NodeIcon = 15
-	NodeIconPvEJutsuDamage   NodeIcon = 16
+	NodeIconPvEDamage        NodeIcon = 16
 	NodeIconJutsuCritChance  NodeIcon = 17
 	NodeIconJutsuCritDamage  NodeIcon = 18
 	NodeIconWeaponDamage     NodeIcon = 19
@@ -92,8 +92,8 @@ func (n NodeIcon) Icon() string {
 		return "armor"
 	case NodeIconJutsuDamage:
 		return "jutsudmg"
-	case NodeIconPvEJutsuDamage:
-		return "jutsupve"
+	case NodeIconPvEDamage:
+		return "pvedmg"
 	case NodeIconJutsuCritChance:
 		return "jutsucrit"
 	case NodeIconJutsuCritDamage:
@@ -145,8 +145,8 @@ func (n NodeIcon) Description(value int32) string {
 		return fmt.Sprintf("{一%+d} armor", value)
 	case NodeIconJutsuDamage:
 		return fmt.Sprintf("{一%+d%%} jutsu damage", value)
-	case NodeIconPvEJutsuDamage:
-		return fmt.Sprintf("{一%+d%%} PvE jutsu damage", value)
+	case NodeIconPvEDamage:
+		return fmt.Sprintf("{一%+d%%} PvE damage", value)
 	case NodeIconJutsuCritChance:
 		return fmt.Sprintf("{一%+d%%} jutsu crit chance", value)
 	case NodeIconJutsuCritDamage:

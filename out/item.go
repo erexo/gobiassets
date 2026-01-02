@@ -61,7 +61,7 @@ const (
 	ItemAttributeMagicCritChance
 	ItemAttributeMeleeCritChance
 	ItemAttributeMagicPercent
-	ItemAttributeMagicPvePercent
+	ItemAttributePvePercent
 	ItemAttributeMeleePercent
 	ItemAttributeHealingPercent
 	ItemAttributeProtection
@@ -282,7 +282,7 @@ func getAttrs(item *in.Item) Attributes {
 	attr.writeAttr(ItemAttributeMagicCritChance, item.Attributes.Read("magiccritchance"))
 	attr.writeAttr(ItemAttributeMeleeCritChance, item.Attributes.Read("meleecritchance"))
 	attr.writeAttr(ItemAttributeMagicPercent, item.Attributes.ReadPercent("increasemagicpercent"))
-	attr.writeAttr(ItemAttributeMagicPvePercent, item.Attributes.ReadPercent("increasemagicpvepercent"))
+	attr.writeAttr(ItemAttributePvePercent, item.Attributes.ReadPercent("increasepvepercent"))
 	attr.writeAttr(ItemAttributeMeleePercent, item.Attributes.ReadPercent("increasemeleepercent"))
 	attr.writeAttr(ItemAttributeHealingPercent, item.Attributes.ReadPercent("increasehealingpercent"))
 	attr.writeAttr(ItemAttributeProtection, item.Attributes.Read("absorbpercentall"))
@@ -341,7 +341,7 @@ const (
 	ItemAttributeMagicCritChance
 	ItemAttributeMeleeCritChance
 	ItemAttributeMagicPercent
-	ItemAttributeMagicPvePercent
+	ItemAttributePvePercent
 	ItemAttributeMeleePercent
 	ItemAttributeHealingPercent
 	ItemAttributeProtection
