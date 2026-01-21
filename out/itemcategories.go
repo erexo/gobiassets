@@ -186,6 +186,7 @@ var Items = map[ItemCategory][]uint16{
 		2091,  // Vile Protector
 		12836, // Dark Helmet
 		13581, // Puppet Mask
+		14292, // Yokai Helmet
 		13938, // Tsumeato Headpiece
 		12045, // Emperor Helmet
 		12937, // Sharingan Implant
@@ -264,6 +265,7 @@ var Items = map[ItemCategory][]uint16{
 		2540,  // Yami Cloak
 		12837, // Dark Armor
 		13582, // Puppet Cloak
+		14293, // Yokai Armor
 		13939, // Tsumeato Armor
 		12090, // Mecha Armor
 		2508,  // Sage Robe
@@ -335,6 +337,7 @@ var Items = map[ItemCategory][]uint16{
 		11986, // Yami Legs
 		12838, // Dark Legs
 		13583, // Puppet Leg Piece
+		14294, // Yokai Legs
 		11889, // Kagero Battle Legs
 		3967,  // Bounded Leg Piece
 		12091, // Mecha Legs
@@ -392,6 +395,7 @@ var Items = map[ItemCategory][]uint16{
 		12789, // Inner Boots
 		12839, // Dark Boots
 		13584, // Puppet Shoes
+		14295, // Yokai Boots
 		12130, // Infected Shoes
 		8009,  // Kagero Kage shoes
 		12092, // Mecha Boots
@@ -652,6 +656,7 @@ var Items = map[ItemCategory][]uint16{
 		12785, // Inner Katana
 		12835, // Ravage Sword
 		13952, // Mamushi Cleaver
+		14289, // Yokai Katana
 		13937, // Tsumeato Sword
 		2382,  // Raiga Katana
 		12255, // Akuma Katana

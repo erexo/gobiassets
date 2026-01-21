@@ -186,13 +186,13 @@ func (n NodeIcon) DescribeEpic() (title string, description string, bonusDescrip
 	case 6:
 		return "Grievous Wounds", "", ""
 	case 7:
-		return "Precision", "Increase {一weapon damage} the further you are from your target", "   {三+5%} {四weapon damage at} {三3} {四range}\n  {三+10%} {四weapon damage at} {三4} {四range}\n  {三+15%} {四weapon damage at} {三5} {四range}\n  {三+20%} {四weapon damage at} {三6} {四range}"
+		return "Precision", "Increase {一weapon damage} the further you are from your target", "  {三+10%} {四weapon damage at} {三3} {四range}\n  {三+15%} {四weapon damage at} {三4} {四range}\n  {三+20%} {四weapon damage at} {三5} {四range}\n  {三+25%} {四weapon damage at} {三6} {四range}"
 	case 8:
 		return "Close Quarters", "{敗Cannot use distance weapon}", ""
 	case 9:
 		return "Overgrowth", "", ""
 	case 10:
-		return "Thorns", "{一25%} of your armor is reflected on weapon damage you take", ""
+		return "Thorns", "{一40%} of your armor is reflected on weapon damage you take", ""
 	default:
 		return "", "", ""
 	}
