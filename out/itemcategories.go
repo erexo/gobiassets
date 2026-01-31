@@ -395,8 +395,8 @@ var Items = map[ItemCategory][]uint16{
 		12789, // Inner Boots
 		12839, // Dark Boots
 		13584, // Puppet Shoes
-		14295, // Yokai Boots
 		12130, // Infected Shoes
+		14295, // Yokai Boots
 		8009,  // Kagero Kage shoes
 		12092, // Mecha Boots
 		12795, // Code Boots
