@@ -186,7 +186,7 @@ var Items = map[ItemCategory][]uint16{
 		2091,  // Vile Protector
 		12836, // Dark Helmet
 		13581, // Puppet Mask
-		14292, // Yokai Helmet
+		// 14292, // Yokai Helmet
 		13938, // Tsumeato Headpiece
 		12045, // Emperor Helmet
 		12937, // Sharingan Implant
@@ -265,7 +265,7 @@ var Items = map[ItemCategory][]uint16{
 		2540,  // Yami Cloak
 		12837, // Dark Armor
 		13582, // Puppet Cloak
-		14293, // Yokai Armor
+		// 14293, // Yokai Armor
 		13939, // Tsumeato Armor
 		12090, // Mecha Armor
 		2508,  // Sage Robe
@@ -337,7 +337,7 @@ var Items = map[ItemCategory][]uint16{
 		11986, // Yami Legs
 		12838, // Dark Legs
 		13583, // Puppet Leg Piece
-		14294, // Yokai Legs
+		// 14294, // Yokai Legs
 		11889, // Kagero Battle Legs
 		3967,  // Bounded Leg Piece
 		12091, // Mecha Legs
@@ -396,7 +396,7 @@ var Items = map[ItemCategory][]uint16{
 		12839, // Dark Boots
 		13584, // Puppet Shoes
 		12130, // Infected Shoes
-		14295, // Yokai Boots
+		// 14295, // Yokai Boots
 		8009,  // Kagero Kage shoes
 		12092, // Mecha Boots
 		12795, // Code Boots
@@ -604,16 +604,17 @@ var Items = map[ItemCategory][]uint16{
 	ItemCategorySwords: {
 		2428,  // Short Sword
 		2419,  // Bandit Sword
+		14275, // Explosive Sword
 		2403,  // Sword
 		2386,  // Machete
-		14275, // Explosive Sword
 		2376,  // Katana
 		2438,  // Assassin Katanas
+		14255, // Shibuki
 		2434,  // Cyborg Katana
 		14254, // Grand Basher
-		14255, // Shibuki
 		2431,  // Heavy Big Sword
 		12313, // Shinobi Katana
+		13952, // Mamushi Cleaver
 		2383,  // Skeleton Sword
 		7386,  // Vampire Sword
 		2435,  // Kyokushin Sword
@@ -626,8 +627,8 @@ var Items = map[ItemCategory][]uint16{
 		7391,  // Legendary Sword
 		2379,  // Kusanagi
 		7420,  // Mystic Sword
-		12073, // Lightning Chakra Sword
 		11943, // Bandit King Dirk
+		12088, // Vital Halberd
 		2432,  // Triple-Blade Scythe
 		2430,  // Shiny Sword
 		2181,  // Doton Tweak Katana
@@ -637,6 +638,7 @@ var Items = map[ItemCategory][]uint16{
 		2187,  // Katon Tweak Katana
 		2488,  // Cursed Katana
 		8924,  // White Katana
+		12073, // Lightning Chakra Sword
 		2433,  // Raiton Swords
 		11947, // Undead Sword
 		2489,  // Crystal Katana
@@ -648,15 +650,13 @@ var Items = map[ItemCategory][]uint16{
 		2461,  // Heaven Sword
 		12981, // Crystal Sword
 		7438,  // Samehada
-		14261, // Kuroi Broadsword
 		2632,  // Sealed Hatchet
-		12088, // Vital Halberd
-		7434,  // Royal Katana
 		12245, // Ninshu Katana
+		7434,  // Royal Katana
 		12785, // Inner Katana
 		12835, // Ravage Sword
-		13952, // Mamushi Cleaver
-		14289, // Yokai Katana
+		14261, // Kuroi Broadsword
+		// 14289, // Yokai Katana
 		13937, // Tsumeato Sword
 		2382,  // Raiga Katana
 		12255, // Akuma Katana
