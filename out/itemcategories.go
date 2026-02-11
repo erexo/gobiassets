@@ -831,6 +831,10 @@ var Items = map[ItemCategory][]uint16{
 		13069, // Mutable Token
 		13070, // Unstable Token
 		13071, // Volatile Token
+		14300, // Red Rose
+		14298, // Valentine Box
+		14297, // Flower Bouquet
+		14299, // Valentine Teddy
 		12842, // Erexo's Eye
 		12843, // Erexo's Horn
 		12844, // Erexo's Brain
